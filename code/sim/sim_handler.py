@@ -16,8 +16,10 @@ def sim_simple_steps(l, noise, steps):
     steps : array_like
         [time1,step1]
         [time2,step2]
-
-
+     Examples
+    --------
+    l, noise, steps = 1000, 30, np.array([[500, -30]])
+    t, s = sim_simple_steps(l, noise, steps)
     Returns
     -------
     append : ndarray
@@ -30,8 +32,3 @@ def sim_simple_steps(l, noise, steps):
     t = np.arange(0, l)
     return t, s
 
-
-l, noise, steps = 1000, 30, np.array([[500, -30]])
-t, s = sim_simple_steps(l, noise, steps)
-plt.plot(t, s)
-plt.show()
