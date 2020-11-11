@@ -39,6 +39,7 @@
 \usepackage{threeparttable}  
 \usepackage{booktabs}
 \usepackage{color}
+\usepackage{amssymb}
 \definecolor{revision_switch}{RGB}{255,0,0}
 \graphicspath{{./fig/}}
 
@@ -108,10 +109,86 @@
 
 
 \section{Methodology}
-\subsection{GNSS Kinematic Positioning}
+\subsection{Relative real-time kinematic (RTK)}
+RTK is widely used in structural health monitoring, landslide monitoring, and other fields due to its high positioning accuracy and real-time efficiency. The observation model, the state model, and the extended Kalman filtering process of RTK are introduced below. 
+\subsubsection{Observation model}
+The double-difference (DD) observation equation of relative positioning among base receiver, rover receiver, and satellites $j$, $k$ is defined in (\ref{eq_dd_obs})\cite{teunissen2017springer}.
+\begin{figure*}
+	\begin{equation}
+	\left. \begin{array}{l}
+	\Delta \nabla P_{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} - \Delta \nabla \delta I_{\Phi {i_{br}}}^{jk} + \Delta \nabla \delta _{tro{p_{br}}}^{jk} + \Delta \nabla \delta M_{{P_{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{P_{{i_{br}}}}}^{jk}\\
+	\Delta \nabla \Phi _{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} + \Delta \nabla \delta I_{{\Phi _{{i_{br}}}}}^{jk} + \Delta \nabla \delta _{tro{p_{br}}}^{jk} - {\lambda _i}\Delta \nabla N_{{i_{br}}}^{jk} + \Delta \nabla \delta M_{{\Phi _{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{\Phi _{{i_{br}}}}}^{jk}
+	\end{array} \right\}
+	\label{eq_dd_obs}
+	\end{equation}
+\end{figure*}
+In this observation equation, $\Delta \nabla $ denotes the DD operator, $i$ denotes the frequency; $b$ and $r$ denote base station and rover station respectively; $\Delta \nabla P_{{{i}_{br}}}^{jk}$ and $\Delta \nabla \Phi _{{{i}_{br}}}^{jk}$ denote pseudo-range and carrier-phase DD observations, respectively; $\Delta \nabla \rho _{br}^{jk}$ is the DD geometric distance between receivers and satellites; $\Delta \nabla \delta M_{{{P}_{{{i}_{br}}}}}^{jk}$ and $\Delta \nabla \delta M_{{{\Phi }_{{{i}_{br}}}}}^{jk}$ denote pseudo-range and carrier-phase multipath error, respectively; $\Delta \nabla \varepsilon _{{{P}_{{{i}_{br}}}}}^{jk}$ and $\Delta \nabla \varepsilon _{{{\Phi }_{{{i}_{br}}}}}^{jk}$ represent DD observation error of pseudo-range and carrier-phase, respectively; $\Delta \nabla \delta I_{\Phi {{i}_{br}}}^{jk}$is the DD ionospheric delay between receivers and satellites, and the ionospheric error has the same absolute value but the opposite sign on pseudo-range and carrier-phase observations; $\Delta \nabla \delta _{tro{{p}_{br}}}^{jk}$is the DD tropospheric delay between receivers and satellites. For the short baseline, the atmospheric error can be ignored, so the above DD observation equation is simplified as (\ref{eq_dd_obs_simplified}).
+\begin{figure*}
+	\begin{equation}
+	\left. \begin{array}{l}
+	\Delta \nabla P_{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} + \Delta \nabla \delta M_{{P_{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{P_{{i_{br}}}}}^{jk}\\
+	\Delta \nabla \Phi _{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} - {\lambda _i}\Delta \nabla N_{{i_{br}}}^{jk} + \Delta \nabla \delta M_{{\Phi _{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{\Phi _{{i_{br}}}}}^{jk}\end{array} \right\}
+	\label{eq_dd_obs_simplified}
+	\end{equation}
+	
+\end{figure*}
+By ignoring the influence of multipath, linearizing equation (\ref{eq_dd_obs_simplified}), we get
+\begin{equation}
+\label{eq_rtk_measure}
+{\bf{y}} = {\bf{Hx}} + {\bf{\varepsilon }}
+\end{equation}
+where $\bf{y}$ is the observation minus the computed,  $\bf{H} $ is the linearized design matrix\cite{hofmann-wellenhof2007gnss}, $\bf{x}\triangleq {{[{{\mathbf{r}}_{r}},\Delta \nabla \mathbf{N}]}^{T}}$, is the state vector, which contains the rover station coordinate ${{\mathbf{r}}_{r}}$ and the DD integer ambiguity $\Delta \nabla \mathbf{N}$;  $\mathbf{\varepsilon } $ is the observation noise, and its covariance matrix is expressed as  ${{\mathbf{R}}_{\varepsilon }} $. After forming the observation equation, the ‘float’ solution of the parameter can be obtained by the standard least square method. To obtain high precision positioning results, it is necessary to fix the integer ambiguity. The 'float' solution and variance of integer ambiguity are expressed as  $\Delta \nabla \mathbf{\tilde{N}} $,  ${{\mathbf{Q}}_{\Delta \nabla \mathbf{\tilde{N}}}} $, respectively. Then the problem of ambiguity fixing can be described as (\ref{eq_lamda})\cite{teunissen1995the}.
+\begin{figure*}
+	\begin{equation}
+	\Delta \nabla {\bf{\hat N}} = \mathop {\arg min}\limits_{\Delta \nabla {\bf{N}} \in {\bf{Z}}} ((\Delta \nabla {\bf{\tilde N}} - \Delta \nabla {\bf{\hat N}}){\bf{Q}}_{\Delta \nabla {\bf{\tilde N}}}^{ - 1}{(\Delta \nabla {\bf{\tilde N}} - \Delta \nabla {\bf{\hat N}})^T})
+	\label{eq_lamda}
+	\end{equation}
+\end{figure*}
+There are many methods referring to integer ambiguity resolution, among which LAMBDA (Least-squares Ambiguity Decorrelation Adjustment)\cite{teunissen1995the} method is the most widely used one. The integer ambiguity is obtained by the integer least square method. Then, the test process is executed to determine whether to accept or reject the integer ambiguity\cite{wang2014ambiguity,wang2018improving}. If the test is passed, the fixed integer ambiguity can be substituted into (\ref{eq_rtk_measure}) to resolve the fixed solution, otherwise, the ‘float’ solution will be maintained.
+
+\subsubsection{State model}
+The state model is defined as follows (Takasu 2013)
+\begin{equation}
+{{\bf{x}}_k} = {\bf{F}}{{\bf{x}}_{k - 1}} + {\bf{w}}
+\end{equation}
+where ${\bf{F}} \buildrel \Delta \over = \left[ {\begin{array}{*{20}{c}}
+	{{{\bf{I}}_{3 \times 3}}}&{\bf{0}}\\
+	{\bf{0}}&{{{\bf{I}}_{(2n - 2)(2n - 2)}}}
+	\end{array}} \right]$ , is the transition matrix from $k-1$ to $k$; $\mathbf{I}$ denotes the identity matrix; $n$ represents the number of satellites observed simultaneously by the base station and the rover station; Only GPS ${{L}_{1}}$ and ${{L}_{2}}$ frequency observations are considered, so $2n-2$ DD ambiguities are formed. $\mathbf{w}$ is the process noise, and its covariance matrix is expressed as ${{\mathbf{G}}_{w}}$. For kinematic positioning, the coordinate covariance component is set to be large to capture dynamic features, while the ambiguity covariance component is set to $\mathbf{0}$ to ensure the stability of positioning.
+\subsubsection{Extended Kalman filtering}
+Kalman filtering includes two processes: prediction update and measurement update\cite{grewal2001kalman}. The prediction process is as follows:
+\begin{equation}
+{{\bf{\hat x}}_{k|k - 1}} = {\bf{F}}{{\bf{\hat x}}_{k - 1}}
+\end{equation}
+\begin{equation}
+{{\bf{Q}}_{k|k - 1}} = {\bf{F}}{{\bf{Q}}_{k - 1}}{{\bf{F}}^T} + {{\bf{G}}_w}(k)
+\end{equation}
+According to the definition of the state transition matrix above, it can be seen that the state value of the previous epoch remains unchanged. However, the coordinate covariance component becomes larger, while the ambiguity covariance component remains unchanged. The measurement update process is as follows:
+\begin{equation}
+{{\bf{v}}_k} = {\bf{y}}(k) - {\bf{H}}(k){{\bf{\hat x}}_{k|k - 1}}
+\end{equation}
+\begin{equation}
+{{\bf{S}}_k} = {\bf{H}}(k){{\bf{Q}}_{k|k - 1}}{\bf{H}}{(k)^{\rm{T}}} + {{\bf{R}}_\varepsilon }(k)
+\end{equation}
+\begin{equation}
+{\bf{K}} = {{\bf{Q}}_{k|k - 1}}{\bf{H}}_k^T{\bf{S}}_k^{ - 1}
+\end{equation}
+where ${{\mathbf{v}}_{k}}$ denotes the innovation vector, and ${{\mathbf{S}}_{k}}$ is the covariance matrix of the innovation vector; $\mathbf{K}$ is the state estimation gain matrix. The final state is estimated as follows:
+\begin{equation}
+{{\bf{\hat x}}_k} = {{\bf{\hat x}}_{k|k - 1}} + {\bf{K}}{{\bf{v}}_k}
+\end{equation}
+\begin{equation}
+{{\bf{Q}}_k} = {{\bf{Q}}_{k|k - 1}} - {\bf{K}}{{\bf{S}}_k}{{\bf{K}}^T}
+\end{equation}
+where ${{\mathbf{\hat{x}}}_{k}}$ is the final estimate, and ${{\mathbf{Q}}_{k}}$ is the corresponding covariance matrix; ${{\mathbf{\hat{x}}}_{k}}$ is the only input of the proposed method.  
+
+Due to the complex spatiotemporal characteristics of observation errors, there are unmodeled error components in time series\cite{shen2020site}. To weaken the influence of these factors, the wavelet analysis tool is introduced as follows.
+
+
 
 
 \subsection{Displacement Detection}
+\subsubsection{Likelihood Function}
 \begin{equation}\label{eq_ts}
 \left[ {{x_1},{x_2}, \cdots {x_m}} \right]
 \end{equation}
@@ -129,10 +206,70 @@ x \sim \left\{ {\begin{array}{*{20}{r}}
 	{N({\mu _{n + 1}},\sigma ),}&{{\tau _n} \le t}
 	\end{array}} \right.
 \end{equation}
+\begin{equation}\label{eq_likelihood}
+P({\bf{x}}\left| {\bf{\theta }} \right.) = P({\bf{x}}\left| {{\mu_0},{\mu_1},} \right. \cdots {\mu_n},{\tau _1},{\tau _2}, \cdots ,{\tau _n},\sigma )
+\end{equation}
+\begin{equation}\label{eq_likelihoodfunc}
+P({\bf{x}}\left| {\bf{\theta }} \right.) = \prod\limits_{x \le {\tau _1}} {P(x\left| {{\mu_0},\sigma } \right.)} \prod\limits_{i = 1}^{n - 1} {\prod\limits_{{\tau _i} \le x < {\tau _{i + 1}}} {P(x\left| {{\mu_i},\sigma } \right.)} \prod\limits_{{\tau _n} \le x} {P(x\left| {{\mu_n},\sigma } \right.)} }.
+\end{equation}
+\begin{equation}\label{eq_likelihoodfunc_detail}
+P({\bf{x}}\left| {\bf{\theta }} \right.) = \frac{1}{{{{(2\pi {\sigma ^2})}^{m/2}}}}\exp \left\{ {\frac{1}{{ - 2{\sigma ^2}}}\left[ {\sum\limits_{x < {\tau _1}} {{{(x - {\mu_0})}^2}} {\rm{ + }}\sum\limits_{i = 1}^{n - 1} {\sum\limits_{{\tau _i} \le x < {\tau _{i + 1}}} {{{(x - {\mu_i})}^2}} } {\rm{ + }}\sum\limits_{{\tau _n} \le x} {{{(x - {\mu_n})}^2}} } \right]} \right\}
+\end{equation}
+\subsubsection{Bayesian Inference}
+\begin{equation}\label{eq_bayesian_inference}
+P({\bf{\theta }}\left| {\bf{x}} \right.) = \frac{{P({\bf{\theta }})P({\bf{x}}\left| {\bf{\theta }} \right.)}}{{P({\bf{x}})}}
+\end{equation}
 
 
+\subsubsection{Priors}
+\begin{equation}\label{eq_bayesian_prior}
+P({\bf{\theta }}) = P({\bf{\tau }},{\bf{\mu }},\sigma ) = P({\bf{\tau }})P({\bf{\mu }})P(\sigma )
+\end{equation}
+\begin{equation}\label{eq_bayesian_prior_sigma}
+\sigma  \sim N({\mu _\sigma },{\sigma _\sigma })
+\end{equation}
+\begin{equation}\label{eq_bayesian_prior_mu}
+{\mu _i} \sim N({\mu _\mu },{\sigma _\mu })(i = 0,1, \cdots ,n)
+\end{equation}
+\begin{equation}\label{eq_bayesian_prior_mu_sum}
+P({\bf{\mu }}) = \prod\limits_{i = 0}^n {P({\mu _i})}
+\end{equation}
+
+
+\begin{equation}\label{eq_bayesian_prior_tau_basic}
+P({\tau _i}) = \left\{ {\begin{array}{*{20}{r}}
+	{{1 \mathord{\left/
+				{\vphantom {1 {({t_m} - {t_1}),}}} \right.
+				\kern-\nulldelimiterspace} {({t_m} - {t_1}),}}}&{i = 1}\\
+	{{1 \mathord{\left/
+				{\vphantom {1 {({t_m} - {\tau _{i - 1}}),}}} \right.
+				\kern-\nulldelimiterspace} {({t_m} - {\tau _{i - 1}}),}}}&{1 < i \le n}
+	\end{array}} \right.
+\end{equation}
+\begin{equation}\label{eq_bayesian_prior_tau_1}
+P({\bf{\tau }}) = P({\tau _1},{\tau _2}, \cdots ,{\tau _{n - 1}},{\tau _n})
+\end{equation}
+\begin{equation}\label{eq_bayesian_prior_tau_2}
+P({\bf{\tau }}) = P({\tau _n},{\tau _{n - 1}}, \cdots ,{\tau _2}\left| {{\tau _1}} \right.)P({\tau _1})
+\end{equation}
+\begin{equation}\label{eq_bayesian_prior_tau_3}
+P({\bf{\tau }}) = P({\tau _n},{\tau _{n - 1}}, \cdots ,{\tau _3}\left| {{\tau _2},{\tau _1}} \right.)P(\left. {{\tau _2}} \right|{\tau _1})P({\tau _1})
+\end{equation}
+\begin{equation}\label{eq_bayesian_prior_tau_4}
+P({\bf{\tau }}) = P({\tau _n},{\tau _{n - 1}}, \cdots ,{\tau _3}\left| {{\tau _2}} \right.)P(\left. {{\tau _2}} \right|{\tau _1})P({\tau _1})
+\end{equation}
+\begin{equation}\label{eq_bayesian_prior_tau_5}
+P({\bf{\tau }}) = P({\tau _n}\left| {{\tau _{n - 1}}} \right.) \cdots P({\tau _3}\left| {{\tau _2}} \right.)P(\left. {{\tau _2}} \right|{\tau _1})P({\tau _1})
+\end{equation}
+\subsection{Displacement Extraction}
 
 \section{Experiments and Results}
+To verify the feasibility of the proposed method, we carried out a series of experiments, including a simulation experiment and a field experiment. In the simulation experiment, data affected by noise and a trend item is simulated. In the field experiment, several displacement changes were triggered manually, and the relative real-time kinematic model is used to process the GNSS observations.
+\subsection{Simulation experiment}
+
+
+\subsection{Field experiment}
+The experiment was carried out on the roof of a building on the campus of Wuhan University. In the experiment, the equipment deployment is shown in Fig. \ref{fig_field_exp_config}. A hard plank is pressed with large stones to ensure that the plank remains as fixed as possible during moving the object hanging on the plank. One receiver antenna is fixed on the plank as a rover; the other receiver antenna is fixed on a tripod beside it as the base station. Both antennas are connected to BD992 OEM boards on the table, and the OEM boards are connected to the laptops for data collection. As shown in subgraphs (c) and (d), the height of the antenna is measured with a tape before and after each movement of the object hanging on the plank. Besides, markers are made on the ground and on the antenna respectively to ensure that the same position is referenced for each measurement. The sampling frequency of the GNSS receiver is set to 1 Hz. The whole experiment lasted for nearly one hour, during which the object hanging on the plank was moved several times manually.
 
 \section{Discussion}
 

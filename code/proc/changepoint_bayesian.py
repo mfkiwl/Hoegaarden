@@ -188,8 +188,8 @@ class cpt_bayesian:
             print("Can only plot theory result for single change point in mean")
             print("--Aborting--")
 
-# if __name__ == '__main__':
-#     d = cpt_bayesian("1-cpt-mean")
-#     d.plot_data()
-#     d.find_changepoint()
-#     d.plot_results()
+if __name__ == '__main__':
+    d = cpt_bayesian("3-cpt-mean")
+    d.plot_data()
+    d.find_changepoint()
+    d.plot_results()

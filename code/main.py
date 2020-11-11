@@ -16,7 +16,7 @@ if __name__ == '__main__':
     # plt.show()
     # bayes_single_detector(t, s)
     # 2----bayes_multiple_detector(disp extraction)
-    l, noise, steps = 500, 10, np.array([[100, -30], [200, -30], [300, -30]])
+    l, noise, steps = 500, 10, np.array([[100, -30], [200, -30], [300, 30]])
 
     t, s = sim_simple_steps(l, noise, steps)
     plt.plot(t, s)
