@@ -1,24 +1,24 @@
 # coding:utf-8
 
 import matplotlib.pyplot as plt
+import arviz as az
 
-import numpy as np
-
-from proc.simple_handler import bayes_single_detector, bayes_multiple_detector
-from sim.sim_handler import sim_simple_steps
+from config.configutil import getpath
+from ioext.gnss_sol_handler import loadsol
+from proc.gnss_handler import bayes_multiple_detector
 
 if __name__ == '__main__':
-    # 1----bayes_single_detector(disp extraction)
-    # l, noise, steps = 500, 10, np.array([[100, -30]])
-    #
-    # t, s = sim_simple_steps(l, noise, steps)
-    # plt.plot(t, s)
-    # plt.show()
-    # bayes_single_detector(t, s)
-    # 2----bayes_multiple_detector(disp extraction)
-    l, noise, steps = 500, 10, np.array([[100, -30], [200, -30], [300, 30]])
-
-    t, s = sim_simple_steps(l, noise, steps)
-    plt.plot(t, s)
+    df = loadsol('rover_bd9_3_enu.pos')
+    t = df.loc[:, 'tow']-df.loc[0, 'tow']
+    plt.subplot(3, 1, 1)
+    plt.plot(t, df.loc[:, 'north'])
+    plt.subplot(3, 1, 2)
+    plt.plot(t, df.loc[:, 'east'])
+    plt.subplot(3, 1, 3)
+    plt.plot(t, df.loc[:, 'up'])
     plt.show()
-    bayes_multiple_detector(t, s, 3)
+    bayes_multiple_detector(t, df.loc[:, 'up'], 2)
+    #
+    # trace = az.from_netcdf(getpath('tracepath') + 'test')
+    # az.plot_trace(trace)
+    # plt.show()
