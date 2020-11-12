@@ -64,7 +64,7 @@
 %
 \begin{document}
 \linenumbers
-\title{GNSS displacement detection and extraction based on Bayesian inference
+\title{GNSS displacement detection based on Bayesian inference
 %\thanks{Grants or other notes
 %about the article that should go on the front page should be
 %placed here. General acknowledgments should be placed at the end of the article.}
@@ -112,7 +112,7 @@
 \subsection{Relative real-time kinematic (RTK)}
 RTK is widely used in structural health monitoring, landslide monitoring, and other fields due to its high positioning accuracy and real-time efficiency. The observation model, the state model, and the extended Kalman filtering process of RTK are introduced below. 
 \subsubsection{Observation model}
-The double-difference (DD) observation equation of relative positioning among base receiver, rover receiver, and satellites $j$, $k$ is defined in (\ref{eq_dd_obs})\cite{teunissen2017springer}.
+The double-difference (DD) observation equation of relative positioning among base receiver, rover receiver, and satellites $j$, $k$ is defined in (\ref{eq_dd_obs})\citep{teunissen2017springer}.
 \begin{figure*}
 	\begin{equation}
 	\left. \begin{array}{l}
@@ -137,14 +137,14 @@ By ignoring the influence of multipath, linearizing equation (\ref{eq_dd_obs_sim
 \label{eq_rtk_measure}
 {\bf{y}} = {\bf{Hx}} + {\bf{\varepsilon }}
 \end{equation}
-where $\bf{y}$ is the observation minus the computed,  $\bf{H} $ is the linearized design matrix\cite{hofmann-wellenhof2007gnss}, $\bf{x}\triangleq {{[{{\mathbf{r}}_{r}},\Delta \nabla \mathbf{N}]}^{T}}$, is the state vector, which contains the rover station coordinate ${{\mathbf{r}}_{r}}$ and the DD integer ambiguity $\Delta \nabla \mathbf{N}$;  $\mathbf{\varepsilon } $ is the observation noise, and its covariance matrix is expressed as  ${{\mathbf{R}}_{\varepsilon }} $. After forming the observation equation, the ‘float’ solution of the parameter can be obtained by the standard least square method. To obtain high precision positioning results, it is necessary to fix the integer ambiguity. The 'float' solution and variance of integer ambiguity are expressed as  $\Delta \nabla \mathbf{\tilde{N}} $,  ${{\mathbf{Q}}_{\Delta \nabla \mathbf{\tilde{N}}}} $, respectively. Then the problem of ambiguity fixing can be described as (\ref{eq_lamda})\cite{teunissen1995the}.
+where $\bf{y}$ is the observation minus the computed,  $\bf{H} $ is the linearized design matrix\citep{hofmann-wellenhof2007gnss}, $\bf{x}\triangleq {{[{{\mathbf{r}}_{r}},\Delta \nabla \mathbf{N}]}^{T}}$, is the state vector, which contains the rover station coordinate ${{\mathbf{r}}_{r}}$ and the DD integer ambiguity $\Delta \nabla \mathbf{N}$;  $\mathbf{\varepsilon } $ is the observation noise, and its covariance matrix is expressed as  ${{\mathbf{R}}_{\varepsilon }} $. After forming the observation equation, the ‘float’ solution of the parameter can be obtained by the standard least square method. To obtain high precision positioning results, it is necessary to fix the integer ambiguity. The 'float' solution and variance of integer ambiguity are expressed as  $\Delta \nabla \mathbf{\tilde{N}} $,  ${{\mathbf{Q}}_{\Delta \nabla \mathbf{\tilde{N}}}} $, respectively. Then the problem of ambiguity fixing can be described as (\ref{eq_lamda})\citep{teunissen1995the}.
 \begin{figure*}
 	\begin{equation}
 	\Delta \nabla {\bf{\hat N}} = \mathop {\arg min}\limits_{\Delta \nabla {\bf{N}} \in {\bf{Z}}} ((\Delta \nabla {\bf{\tilde N}} - \Delta \nabla {\bf{\hat N}}){\bf{Q}}_{\Delta \nabla {\bf{\tilde N}}}^{ - 1}{(\Delta \nabla {\bf{\tilde N}} - \Delta \nabla {\bf{\hat N}})^T})
 	\label{eq_lamda}
 	\end{equation}
 \end{figure*}
-There are many methods referring to integer ambiguity resolution, among which LAMBDA (Least-squares Ambiguity Decorrelation Adjustment)\cite{teunissen1995the} method is the most widely used one. The integer ambiguity is obtained by the integer least square method. Then, the test process is executed to determine whether to accept or reject the integer ambiguity\cite{wang2014ambiguity,wang2018improving}. If the test is passed, the fixed integer ambiguity can be substituted into (\ref{eq_rtk_measure}) to resolve the fixed solution, otherwise, the ‘float’ solution will be maintained.
+There are many methods referring to integer ambiguity resolution, among which LAMBDA (Least-squares Ambiguity Decorrelation Adjustment)\citep{teunissen1995the} method is the most widely used one. The integer ambiguity is obtained by the integer least square method. Then, the test process is executed to determine whether to accept or reject the integer ambiguity\citep{wang2014ambiguity,wang2018improving}. If the test is passed, the fixed integer ambiguity can be substituted into (\ref{eq_rtk_measure}) to resolve the fixed solution, otherwise, the ‘float’ solution will be maintained.
 
 \subsubsection{State model}
 The state model is defined as follows (Takasu 2013)
@@ -156,7 +156,7 @@ where ${\bf{F}} \buildrel \Delta \over = \left[ {\begin{array}{*{20}{c}}
 	{\bf{0}}&{{{\bf{I}}_{(2n - 2)(2n - 2)}}}
 	\end{array}} \right]$ , is the transition matrix from $k-1$ to $k$; $\mathbf{I}$ denotes the identity matrix; $n$ represents the number of satellites observed simultaneously by the base station and the rover station; Only GPS ${{L}_{1}}$ and ${{L}_{2}}$ frequency observations are considered, so $2n-2$ DD ambiguities are formed. $\mathbf{w}$ is the process noise, and its covariance matrix is expressed as ${{\mathbf{G}}_{w}}$. For kinematic positioning, the coordinate covariance component is set to be large to capture dynamic features, while the ambiguity covariance component is set to $\mathbf{0}$ to ensure the stability of positioning.
 \subsubsection{Extended Kalman filtering}
-Kalman filtering includes two processes: prediction update and measurement update\cite{grewal2001kalman}. The prediction process is as follows:
+Kalman filtering includes two processes: prediction update and measurement update\citep{grewal2001kalman}. The prediction process is as follows:
 \begin{equation}
 {{\bf{\hat x}}_{k|k - 1}} = {\bf{F}}{{\bf{\hat x}}_{k - 1}}
 \end{equation}
@@ -182,7 +182,7 @@ where ${{\mathbf{v}}_{k}}$ denotes the innovation vector, and ${{\mathbf{S}}_{k}
 \end{equation}
 where ${{\mathbf{\hat{x}}}_{k}}$ is the final estimate, and ${{\mathbf{Q}}_{k}}$ is the corresponding covariance matrix; ${{\mathbf{\hat{x}}}_{k}}$ is the only input of the proposed method.  
 
-Due to the complex spatiotemporal characteristics of observation errors, there are unmodeled error components in time series\cite{shen2020site}. To weaken the influence of these factors, the wavelet analysis tool is introduced as follows.
+Due to the complex spatiotemporal characteristics of observation errors, there are unmodeled error components in time series\citep{shen2020site}. To weaken the influence of these factors, the wavelet analysis tool is introduced as follows.
 
 
 
@@ -261,7 +261,43 @@ P({\bf{\tau }}) = P({\tau _n},{\tau _{n - 1}}, \cdots ,{\tau _3}\left| {{\tau _2
 \begin{equation}\label{eq_bayesian_prior_tau_5}
 P({\bf{\tau }}) = P({\tau _n}\left| {{\tau _{n - 1}}} \right.) \cdots P({\tau _3}\left| {{\tau _2}} \right.)P(\left. {{\tau _2}} \right|{\tau _1})P({\tau _1})
 \end{equation}
+
+\subsubsection{Markov Chain Monte Carlo (MCMC)}
+The posterior distribution of the parameters depends on the prior distribution and the likelihood function. Obtaining the posterior probability of parameters by direct integration or sum requires a lot of operations, which is difficult to achieve. In this work, the Markov chain Monte Carlo technique is used to approximate the integral or sum value. Monte Carlo sampling is to construct the integral or sum function as the expectation under a certain distribution, and then approximate the expectation by the corresponding average value\citep{goodfellow2016deep}.
+
+\begin{equation}\label{eq_monte_carlo_1}
+s =\sum\limits_x g(x)= \sum\limits_x {p(x)f(x) = {E_p}[f(x)]}
+\end{equation}
+\begin{equation}\label{eq_monte_carlo_2}
+s =\int {g(x)}= \int {p(x)f(x)dx}  = {E_p}[f(x)]
+\end{equation}
+where $g(x)$ is the function to be integrated or summated; $p(x)$ is the probability distribution or probability density function of $x$. The integral or summation problem of $g(x)$ is transformed into the mathematical expectation problem of $f(x)$ under the distribution $p(x)$. This mathematical expectation can be approximated by sampling from $p(x)$.
+
+\begin{equation}\label{eq_monte_carlo_3}
+\hat s = \frac{1}{n}\sum\limits_{i = 1}^n {f({x_i})}
+\end{equation}
+where $x_i$ is the sample with the distribution of $p(x)$. As can be seen from the above, Monte Carlo method as a general sampling simulation sum or integration method, depends on sampling from the distribution of $p(x)$. However, it is not easy to directly sample from the target distribution of $p(x)$. At present, the most popular solution is to use Markov chain Monte Carlo sampling, which provides a general way to construct a sequence that converges to the target distribution. According to Markov chain, the probability of state transition at a certain time only depends on its previous state, which is expressed as follows
+
+\begin{equation}\label{eq_markov_chain_1}
+P({x_{n + 1}}\left| {{x_n},{x_{n - 1}}} \right.,{x_{n - 2}}, \cdots ,{x_2},{x_1}) = P({x_{n + 1}}\left| {{x_n}} \right.)
+\end{equation}
+If a Markov process is neither periodic nor irreducible, then the Markov process is ergodic, that is, each state appears with a certain probability. The Markov process of ergodic states has an important property: no matter what the initial state probability is, the Markov process of the ergodic state tends to be a stable distribution after enough state transitions.
+That is, for the initial probability distribution is $\pi_0(x)$, the probability distribution after several rounds of state transition is as follows
+
+\begin{equation}\label{eq_markov_chain_2}
+\pi_{0}(x),\pi_{1}(x),\pi_{2}(x),\cdots \pi_{n}(x),\pi_{n+1}(x),\pi_{n+2}(x)\cdots
+\end{equation}
+There exists $n$ which satisfies the following conditions
+
+\begin{equation}\label{eq_markov_chain_3}
+\pi_{n}(x)=\pi_{n+1}(x)=\pi_{n+2}(x)\cdots
+\end{equation}
+This is the target distribution we want to construct. Based on the initial arbitrary simple probability distribution such as Gaussian distribution $\pi_{0}(x)$, the state value $x_0$ is obtained by sampling. Based on the probability distribution $\pi_{1}(x)=\pi_{0}(x)P(x\left| {{x_0}} \right.)$ sampling state value $x_1$, using the same method, execute $n$ times. Sample $(x_{n},x_{n+1},x_{n+2}\cdots)$ is the corresponding sample set of the target distribution. However, the implementation of MCMC also needs to consider other factors such as constructing the state transition matrix according to the target distribution, which is beyond the scope of this work. Two implementations of MCMC, a and the No-U-Turn sampler, are used to sample discrete random variables and continuous random variables, respectively.
+
+
 \subsection{Displacement Extraction}
+
+
 
 \section{Experiments and Results}
 To verify the feasibility of the proposed method, we carried out a series of experiments, including a simulation experiment and a field experiment. In the simulation experiment, data affected by noise and a trend item is simulated. In the field experiment, several displacement changes were triggered manually, and the relative real-time kinematic model is used to process the GNSS observations.
