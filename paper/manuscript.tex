@@ -188,13 +188,20 @@ Due to the complex spatiotemporal characteristics of observation errors, there a
 
 
 \subsection{Displacement Detection}
+The displacement time series is described as $\left[ {{x_1},{x_2}, \cdots {x_m}} \right]$, where $m$ is the number of coordinate displacements. The time of displacement changes is expressed as $\left[ {{\tau _1},{\tau _2}, \cdots {\tau _n}} \right]$, where $n$ is the number of change points. The problem of displacement detection is defined as finding out the change points of displacement and giving the effective estimation of displacement.
+
+\subsubsection{Bayesian Inference}
+Bayesian inference is one of the most important skills in statistics. Bayesian inference deduces the posterior probability as the result of a priori probability and likelihood function. Bayesian inference calculates the posterior probability according to the Bayesian theorem
+
+\begin{equation}\label{eq_bayesian_inference}
+P({\bf{\theta }}\left| {\bf{x}} \right.) = \frac{{P({\bf{\theta }})P({\bf{x}}\left| {\bf{\theta }} \right.)}}{{P({\bf{x}})}}
+\end{equation}
+where $\bf{\theta }$ is the parameter to be estimated and $\bf{x}$ is the observation;$P({\bf{\theta }}\left| {\bf{x}} \right.)$ denotes the posterior probability; $P({\bf{\theta }})$ represents a priori probability, which refers to the probability obtained from previous experience and analysis;
+$P({\bf{x}}\left| {\bf{\theta }} \right.)$ is the likelihood function, which represents the probability of $x$ when a priori is established. ${P({\bf{x}})}$ is the total likelihood, which is a constant value.
+
 \subsubsection{Likelihood Function}
-\begin{equation}\label{eq_ts}
-\left[ {{x_1},{x_2}, \cdots {x_m}} \right]
-\end{equation}
-\begin{equation}\label{eq_cps}
-\left[ {{\tau _1},{\tau _2}, \cdots {\tau _n}} \right]
-\end{equation}
+It is assumed that the displacement obtained by GNSS obeys Gaussian normal distribution. The displacement of each segment segmented by the change point obeys the Gaussian distribution of different mean and same variance, which is expressed as follows
+
 \begin{equation}\label{eq_ts_cps}
 x \sim \left\{ {\begin{array}{*{20}{r}}
 	{N({\mu _0},\sigma ),}&{t < {\tau _1}}\\
@@ -206,20 +213,21 @@ x \sim \left\{ {\begin{array}{*{20}{r}}
 	{N({\mu _{n + 1}},\sigma ),}&{{\tau _n} \le t}
 	\end{array}} \right.
 \end{equation}
+where the $n$ change points divide the time series into $n+1$ segments, and the mean values of each segment are ${\mu _0},{\mu _1},\cdots,{\mu _n}$; $\sigma$ is the standard deviation of each normal distribution; Then the likelihood probability is expressed as follows
+
 \begin{equation}\label{eq_likelihood}
 P({\bf{x}}\left| {\bf{\theta }} \right.) = P({\bf{x}}\left| {{\mu_0},{\mu_1},} \right. \cdots {\mu_n},{\tau _1},{\tau _2}, \cdots ,{\tau _n},\sigma )
 \end{equation}
+where ${\bf{\theta }}=({{\mu_0},{\mu_1},} \cdots {\mu_n},{\tau _1},{\tau _2}, \cdots ,{\tau _n},\sigma) $; Assuming that the displacement observations are independent of each other, the likelihood probability can be expressed as
+
 \begin{equation}\label{eq_likelihoodfunc}
 P({\bf{x}}\left| {\bf{\theta }} \right.) = \prod\limits_{x \le {\tau _1}} {P(x\left| {{\mu_0},\sigma } \right.)} \prod\limits_{i = 1}^{n - 1} {\prod\limits_{{\tau _i} \le x < {\tau _{i + 1}}} {P(x\left| {{\mu_i},\sigma } \right.)} \prod\limits_{{\tau _n} \le x} {P(x\left| {{\mu_n},\sigma } \right.)} }.
 \end{equation}
+Combine \ref{eq_ts_cps} and \ref{eq_likelihoodfunc} to get the likelihood function as follows
+
 \begin{equation}\label{eq_likelihoodfunc_detail}
 P({\bf{x}}\left| {\bf{\theta }} \right.) = \frac{1}{{{{(2\pi {\sigma ^2})}^{m/2}}}}\exp \left\{ {\frac{1}{{ - 2{\sigma ^2}}}\left[ {\sum\limits_{x < {\tau _1}} {{{(x - {\mu_0})}^2}} {\rm{ + }}\sum\limits_{i = 1}^{n - 1} {\sum\limits_{{\tau _i} \le x < {\tau _{i + 1}}} {{{(x - {\mu_i})}^2}} } {\rm{ + }}\sum\limits_{{\tau _n} \le x} {{{(x - {\mu_n})}^2}} } \right]} \right\}
 \end{equation}
-\subsubsection{Bayesian Inference}
-\begin{equation}\label{eq_bayesian_inference}
-P({\bf{\theta }}\left| {\bf{x}} \right.) = \frac{{P({\bf{\theta }})P({\bf{x}}\left| {\bf{\theta }} \right.)}}{{P({\bf{x}})}}
-\end{equation}
-
 
 \subsubsection{Priors}
 \begin{equation}\label{eq_bayesian_prior}
@@ -292,7 +300,7 @@ There exists $n$ which satisfies the following conditions
 \begin{equation}\label{eq_markov_chain_3}
 \pi_{n}(x)=\pi_{n+1}(x)=\pi_{n+2}(x)\cdots
 \end{equation}
-This is the target distribution we want to construct. Based on the initial arbitrary simple probability distribution such as Gaussian distribution $\pi_{0}(x)$, the state value $x_0$ is obtained by sampling. Based on the probability distribution $\pi_{1}(x)=\pi_{0}(x)P(x\left| {{x_0}} \right.)$ sampling state value $x_1$, using the same method, execute $n$ times. Sample $(x_{n},x_{n+1},x_{n+2}\cdots)$ is the corresponding sample set of the target distribution. However, the implementation of MCMC also needs to consider other factors such as constructing the state transition matrix according to the target distribution, which is beyond the scope of this work. Two implementations of MCMC, a and the No-U-Turn sampler, are used to sample discrete random variables and continuous random variables, respectively.
+This is the target distribution we want to construct. Based on the initial arbitrary simple probability distribution such as Gaussian distribution $\pi_{0}(x)$, the state value $x_0$ is obtained by sampling. Based on the probability distribution $\pi_{1}(x)=\pi_{0}(x)P(x\left| {{x_0}} \right.)$ sampling state value $x_1$, using the same method, execute $n$ times. Sample $(x_{n},x_{n+1},x_{n+2}\cdots)$ is the corresponding sample set of the target distribution. However, the implementation of MCMC also needs to consider other factors such as constructing the state transition matrix according to the target distribution, which is beyond the scope of this work. Two implementations of MCMC,  the Metropolis-Hasting sampler\citep{chib1995understanding} and the No-U-Turn sampler\citep{hoffman2014no}, are used to sample discrete random variables and continuous random variables, respectively.
 
 
 \subsection{Displacement Extraction}
