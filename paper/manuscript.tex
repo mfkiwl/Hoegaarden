@@ -282,9 +282,12 @@ Since the conditional probability $P({\tau _n},{\tau _{n - 1}}, \cdots ,{\tau _3
 \begin{equation}\label{eq_bayesian_prior_tau_4}
 P({\bf{\tau }}) = P({\tau _n},{\tau _{n - 1}}, \cdots ,{\tau _3}\left| {{\tau _2}} \right.)P(\left. {{\tau _2}} \right|{\tau _1})P({\tau _1})
 \end{equation}
+Continue to expand in a similar way, and finally get
+
 \begin{equation}\label{eq_bayesian_prior_tau_5}
 P({\bf{\tau }}) = P({\tau _n}\left| {{\tau _{n - 1}}} \right.) \cdots P({\tau _3}\left| {{\tau _2}} \right.)P(\left. {{\tau _2}} \right|{\tau _1})P({\tau _1})
 \end{equation}
+Through \ref{eq_bayesian_prior_tau_basic} and \ref{eq_bayesian_prior_tau_5}, the joint probability of all change points can be determined. Finally, the prior distribution of parameter ${\bf{\theta }}$ can be determined by formula \ref{eq_bayesian_prior}, \ref{eq_bayesian_prior_sigma}, \ref{eq_bayesian_prior_mu_sum}, \ref{eq_bayesian_prior_tau_5}.
 
 \subsubsection{Markov Chain Monte Carlo (MCMC)}
 The posterior distribution of the parameters depends on the prior distribution and the likelihood function. Obtaining the posterior probability of parameters by direct integration or sum requires a lot of operations, which is difficult to achieve. In this work, the Markov chain Monte Carlo technique is used to approximate the integral or sum value. Monte Carlo sampling is to construct the integral or sum function as the expectation under a certain distribution, and then approximate the expectation by the corresponding average value\citep{goodfellow2016deep}.
@@ -317,11 +320,6 @@ There exists $n$ which satisfies the following conditions
 \pi_{n}(x)=\pi_{n+1}(x)=\pi_{n+2}(x)\cdots
 \end{equation}
 This is the target distribution we want to construct. Based on the initial arbitrary simple probability distribution such as Gaussian distribution $\pi_{0}(x)$, the state value $x_0$ is obtained by sampling. Based on the probability distribution $\pi_{1}(x)=\pi_{0}(x)P(x\left| {{x_0}} \right.)$ sampling state value $x_1$, using the same method, execute $n$ times. Sample $(x_{n},x_{n+1},x_{n+2}\cdots)$ is the corresponding sample set of the target distribution. However, the implementation of MCMC also needs to consider other factors such as constructing the state transition matrix according to the target distribution, which is beyond the scope of this work. Two implementations of MCMC,  the Metropolis-Hasting sampler\citep{chib1995understanding} and the No-U-Turn sampler\citep{hoffman2014no}, are used to sample discrete random variables and continuous random variables, respectively.
-
-
-\subsection{Displacement Extraction}
-
-
 
 \section{Experiments and Results}
 To verify the feasibility of the proposed method, we carried out a series of experiments, including a simulation experiment and a field experiment. In the simulation experiment, data affected by noise and a trend item is simulated. In the field experiment, several displacement changes were triggered manually, and the relative real-time kinematic model is used to process the GNSS observations.
