@@ -229,16 +229,25 @@ Combine \ref{eq_ts_cps} and \ref{eq_likelihoodfunc} to get the likelihood functi
 P({\bf{x}}\left| {\bf{\theta }} \right.) = \frac{1}{{{{(2\pi {\sigma ^2})}^{m/2}}}}\exp \left\{ {\frac{1}{{ - 2{\sigma ^2}}}\left[ {\sum\limits_{x < {\tau _1}} {{{(x - {\mu_0})}^2}} {\rm{ + }}\sum\limits_{i = 1}^{n - 1} {\sum\limits_{{\tau _i} \le x < {\tau _{i + 1}}} {{{(x - {\mu_i})}^2}} } {\rm{ + }}\sum\limits_{{\tau _n} \le x} {{{(x - {\mu_n})}^2}} } \right]} \right\}
 \end{equation}
 
-\subsubsection{Priors}
+\subsubsection{Prior Distribution}
+Assuming that the parameters ${\bf{\tau }}=(\tau_1,\mu_2,\cdots,\tau_n)$, ${\bf{\mu }}=(\mu_0,\mu_1,\cdots,\mu_n)$ and $\sigma$ are independent of each other, then:
+
 \begin{equation}\label{eq_bayesian_prior}
 P({\bf{\theta }}) = P({\bf{\tau }},{\bf{\mu }},\sigma ) = P({\bf{\tau }})P({\bf{\mu }})P(\sigma )
 \end{equation}
+The posterior distribution consists of three parts, including the prior distribution of change point, mean value and standard deviation.
+
+
 \begin{equation}\label{eq_bayesian_prior_sigma}
 \sigma  \sim N({\mu _\sigma },{\sigma _\sigma })
 \end{equation}
+
+
 \begin{equation}\label{eq_bayesian_prior_mu}
 {\mu _i} \sim N({\mu _\mu },{\sigma _\mu })(i = 0,1, \cdots ,n)
 \end{equation}
+
+
 \begin{equation}\label{eq_bayesian_prior_mu_sum}
 P({\bf{\mu }}) = \prod\limits_{i = 0}^n {P({\mu _i})}
 \end{equation}
