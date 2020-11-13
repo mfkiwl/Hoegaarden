@@ -188,7 +188,9 @@ Due to the complex spatiotemporal characteristics of observation errors, there a
 
 
 \subsection{Displacement Detection}
-The displacement time series is described as $\left[ {{x_1},{x_2}, \cdots {x_m}} \right]$, where $m$ is the number of coordinate displacements. The time of displacement changes is expressed as $\left[ {{\tau _1},{\tau _2}, \cdots {\tau _n}} \right]$, where $n$ is the number of change points. The problem of displacement detection is defined as finding out the change points of displacement and giving the effective estimation of displacement.
+The displacement time series is described as $\left[ {{x_1},{x_2}, \cdots {x_m}} \right]$,  and the corresponding time is denoted as $\left[ {{t_1},{t_2}, \cdots {t_m}} \right]$, where $m$ is the number of coordinate displacements. The time of displacement changes is expressed as $\left[ {{\tau _1},{\tau _2}, \cdots {\tau _n}} \right]$, which is a subset of $\left[ {{t_1},{t_2}, \cdots {t_m}} \right]$.  
+The time corresponding to the $n$ change points satisfies the following relationship:$ {{\tau _1}<{\tau _2}<\cdots {\tau _{n-1}}<{\tau _n}} $.
+The problem of displacement detection is defined as finding out the change points of displacement and giving the effective estimation of displacement.
 
 \subsubsection{Bayesian Inference}
 Bayesian inference is one of the most important skills in statistics. Bayesian inference deduces the posterior probability as the result of a priori probability and likelihood function. Bayesian inference calculates the posterior probability according to the Bayesian theorem
@@ -235,43 +237,48 @@ Assuming that the parameters ${\bf{\tau }}=(\tau_1,\mu_2,\cdots,\tau_n)$, ${\bf{
 \begin{equation}\label{eq_bayesian_prior}
 P({\bf{\theta }}) = P({\bf{\tau }},{\bf{\mu }},\sigma ) = P({\bf{\tau }})P({\bf{\mu }})P(\sigma )
 \end{equation}
-The posterior distribution consists of three parts, including the prior distribution of change point, mean value and standard deviation.
-
+The posterior distribution consists of three parts, including the prior distribution of change point, mean value and standard deviation. It is assumed that the standard deviation $\sigma$ obeys the Gaussian normal distribution and is expressed as follows
 
 \begin{equation}\label{eq_bayesian_prior_sigma}
 \sigma  \sim N({\mu _\sigma },{\sigma _\sigma })
 \end{equation}
-
+where $\mu_{\sigma}$ and $\sigma_{\sigma}$ are determined according to the noise level of GNSS positioning.
+For the mean value of the segments divided by the change point, it is assumed to obey the continuous uniform distribution, that is
 
 \begin{equation}\label{eq_bayesian_prior_mu}
-{\mu _i} \sim N({\mu _\mu },{\sigma _\mu })(i = 0,1, \cdots ,n)
+{\mu _i} \sim U({x_l },{x_u })(i = 0,1, \cdots ,n)
 \end{equation}
-
+where $x_l$ and $x_u$ represent the lower limit and  upper limit of the uniform distribution, which are determined by the mean value of the coordinate time series and the possible range of variation. Assuming that the mean values of each segment are independent of each other, then
 
 \begin{equation}\label{eq_bayesian_prior_mu_sum}
 P({\bf{\mu }}) = \prod\limits_{i = 0}^n {P({\mu _i})}
 \end{equation}
-
+For the change point ${\bf{\tau }}$, we only know that it is a subset of the corresponding time series.
+It is assumed to obey the discrete uniform distribution. However, it should be noted that the lower limit of the distribution of the $i$th change point is determined by the $(i-1)$th change point, that is
 
 \begin{equation}\label{eq_bayesian_prior_tau_basic}
-P({\tau _i}) = \left\{ {\begin{array}{*{20}{r}}
-	{{1 \mathord{\left/
-				{\vphantom {1 {({t_m} - {t_1}),}}} \right.
-				\kern-\nulldelimiterspace} {({t_m} - {t_1}),}}}&{i = 1}\\
-	{{1 \mathord{\left/
-				{\vphantom {1 {({t_m} - {\tau _{i - 1}}),}}} \right.
-				\kern-\nulldelimiterspace} {({t_m} - {\tau _{i - 1}}),}}}&{1 < i \le n}
+P({\tau _i}\left| {{\tau _{i - 1}}} \right.) = \left\{ {\begin{array}{*{20}{r}}
+	{DiscreteU({t_1},{t_m}),}&{i = 1}\\
+	{DiscreteU({\tau _{i - 1}},{t_m}),}&{1 < i \le n}
 	\end{array}} \right.
 \end{equation}
+The joint probability of all change points is expressed as
+
 \begin{equation}\label{eq_bayesian_prior_tau_1}
 P({\bf{\tau }}) = P({\tau _1},{\tau _2}, \cdots ,{\tau _{n - 1}},{\tau _n})
 \end{equation}
+According to the conditional probability at the change point ${\tau _1}$, the joint probability is expanded as
+
 \begin{equation}\label{eq_bayesian_prior_tau_2}
 P({\bf{\tau }}) = P({\tau _n},{\tau _{n - 1}}, \cdots ,{\tau _2}\left| {{\tau _1}} \right.)P({\tau _1})
 \end{equation}
+Further conditionally expand at the change point ${\tau _2}$ to get
+
 \begin{equation}\label{eq_bayesian_prior_tau_3}
 P({\bf{\tau }}) = P({\tau _n},{\tau _{n - 1}}, \cdots ,{\tau _3}\left| {{\tau _2},{\tau _1}} \right.)P(\left. {{\tau _2}} \right|{\tau _1})P({\tau _1})
 \end{equation}
+Since the conditional probability $P({\tau _n},{\tau _{n - 1}}, \cdots ,{\tau _3}\left| {{\tau _2},{\tau _1}} \right.)$ is directly determined by ${\tau _2}$, it has no direct relationship with ${\tau _1}$. So the above formula is reduced to
+
 \begin{equation}\label{eq_bayesian_prior_tau_4}
 P({\bf{\tau }}) = P({\tau _n},{\tau _{n - 1}}, \cdots ,{\tau _3}\left| {{\tau _2}} \right.)P(\left. {{\tau _2}} \right|{\tau _1})P({\tau _1})
 \end{equation}
