@@ -25,6 +25,7 @@ def sim_simple_steps(l, noise, steps):
     append : ndarray
         [time,value]
     """
+    np.random.seed(1)
     s = np.random.normal(0, noise, l)
     sshape = steps.shape
     for i in np.arange(0, sshape[0]):

@@ -105,84 +105,22 @@
 
 \section{Introduction}
 \label{intro}
+%全球定位系统系统的应用-》位移探测
+%在自然灾害监测，或者工业测量等领域，GNSS被用于位移探测。
+%传统测量仪器的弊端，GNSS位移探测的优势。
+In recent decades, GNSS has been widely used in navigation, surveying, and civil aviation as a positioning method. Besides, as a displacement detection method, GNSS has been applied to natural disaster monitoring, industrial measurement, and other fields. Compared with traditional displacement detection technology, GNSS-based displacement detection has many advantages, such as real-time, high accuracy, and weather independence.
 
+%位移探测算法回顾，传统位移探测的弊端
+%位移探测的短板
+%本文拟采取的措施弥补这些短板
+%Bayes的优势，并且调研一下前人是否尝试同样的方法干过这类事情
+%引入本文的研究内容和贡献
+%引入文章结构
 
 
 \section{Methodology}
-\subsection{Relative real-time kinematic (RTK)}
-RTK is widely used in structural health monitoring, landslide monitoring, and other fields due to its high positioning accuracy and real-time efficiency. The observation model, the state model, and the extended Kalman filtering process of RTK are introduced below. 
-\subsubsection{Observation model}
-The double-difference (DD) observation equation of relative positioning among base receiver, rover receiver, and satellites $j$, $k$ is defined in (\ref{eq_dd_obs})\citep{teunissen2017springer}.
-\begin{figure*}
-	\begin{equation}
-	\left. \begin{array}{l}
-	\Delta \nabla P_{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} - \Delta \nabla \delta I_{\Phi {i_{br}}}^{jk} + \Delta \nabla \delta _{tro{p_{br}}}^{jk} + \Delta \nabla \delta M_{{P_{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{P_{{i_{br}}}}}^{jk}\\
-	\Delta \nabla \Phi _{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} + \Delta \nabla \delta I_{{\Phi _{{i_{br}}}}}^{jk} + \Delta \nabla \delta _{tro{p_{br}}}^{jk} - {\lambda _i}\Delta \nabla N_{{i_{br}}}^{jk} + \Delta \nabla \delta M_{{\Phi _{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{\Phi _{{i_{br}}}}}^{jk}
-	\end{array} \right\}
-	\label{eq_dd_obs}
-	\end{equation}
-\end{figure*}
-In this observation equation, $\Delta \nabla $ denotes the DD operator, $i$ denotes the frequency; $b$ and $r$ denote base station and rover station respectively; $\Delta \nabla P_{{{i}_{br}}}^{jk}$ and $\Delta \nabla \Phi _{{{i}_{br}}}^{jk}$ denote pseudo-range and carrier-phase DD observations, respectively; $\Delta \nabla \rho _{br}^{jk}$ is the DD geometric distance between receivers and satellites; $\Delta \nabla \delta M_{{{P}_{{{i}_{br}}}}}^{jk}$ and $\Delta \nabla \delta M_{{{\Phi }_{{{i}_{br}}}}}^{jk}$ denote pseudo-range and carrier-phase multipath error, respectively; $\Delta \nabla \varepsilon _{{{P}_{{{i}_{br}}}}}^{jk}$ and $\Delta \nabla \varepsilon _{{{\Phi }_{{{i}_{br}}}}}^{jk}$ represent DD observation error of pseudo-range and carrier-phase, respectively; $\Delta \nabla \delta I_{\Phi {{i}_{br}}}^{jk}$is the DD ionospheric delay between receivers and satellites, and the ionospheric error has the same absolute value but the opposite sign on pseudo-range and carrier-phase observations; $\Delta \nabla \delta _{tro{{p}_{br}}}^{jk}$is the DD tropospheric delay between receivers and satellites. For the short baseline, the atmospheric error can be ignored, so the above DD observation equation is simplified as (\ref{eq_dd_obs_simplified}).
-\begin{figure*}
-	\begin{equation}
-	\left. \begin{array}{l}
-	\Delta \nabla P_{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} + \Delta \nabla \delta M_{{P_{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{P_{{i_{br}}}}}^{jk}\\
-	\Delta \nabla \Phi _{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} - {\lambda _i}\Delta \nabla N_{{i_{br}}}^{jk} + \Delta \nabla \delta M_{{\Phi _{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{\Phi _{{i_{br}}}}}^{jk}\end{array} \right\}
-	\label{eq_dd_obs_simplified}
-	\end{equation}
-	
-\end{figure*}
-By ignoring the influence of multipath, linearizing equation (\ref{eq_dd_obs_simplified}), we get
-\begin{equation}
-\label{eq_rtk_measure}
-{\bf{y}} = {\bf{Hx}} + {\bf{\varepsilon }}
-\end{equation}
-where $\bf{y}$ is the observation minus the computed,  $\bf{H} $ is the linearized design matrix\citep{hofmann-wellenhof2007gnss}, $\bf{x}\triangleq {{[{{\mathbf{r}}_{r}},\Delta \nabla \mathbf{N}]}^{T}}$, is the state vector, which contains the rover station coordinate ${{\mathbf{r}}_{r}}$ and the DD integer ambiguity $\Delta \nabla \mathbf{N}$;  $\mathbf{\varepsilon } $ is the observation noise, and its covariance matrix is expressed as  ${{\mathbf{R}}_{\varepsilon }} $. After forming the observation equation, the ‘float’ solution of the parameter can be obtained by the standard least square method. To obtain high precision positioning results, it is necessary to fix the integer ambiguity. The 'float' solution and variance of integer ambiguity are expressed as  $\Delta \nabla \mathbf{\tilde{N}} $,  ${{\mathbf{Q}}_{\Delta \nabla \mathbf{\tilde{N}}}} $, respectively. Then the problem of ambiguity fixing can be described as (\ref{eq_lamda})\citep{teunissen1995the}.
-\begin{figure*}
-	\begin{equation}
-	\Delta \nabla {\bf{\hat N}} = \mathop {\arg min}\limits_{\Delta \nabla {\bf{N}} \in {\bf{Z}}} ((\Delta \nabla {\bf{\tilde N}} - \Delta \nabla {\bf{\hat N}}){\bf{Q}}_{\Delta \nabla {\bf{\tilde N}}}^{ - 1}{(\Delta \nabla {\bf{\tilde N}} - \Delta \nabla {\bf{\hat N}})^T})
-	\label{eq_lamda}
-	\end{equation}
-\end{figure*}
-There are many methods referring to integer ambiguity resolution, among which LAMBDA (Least-squares Ambiguity Decorrelation Adjustment)\citep{teunissen1995the} method is the most widely used one. The integer ambiguity is obtained by the integer least square method. Then, the test process is executed to determine whether to accept or reject the integer ambiguity\citep{wang2014ambiguity,wang2018improving}. If the test is passed, the fixed integer ambiguity can be substituted into (\ref{eq_rtk_measure}) to resolve the fixed solution, otherwise, the ‘float’ solution will be maintained.
+\label{method}
 
-\subsubsection{State model}
-The state model is defined as follows (Takasu 2013)
-\begin{equation}
-{{\bf{x}}_k} = {\bf{F}}{{\bf{x}}_{k - 1}} + {\bf{w}}
-\end{equation}
-where ${\bf{F}} \buildrel \Delta \over = \left[ {\begin{array}{*{20}{c}}
-	{{{\bf{I}}_{3 \times 3}}}&{\bf{0}}\\
-	{\bf{0}}&{{{\bf{I}}_{(2n - 2)(2n - 2)}}}
-	\end{array}} \right]$ , is the transition matrix from $k-1$ to $k$; $\mathbf{I}$ denotes the identity matrix; $n$ represents the number of satellites observed simultaneously by the base station and the rover station; Only GPS ${{L}_{1}}$ and ${{L}_{2}}$ frequency observations are considered, so $2n-2$ DD ambiguities are formed. $\mathbf{w}$ is the process noise, and its covariance matrix is expressed as ${{\mathbf{G}}_{w}}$. For kinematic positioning, the coordinate covariance component is set to be large to capture dynamic features, while the ambiguity covariance component is set to $\mathbf{0}$ to ensure the stability of positioning.
-\subsubsection{Extended Kalman filtering}
-Kalman filtering includes two processes: prediction update and measurement update\citep{grewal2001kalman}. The prediction process is as follows:
-\begin{equation}
-{{\bf{\hat x}}_{k|k - 1}} = {\bf{F}}{{\bf{\hat x}}_{k - 1}}
-\end{equation}
-\begin{equation}
-{{\bf{Q}}_{k|k - 1}} = {\bf{F}}{{\bf{Q}}_{k - 1}}{{\bf{F}}^T} + {{\bf{G}}_w}(k)
-\end{equation}
-According to the definition of the state transition matrix above, it can be seen that the state value of the previous epoch remains unchanged. However, the coordinate covariance component becomes larger, while the ambiguity covariance component remains unchanged. The measurement update process is as follows:
-\begin{equation}
-{{\bf{v}}_k} = {\bf{y}}(k) - {\bf{H}}(k){{\bf{\hat x}}_{k|k - 1}}
-\end{equation}
-\begin{equation}
-{{\bf{S}}_k} = {\bf{H}}(k){{\bf{Q}}_{k|k - 1}}{\bf{H}}{(k)^{\rm{T}}} + {{\bf{R}}_\varepsilon }(k)
-\end{equation}
-\begin{equation}
-{\bf{K}} = {{\bf{Q}}_{k|k - 1}}{\bf{H}}_k^T{\bf{S}}_k^{ - 1}
-\end{equation}
-where ${{\mathbf{v}}_{k}}$ denotes the innovation vector, and ${{\mathbf{S}}_{k}}$ is the covariance matrix of the innovation vector; $\mathbf{K}$ is the state estimation gain matrix. The final state is estimated as follows:
-\begin{equation}
-{{\bf{\hat x}}_k} = {{\bf{\hat x}}_{k|k - 1}} + {\bf{K}}{{\bf{v}}_k}
-\end{equation}
-\begin{equation}
-{{\bf{Q}}_k} = {{\bf{Q}}_{k|k - 1}} - {\bf{K}}{{\bf{S}}_k}{{\bf{K}}^T}
-\end{equation}
-where ${{\mathbf{\hat{x}}}_{k}}$ is the final estimate, and ${{\mathbf{Q}}_{k}}$ is the corresponding covariance matrix; ${{\mathbf{\hat{x}}}_{k}}$ is the only input of the proposed method.  
-
-Due to the complex spatiotemporal characteristics of observation errors, there are unmodeled error components in time series\citep{shen2020site}. To weaken the influence of these factors, the wavelet analysis tool is introduced as follows.
 
 
 
@@ -321,8 +259,81 @@ There exists $n$ which satisfies the following conditions
 \end{equation}
 This is the target distribution we want to construct. Based on the initial arbitrary simple probability distribution such as Gaussian distribution $\pi_{0}(x)$, the state value $x_0$ is obtained by sampling. Based on the probability distribution $\pi_{1}(x)=\pi_{0}(x)P(x\left| {{x_0}} \right.)$ sampling state value $x_1$, using the same method, execute $n$ times. Sample $(x_{n},x_{n+1},x_{n+2}\cdots)$ is the corresponding sample set of the target distribution. However, the implementation of MCMC also needs to consider other factors such as constructing the state transition matrix according to the target distribution, which is beyond the scope of this work. Two implementations of MCMC,  the Metropolis-Hasting sampler\citep{chib1995understanding} and the No-U-Turn sampler\citep{hoffman2014no}, are used to sample discrete random variables and continuous random variables, respectively.
 
+\subsection{Relative real-time kinematic (RTK)}
+RTK is widely used in structural health monitoring, landslide monitoring, and other fields due to its high positioning accuracy and real-time efficiency. The observation model, the state model, and the extended Kalman filtering process of RTK are introduced below. 
+\subsubsection{Observation model}
+The double-difference (DD) observation equation of relative positioning among base receiver, rover receiver, and satellites $j$, $k$ is defined in (\ref{eq_dd_obs})\citep{teunissen2017springer}.
+\begin{figure*}
+	\begin{equation}
+	\left. \begin{array}{l}
+	\Delta \nabla P_{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} - \Delta \nabla \delta I_{\Phi {i_{br}}}^{jk} + \Delta \nabla \delta _{tro{p_{br}}}^{jk} + \Delta \nabla \delta M_{{P_{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{P_{{i_{br}}}}}^{jk}\\
+	\Delta \nabla \Phi _{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} + \Delta \nabla \delta I_{{\Phi _{{i_{br}}}}}^{jk} + \Delta \nabla \delta _{tro{p_{br}}}^{jk} - {\lambda _i}\Delta \nabla N_{{i_{br}}}^{jk} + \Delta \nabla \delta M_{{\Phi _{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{\Phi _{{i_{br}}}}}^{jk}
+	\end{array} \right\}
+	\label{eq_dd_obs}
+	\end{equation}
+\end{figure*}
+In this observation equation, $\Delta \nabla $ denotes the DD operator, $i$ denotes the frequency; $b$ and $r$ denote base station and rover station respectively; $\Delta \nabla P_{{{i}_{br}}}^{jk}$ and $\Delta \nabla \Phi _{{{i}_{br}}}^{jk}$ denote pseudo-range and carrier-phase DD observations, respectively; $\Delta \nabla \rho _{br}^{jk}$ is the DD geometric distance between receivers and satellites; $\Delta \nabla \delta M_{{{P}_{{{i}_{br}}}}}^{jk}$ and $\Delta \nabla \delta M_{{{\Phi }_{{{i}_{br}}}}}^{jk}$ denote pseudo-range and carrier-phase multipath error, respectively; $\Delta \nabla \varepsilon _{{{P}_{{{i}_{br}}}}}^{jk}$ and $\Delta \nabla \varepsilon _{{{\Phi }_{{{i}_{br}}}}}^{jk}$ represent DD observation error of pseudo-range and carrier-phase, respectively; $\Delta \nabla \delta I_{\Phi {{i}_{br}}}^{jk}$is the DD ionospheric delay between receivers and satellites, and the ionospheric error has the same absolute value but the opposite sign on pseudo-range and carrier-phase observations; $\Delta \nabla \delta _{tro{{p}_{br}}}^{jk}$is the DD tropospheric delay between receivers and satellites. For the short baseline, the atmospheric error can be ignored, so the above DD observation equation is simplified as (\ref{eq_dd_obs_simplified}).
+\begin{figure*}
+	\begin{equation}
+	\left. \begin{array}{l}
+	\Delta \nabla P_{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} + \Delta \nabla \delta M_{{P_{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{P_{{i_{br}}}}}^{jk}\\
+	\Delta \nabla \Phi _{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} - {\lambda _i}\Delta \nabla N_{{i_{br}}}^{jk} + \Delta \nabla \delta M_{{\Phi _{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{\Phi _{{i_{br}}}}}^{jk}\end{array} \right\}
+	\label{eq_dd_obs_simplified}
+	\end{equation}
+	
+\end{figure*}
+By ignoring the influence of multipath, linearizing equation (\ref{eq_dd_obs_simplified}), we get
+\begin{equation}
+\label{eq_rtk_measure}
+{\bf{y}} = {\bf{Hx}} + {\bf{\varepsilon }}
+\end{equation}
+where $\bf{y}$ is the observation minus the computed,  $\bf{H} $ is the linearized design matrix\citep{hofmann-wellenhof2007gnss}, $\bf{x}\triangleq {{[{{\mathbf{r}}_{r}},\Delta \nabla \mathbf{N}]}^{T}}$, is the state vector, which contains the rover station coordinate ${{\mathbf{r}}_{r}}$ and the DD integer ambiguity $\Delta \nabla \mathbf{N}$;  $\mathbf{\varepsilon } $ is the observation noise, and its covariance matrix is expressed as  ${{\mathbf{R}}_{\varepsilon }} $. After forming the observation equation, the ‘float’ solution of the parameter can be obtained by the standard least square method. To obtain high precision positioning results, it is necessary to fix the integer ambiguity. The 'float' solution and variance of integer ambiguity are expressed as  $\Delta \nabla \mathbf{\tilde{N}} $,  ${{\mathbf{Q}}_{\Delta \nabla \mathbf{\tilde{N}}}} $, respectively. Then the problem of ambiguity fixing can be described as (\ref{eq_lamda})\citep{teunissen1995the}.
+\begin{figure*}
+	\begin{equation}
+	\Delta \nabla {\bf{\hat N}} = \mathop {\arg min}\limits_{\Delta \nabla {\bf{N}} \in {\bf{Z}}} ((\Delta \nabla {\bf{\tilde N}} - \Delta \nabla {\bf{\hat N}}){\bf{Q}}_{\Delta \nabla {\bf{\tilde N}}}^{ - 1}{(\Delta \nabla {\bf{\tilde N}} - \Delta \nabla {\bf{\hat N}})^T})
+	\label{eq_lamda}
+	\end{equation}
+\end{figure*}
+There are many methods referring to integer ambiguity resolution, among which LAMBDA (Least-squares Ambiguity Decorrelation Adjustment)\citep{teunissen1995the} method is the most widely used one. The integer ambiguity is obtained by the integer least square method. Then, the test process is executed to determine whether to accept or reject the integer ambiguity\citep{wang2014ambiguity,wang2018improving}. If the test is passed, the fixed integer ambiguity can be substituted into (\ref{eq_rtk_measure}) to resolve the fixed solution, otherwise, the ‘float’ solution will be maintained.
+
+\subsubsection{State model}
+The state model is defined as follows (Takasu 2013)
+\begin{equation}
+{{\bf{x}}_k} = {\bf{F}}{{\bf{x}}_{k - 1}} + {\bf{w}}
+\end{equation}
+where ${\bf{F}} \buildrel \Delta \over = \left[ {\begin{array}{*{20}{c}}
+	{{{\bf{I}}_{3 \times 3}}}&{\bf{0}}\\
+	{\bf{0}}&{{{\bf{I}}_{(2n - 2)(2n - 2)}}}
+	\end{array}} \right]$ , is the transition matrix from $k-1$ to $k$; $\mathbf{I}$ denotes the identity matrix; $n$ represents the number of satellites observed simultaneously by the base station and the rover station; Only GPS ${{L}_{1}}$ and ${{L}_{2}}$ frequency observations are considered, so $2n-2$ DD ambiguities are formed. $\mathbf{w}$ is the process noise, and its covariance matrix is expressed as ${{\mathbf{G}}_{w}}$. For kinematic positioning, the coordinate covariance component is set to be large to capture dynamic features, while the ambiguity covariance component is set to $\mathbf{0}$ to ensure the stability of positioning.
+\subsubsection{Extended Kalman filtering}
+Kalman filtering includes two processes: prediction update and measurement update\citep{grewal2001kalman}. The prediction process is as follows:
+\begin{equation}
+{{\bf{\hat x}}_{k|k - 1}} = {\bf{F}}{{\bf{\hat x}}_{k - 1}}
+\end{equation}
+\begin{equation}
+{{\bf{Q}}_{k|k - 1}} = {\bf{F}}{{\bf{Q}}_{k - 1}}{{\bf{F}}^T} + {{\bf{G}}_w}(k)
+\end{equation}
+According to the definition of the state transition matrix above, it can be seen that the state value of the previous epoch remains unchanged. However, the coordinate covariance component becomes larger, while the ambiguity covariance component remains unchanged. The measurement update process is as follows:
+\begin{equation}
+{{\bf{v}}_k} = {\bf{y}}(k) - {\bf{H}}(k){{\bf{\hat x}}_{k|k - 1}}
+\end{equation}
+\begin{equation}
+{{\bf{S}}_k} = {\bf{H}}(k){{\bf{Q}}_{k|k - 1}}{\bf{H}}{(k)^{\rm{T}}} + {{\bf{R}}_\varepsilon }(k)
+\end{equation}
+\begin{equation}
+{\bf{K}} = {{\bf{Q}}_{k|k - 1}}{\bf{H}}_k^T{\bf{S}}_k^{ - 1}
+\end{equation}
+where ${{\mathbf{v}}_{k}}$ denotes the innovation vector, and ${{\mathbf{S}}_{k}}$ is the covariance matrix of the innovation vector; $\mathbf{K}$ is the state estimation gain matrix. The final state is estimated as follows:
+\begin{equation}
+{{\bf{\hat x}}_k} = {{\bf{\hat x}}_{k|k - 1}} + {\bf{K}}{{\bf{v}}_k}
+\end{equation}
+\begin{equation}
+{{\bf{Q}}_k} = {{\bf{Q}}_{k|k - 1}} - {\bf{K}}{{\bf{S}}_k}{{\bf{K}}^T}
+\end{equation}
+where ${{\mathbf{\hat{x}}}_{k}}$ is the final estimate, and ${{\mathbf{Q}}_{k}}$ is the corresponding covariance matrix; ${{\mathbf{\hat{x}}}_{k}}$ is the only input of the proposed method.  
+
 \section{Experiments and Results}
-To verify the feasibility of the proposed method, we carried out a series of experiments, including a simulation experiment and a field experiment. In the simulation experiment, data affected by noise and a trend item is simulated. In the field experiment, several displacement changes were triggered manually, and the relative real-time kinematic model is used to process the GNSS observations.
+To verify the feasibility of the proposed method, we carried out a series of experiments, including simulation experiments and field experiments. In the simulation experiment, the data affected by different noises are simulated. In the field experiment, several displacement changes were triggered manually, and the relative real-time kinematic model is used to process the GNSS observations.
 \subsection{Simulation experiment}
 
 
