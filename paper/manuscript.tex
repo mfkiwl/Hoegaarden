@@ -385,6 +385,86 @@ To verify the feasibility of the proposed method, we carried out a series of exp
 \subsection{Field experiment}
 The experiment was carried out on the roof of a building on the campus of Wuhan University. In the experiment, the equipment deployment is shown in Fig. \ref{fig_field_exp_config}. A hard plank is pressed with large stones to ensure that the plank remains as fixed as possible during moving the object hanging on the plank. One receiver antenna is fixed on the plank as a rover; the other receiver antenna is fixed on a tripod beside it as the base station. Both antennas are connected to BD992 OEM boards on the table, and the OEM boards are connected to the laptops for data collection. As shown in subgraphs (c) and (d), the height of the antenna is measured with a tape before and after each movement of the object hanging on the plank. Besides, markers are made on the ground and on the antenna respectively to ensure that the same position is referenced for each measurement. The sampling frequency of the GNSS receiver is set to 1 Hz. The whole experiment lasted for nearly one hour, during which the object hanging on the plank was moved several times manually.
 
+\begin{table*}[h!t]
+	\centering
+	%	\fontsize{6.5}{8}\selectfont
+	\begin{threeparttable}
+		\caption{Measured height before and after each movement of the object hanging on the plank, unit (mm).}
+		\label{tab_measured_height}
+		\begin{tabular}{ccccccccc}
+			\toprule
+			&&&\textbf{1}&\textbf{2}&\textbf{3}&\textbf{4}&\textbf{5}&\textbf{mean}\cr
+			\midrule
+			\multirow{3}*{Step 1} 
+			& & ${h_0}$    &371.0&370.9&370.9&371.1&370.9&370.96\\
+			& & ${h_1}$    &341.0&341.1&341.5&341.9&341.0&341.30\\
+			& & $\Delta h$ & 30.0& 29.8& 29.4& 29.2& 29.9&29.66\\
+			\hline
+			\multirow{3}*{Step 2} 
+			& & ${h_0}$    &340.5&340.1&340.0&340.0&340.1&340.14\\
+			& & ${h_1}$    &313.0&312.9&312.9&313.0&313.0&312.96\\
+			& & $\Delta h$ &27.5& 27.2& 27.1& 27.0& 27.1& 27.18\\
+			\bottomrule
+		\end{tabular}
+	\end{threeparttable}
+\end{table*}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=10 cm]{v_bd9_3_up_ts}
+	\caption{Daily displacement of experimental data obtained by the ionosphere-free PPP static model.}
+	\label{fig_v_bd9_3_up_ts}
+\end{figure} 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=10 cm]{v_bd9_3_up_tau}
+	\caption{Daily displacement of experimental data obtained by the ionosphere-free PPP static model.}
+	\label{fig_v_bd9_3_up_tau}
+\end{figure} 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=10 cm]{v_bd9_3_up_sigma}
+	\caption{Daily displacement of experimental data obtained by the ionosphere-free PPP static model.}
+	\label{fig_v_bd9_3_up_sigma}
+\end{figure} 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=10 cm]{v_bd9_3_up_mu}
+	\caption{Daily displacement of experimental data obtained by the ionosphere-free PPP static model.}
+	\label{fig_v_bd9_3_up_mu}
+\end{figure} 
+
+\begin{table*}[h!t]
+	\centering
+	%	\fontsize{6.5}{8}\selectfont
+	\begin{threeparttable}
+		\caption{Measured height before and after each movement of the object hanging on the plank, unit (m).}
+		\label{tab_measured_height}
+		\begin{tabular}{ccccccccc}
+			\toprule
+			&&&\textbf{1}&\textbf{2}&\textbf{3}&\textbf{4}&\textbf{5}&\textbf{mean}\cr
+			\midrule
+			\multirow{3}*{Step 1} 
+			& & ${h_0}$    &368.5&	368.9&	369.0&	368.9&	369.0&	368.9\\
+			& & ${h_1}$    &348.1&	348.0&	348.0&	348.2&	348.3&	348.1\\
+			& & $\Delta h$ & 20.4&	 20.9&	 21.0&	 20.7&	 20.7&	 20.7\\
+			\hline               
+			\multirow{3}*{Step 2}
+			& & ${h_0}$    &347.5&	347.3&	347.6&	347.5&	347.4&	347.5\\
+			& & ${h_1}$    &326.1&	326.3&	326.1&	326.0&	326.1&	326.1\\
+			& & $\Delta h$ & 21.4&	 21.0&	 21.5&	 21.5&	 21.3&	 21.3\\
+			\hline               
+			\multirow{3}*{Step 3}
+			& & ${h_0}$    &325.0&	325.1&	324.9&	325.0&	325.2&	325.0\\
+			& & ${h_1}$    &305.5&	305.3&	305.4&	305.5&	305.6&	305.5\\
+			& & $\Delta h$ & 19.5&	 19.8&	 19.5&	 19.5&	 19.6&	 19.6\\
+			\bottomrule
+		\end{tabular}
+	\end{threeparttable}
+\end{table*}
+
 \section{Discussion}
 
 
