@@ -21,5 +21,5 @@ class ReadConfig:
 
 def getpath(key):
     root_dir = os.path.dirname(os.path.abspath('.'))
-    readcfg = ReadConfig(root_dir + "\\config\\sn_laptop.cfg")
+    readcfg = ReadConfig(root_dir + "\\code\\config\\sn_laptop.cfg")
     return readcfg.getpath(key)

@@ -109,14 +109,25 @@
 %在自然灾害监测，或者工业测量等领域，GNSS被用于位移探测。
 %传统测量仪器的弊端，GNSS位移探测的优势。
 %GNSS在位移探测中扮演的角色，以及位移探测的要求
-In recent decades, Global navigation satellite system (GNSS) has been widely used in navigation, surveying, and civil aviation as a positioning method. Besides, as a displacement detection method, GNSS has been applied to natural disaster monitoring, industrial measurement, and other fields. Compared with traditional displacement detection technology, GNSS-based displacement detection has many advantages, such as real-time, high accuracy, and weather independence. Displacement detection involves automatic identification of the time of displacement and determination of displacement. GNSS-based displacement detection is generally performed by the time-domain difference of GNSS positioning results.
-
-
+%目前人们对于基于GNSS位移探测的研究更过的关注与如何提高定位的精度，而忽略了如何从GNSS获取的坐标序列中识别并提取位移。
+In recent decades, Global navigation satellite system (GNSS) has been widely used in navigation, surveying, and civil aviation as a positioning method\citep{teunissen2017springer}. 
+Besides, as a displacement detection method, GNSS has been applied to natural disaster monitoring\citep{awange2012environmental}, industrial measurement\citep{pavasovic2011application}, and other fields. 
+Compared with traditional displacement detection technology, GNSS-based displacement detection has many advantages, such as real-time, high accuracy, and weather independence\citep{shen2019a}. 
+Displacement detection involves automatic identification of the time of displacement and determination of displacement. 
+GNSS-based displacement detection is generally performed by the time-domain difference of GNSS positioning results. 
+Previous studies on displacement detection based on GNSS pay more attention to how to improve the positioning accuracy. The research on how to identify and extract displacement from the coordinate sequence obtained by GNSS is limited.
 %位移探测算法回顾，传统位移探测的弊端
 %位移探测的短板
+
+
+
 %本文拟采取的措施弥补这些短板
 %Bayes的优势，并且调研一下前人是否尝试同样的方法干过这类事情
+
+
 %引入本文的研究内容和贡献
+
+
 %引入文章结构
 
 
@@ -228,6 +239,12 @@ Continue to expand in a similar way, and finally get
 P({\bf{\tau }}) = P({\tau _n}\left| {{\tau _{n - 1}}} \right.) \cdots P({\tau _3}\left| {{\tau _2}} \right.)P(\left. {{\tau _2}} \right|{\tau _1})P({\tau _1})
 \end{equation}
 Through \ref{eq_bayesian_prior_tau_basic} and \ref{eq_bayesian_prior_tau_5}, the joint probability of all change points can be determined. Finally, the prior distribution of parameter ${\bf{\theta }}$ can be determined by formula \ref{eq_bayesian_prior}, \ref{eq_bayesian_prior_sigma}, \ref{eq_bayesian_prior_mu_sum}, \ref{eq_bayesian_prior_tau_5}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=8 cm]{v_simple_p_model}
+	\caption{Daily displacement of experimental data obtained by the ionosphere-free PPP static model.}
+	\label{fig_v_simple_p_model}
+\end{figure} 
 
 \subsubsection{Markov Chain Monte Carlo (MCMC)}
 The posterior distribution of the parameters depends on the prior distribution and the likelihood function. Obtaining the posterior probability of parameters by direct integration or sum requires a lot of operations, which is difficult to achieve. In this work, the Markov chain Monte Carlo technique is used to approximate the integral or sum value. Monte Carlo sampling is to construct the integral or sum function as the expectation under a certain distribution, and then approximate the expectation by the corresponding average value\citep{goodfellow2016deep}.
@@ -296,7 +313,7 @@ where $\bf{y}$ is the observation minus the computed,  $\bf{H} $ is the lineariz
 	\label{eq_lamda}
 	\end{equation}
 \end{figure*}
-There are many methods referring to integer ambiguity resolution, among which LAMBDA (Least-squares Ambiguity Decorrelation Adjustment)\citep{teunissen1995the} method is the most widely used one. The integer ambiguity is obtained by the integer least square method. Then, the test process is executed to determine whether to accept or reject the integer ambiguity\citep{wang2014ambiguity,wang2018improving}. If the test is passed, the fixed integer ambiguity can be substituted into (\ref{eq_rtk_measure}) to resolve the fixed solution, otherwise, the ‘float’ solution will be maintained.
+There are many methods referring to integer ambiguity resolution, among which LAMBDA (Least-squares Ambiguity Decorrelation Adjustment)\citep{teunissen1995the} method is the most widely used one. The integer ambiguity is obtained by the integer least square method. Then, the test process is executed to determine whether to accept or reject the integer ambiguity. If the test is passed, the fixed integer ambiguity can be substituted into (\ref{eq_rtk_measure}) to resolve the fixed solution, otherwise, the ‘float’ solution will be maintained.
 
 \subsubsection{State model}
 The state model is defined as follows (Takasu 2013)
@@ -337,7 +354,33 @@ where ${{\mathbf{\hat{x}}}_{k}}$ is the final estimate, and ${{\mathbf{Q}}_{k}}$
 \section{Experiments and Results}
 To verify the feasibility of the proposed method, we carried out a series of experiments, including simulation experiments and field experiments. In the simulation experiment, the data affected by different noises are simulated. In the field experiment, several displacement changes were triggered manually, and the relative real-time kinematic model is used to process the GNSS observations.
 \subsection{Simulation experiment}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=10 cm]{v_sim_simple_gauss_ts}
+	\caption{Daily displacement of experimental data obtained by the ionosphere-free PPP static model.}
+	\label{fig_v_sim_simple_gauss_ts}
+\end{figure} 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=10 cm]{v_tau_sim_simple}
+	\caption{Daily displacement of experimental data obtained by the ionosphere-free PPP static model.}
+	\label{fig_v_tau_sim_simple}
+\end{figure} 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=10 cm]{v_sigma_sim_simple}
+	\caption{Daily displacement of experimental data obtained by the ionosphere-free PPP static model.}
+	\label{fig_v_sigma_sim_simple}
+\end{figure} 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=10 cm]{v_mu_sim_simple}
+	\caption{Daily displacement of experimental data obtained by the ionosphere-free PPP static model.}
+	\label{fig_v_mu_sim_simple}
+\end{figure} 
 
 \subsection{Field experiment}
 The experiment was carried out on the roof of a building on the campus of Wuhan University. In the experiment, the equipment deployment is shown in Fig. \ref{fig_field_exp_config}. A hard plank is pressed with large stones to ensure that the plank remains as fixed as possible during moving the object hanging on the plank. One receiver antenna is fixed on the plank as a rover; the other receiver antenna is fixed on a tripod beside it as the base station. Both antennas are connected to BD992 OEM boards on the table, and the OEM boards are connected to the laptops for data collection. As shown in subgraphs (c) and (d), the height of the antenna is measured with a tape before and after each movement of the object hanging on the plank. Besides, markers are made on the ground and on the antenna respectively to ensure that the same position is referenced for each measurement. The sampling frequency of the GNSS receiver is set to 1 Hz. The whole experiment lasted for nearly one hour, during which the object hanging on the plank was moved several times manually.
@@ -356,7 +399,7 @@ This research was funded by the National Key Research and Development Programs 2
 \section*{Conflict of Interest}
 The authors declare that they have no conflict of interest.
 \section*{Author Contributions}
-Conceptualization: Nan Shen; Methodology: Nan Shen; Writing - original draft preparation: Nan Shen; Writing - review and editing:Ruizhi Chen; Supervision: Liang Chen.
+Conceptualization: Nan Shen, Liang Chen; Methodology: Nan Shen; Writing - original draft preparation: Nan Shen; Writing - review and editing:Ruizhi Chen; Supervision: Liang Chen.
  \section*{Data Availability}
 
 
