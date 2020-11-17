@@ -119,12 +119,15 @@ Previous studies on displacement detection based on GNSS pay more attention to h
 
 %位移探测算法回顾，
 %传统位移探测的弊端
-%位移探测的短板
+%位移探测的短板1,关注与定位算法，忽略探测算法2，关注与longterm忽略shortterm
 %随着在线监测系统的普及，急需对于单历元动态监测数据进行分析处理，今早发现识别和确定位移。
-In \cite{GUMUS2019131}, a displacement monitoring system was designed to evaluate Network Real Time Kinematic(NRTK) for displacement detection. The results showed that NRTK can achieve an accuracy of 4.7 mm and 7.9 mm in the horizontal and vertical directions respectively.
+In order to evaluate the performance of single base station real time kinematic(RTK) and network RTK(NRTK) in displacement detection, the data of different observation duration were compared\citep{wang2011gps}.The results showed that NRTK has advantages in accuracy and robustness.
+A displacement monitoring system was designed to evaluate NRTK for displacement detection\citep{GUMUS2019131}. The results showed that NRTK can achieve an accuracy of 4.7 mm and 7.9 mm in the horizontal and vertical directions respectively.
+In \cite{csanliouglu2016landslide} and \cite{lytvyn2012real}, the feasibility of displacement detection using PPP has been studied.
 
+
+\cite{gili2000using} was one of the first landslide monitoring studies using GNSS displacement detection technology, in which traditional measurement data are used as a comparison. The results showed that the accuracy of GPS measurement was 12 to 16 mm in the horizontal plane and 18 to 24 mm in the elevation.
 A prototype of a low-cost GNSS has been developed for deep-seated landslide monitoring\citep{rs12203375}. The results of a nine-month filed monitoring period provided a detailed insight into the spatial and temporal pattern of deep-seated landslide surface movements, in which the displacement is obtained by the direct difference between the coordinates of the start and end periods.
-
 In addition, GNSS is also combined with synthetic aperture radar technology for displacement detection, in which long-term GNSS measurements are used as references\citep{atanasova2018ground,fuhrmann2015estimation}.
 
 
@@ -362,35 +365,41 @@ where ${{\mathbf{v}}_{k}}$ denotes the innovation vector, and ${{\mathbf{S}}_{k}
 where ${{\mathbf{\hat{x}}}_{k}}$ is the final estimate, and ${{\mathbf{Q}}_{k}}$ is the corresponding covariance matrix; ${{\mathbf{\hat{x}}}_{k}}$ is the only input of the proposed method.  
 
 \section{Experiments and Results}
-To verify the feasibility of the proposed method, we carried out a series of experiments, including simulation experiments and field experiments. In the simulation experiment, the data affected by different noises are simulated. In the field experiment, several displacement changes were triggered manually, and the relative real-time kinematic model is used to process the GNSS observations.
+To verify the feasibility of the proposed method, we carried out a series of experiments, including simulation and field experiments. In the simulation experiment, the data affected by different noises are simulated. In the field experiment, several displacement changes were triggered manually, and the relative real-time kinematic model is used to process the GNSS observations.
 \subsection{Simulation experiment}
-\begin{figure}[H]
+In the experiment, we only simulate the position measurement. In this simulation data, Gaussian white noise with mean 0 mm and standard deviation 30 mm is added. At 1000 s, 2500 s, and 3200 s, the displacements of -50 mm, -50 mm, and 100 mm are added, respectively. The simulation results are shown in Fig. \ref{fig_v_sim_simple_gauss_ts}.
+
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[width=10 cm]{v_sim_simple_gauss_ts}
-	\caption{Daily displacement of experimental data obtained by the ionosphere-free PPP static model.}
+	\caption{Simulation data with multiple displacement change points.}
 	\label{fig_v_sim_simple_gauss_ts}
 \end{figure} 
+As shown in Fig. \ref{fig_v_sim_simple_gauss_ts}, the whole time series is divided into four segments by three displacement change points. Using the model designed above, Bayesian inference is realized by MCMC sampling. The histogram of posterior estimation of displacement change points is shown in Fig. \ref{fig_v_tau_sim_simple}.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[width=10 cm]{v_tau_sim_simple}
-	\caption{Daily displacement of experimental data obtained by the ionosphere-free PPP static model.}
+	\caption{Histogram of posterior estimation of displacement change points in the simulation experiment.}
 	\label{fig_v_tau_sim_simple}
 \end{figure} 
+As can be seen from Fig. \ref{fig_v_tau_sim_simple}, all the designed displacement change points are identified. $\tau_3$ is the easiest to be identified, mainly due to the largest displacement amplitude. Due to the small displacement amplitude and fewer sample points for Bayesian estimation on the right, the estimation accuracy at $\tau_2$ is worse than the other two points.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=10 cm]{v_mu_sim_simple}
+	\caption{Histogram of posterior estimation of the mean in the simulation experiment.}
+	\label{fig_v_mu_sim_simple}
+\end{figure} 
+
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[width=10 cm]{v_sigma_sim_simple}
-	\caption{Daily displacement of experimental data obtained by the ionosphere-free PPP static model.}
+	\caption{Histogram of posterior estimation of the measurement noise in the simulation experiment.}
 	\label{fig_v_sigma_sim_simple}
 \end{figure} 
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=10 cm]{v_mu_sim_simple}
-	\caption{Daily displacement of experimental data obtained by the ionosphere-free PPP static model.}
-	\label{fig_v_mu_sim_simple}
-\end{figure} 
+
 
 \subsection{Field experiment}
 The experiment was carried out on the roof of a building on the campus of Wuhan University. In the experiment, the equipment deployment is shown in Fig. \ref{fig_field_exp_config}. A hard plank is pressed with large stones to ensure that the plank remains as fixed as possible during moving the object hanging on the plank. One receiver antenna is fixed on the plank as a rover; the other receiver antenna is fixed on a tripod beside it as the base station. Both antennas are connected to BD992 OEM boards on the table, and the OEM boards are connected to the laptops for data collection. As shown in subgraphs (c) and (d), the height of the antenna is measured with a tape before and after each movement of the object hanging on the plank. Besides, markers are made on the ground and on the antenna respectively to ensure that the same position is referenced for each measurement. The sampling frequency of the GNSS receiver is set to 1 Hz. The whole experiment lasted for nearly one hour, during which the object hanging on the plank was moved several times manually.
@@ -419,27 +428,27 @@ The experiment was carried out on the roof of a building on the campus of Wuhan 
 	\end{threeparttable}
 \end{table*}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[width=10 cm]{v_bd9_3_up_ts}
 	\caption{Daily displacement of experimental data obtained by the ionosphere-free PPP static model.}
 	\label{fig_v_bd9_3_up_ts}
 \end{figure} 
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[width=10 cm]{v_bd9_3_up_tau}
 	\caption{Daily displacement of experimental data obtained by the ionosphere-free PPP static model.}
 	\label{fig_v_bd9_3_up_tau}
 \end{figure} 
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[width=10 cm]{v_bd9_3_up_sigma}
 	\caption{Daily displacement of experimental data obtained by the ionosphere-free PPP static model.}
 	\label{fig_v_bd9_3_up_sigma}
 \end{figure} 
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[width=10 cm]{v_bd9_3_up_mu}
 	\caption{Daily displacement of experimental data obtained by the ionosphere-free PPP static model.}
@@ -474,7 +483,7 @@ The experiment was carried out on the roof of a building on the campus of Wuhan 
 		\end{tabular}
 	\end{threeparttable}
 \end{table*}
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[width=10 cm]{v_bd9_4_up_ts}
 	\caption{Daily displacement of experimental data obtained by the ionosphere-free PPP static model.}
