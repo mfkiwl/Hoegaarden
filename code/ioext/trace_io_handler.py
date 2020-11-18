@@ -19,5 +19,5 @@ def trace_export_4_mat(srcname, destname, n):
 
 if __name__ == '__main__':
     # trace_export_4_mat(getpath('tracepath') + 'sim_simple', getpath('data4origin') + 'sim_simple_posterior.mat', 3)
-    trace_export_4_mat(getpath('tracepath') + 'bd9_3', getpath('data4origin') + 'bd9_3_up_posterior.mat', 2)
+    trace_export_4_mat(getpath('tracepath') + 'bd9_4', getpath('data4origin') + 'bd9_4_up_posterior.mat', 2)
 

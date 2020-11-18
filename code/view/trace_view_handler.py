@@ -10,4 +10,4 @@ def trace_plot(name):
     plt.show()
 
 if __name__ == '__main__':
-    trace_plot(getpath('tracepath')+'sim_simple')
+    trace_plot(getpath('tracepath')+'bd9_4')
