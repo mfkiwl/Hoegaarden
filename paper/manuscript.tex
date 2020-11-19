@@ -114,23 +114,28 @@ In recent decades, Global navigation satellite system (GNSS) has been widely use
 Besides, as a displacement detection method, GNSS has been applied to natural disaster monitoring\citep{awange2012environmental}, industrial measurement\citep{pavasovic2011application}, and other fields. 
 Compared with traditional displacement detection technology, GNSS-based displacement detection has many advantages, such as real-time, high accuracy, and weather independence\citep{shen2019a}. 
 Displacement detection involves automatic identification of the time of displacement and determination of displacement. 
-GNSS-based displacement detection is generally performed by the time-domain difference of GNSS positioning results. 
-Previous studies on displacement detection based on GNSS pay more attention to how to improve the positioning accuracy. The research on how to identify and extract displacement from the coordinate sequence obtained by GNSS is limited.
+GNSS-based displacement detection is generally performed by the time-domain difference of GNSS positioning results. There are many researches on displacement detection based on GNSS, which can be divided into two categories.
+
 
 %位移探测算法回顾，
 %传统位移探测的弊端
 %位移探测的短板1,关注与定位算法，忽略探测算法2，关注与longterm忽略shortterm
 %随着在线监测系统的普及，急需对于单历元动态监测数据进行分析处理，今早发现识别和确定位移。
+The first category is about the research of measurement technology in GNSS-based displacement detection.
 In order to evaluate the performance of single base station real time kinematic(RTK) and network RTK(NRTK) in displacement detection, the data of different observation duration were compared\citep{wang2011gps}.The results showed that NRTK has advantages in accuracy and robustness.
 A displacement monitoring system was designed to evaluate NRTK for displacement detection\citep{GUMUS2019131}. The results showed that NRTK can achieve an accuracy of 4.7 mm and 7.9 mm in the horizontal and vertical directions respectively.
-In \cite{csanliouglu2016landslide} and \cite{lytvyn2012real}, the feasibility of displacement detection using PPP has been studied.
+In \cite{csanliouglu2016landslide} and \cite{lytvyn2012real}, the feasibility of displacement detection using PPP has been studied. There are also some studies using the time-differenced carrier phases (TDCP) technique\citep{freda2015time,colosimo2011real} to obtain velocity estimates for displacement detection. This kind of method obtains displacement by integrating velocity, which is mainly used in displacement detection and extraction of large earthquakes.
+This kind of method mainly focuses on how to improve the positioning accuracy, and the research on how to identify and extract the displacement from the coordinate sequence obtained by GNSS is limited.
 
-
+In another category of GNSS-based displacement detection research, GNSS is only used as a long-term monitoring method.
 \cite{gili2000using} was one of the first landslide monitoring studies using GNSS displacement detection technology, in which traditional measurement data are used as a comparison. The results showed that the accuracy of GPS measurement was 12 to 16 mm in the horizontal plane and 18 to 24 mm in the elevation.
 A prototype of a low-cost GNSS has been developed for deep-seated landslide monitoring\citep{rs12203375}. The results of a nine-month filed monitoring period provided a detailed insight into the spatial and temporal pattern of deep-seated landslide surface movements, in which the displacement is obtained by the direct difference between the coordinates of the start and end periods.
 In addition, GNSS is also combined with synthetic aperture radar technology for displacement detection, in which long-term GNSS measurements are used as references\citep{atanasova2018ground,fuhrmann2015estimation}.
+In these studies, the GNSS static positioning mode is usually adopted.
 
-
+%目前针对GNSS动态定位时间序列的位移识别和提取的研究还很少。
+At present, there are few studies on displacement identification and extraction of GNSS kinematic positioning time series. In \cite{li2010deformation}, a multiple Kalman filters model was proposed for deformation detection in the GPS real-time series. Different filters in the model represent different displacement models, which need to be defined in advance. In addition, epoch by epoch displacement detection is easily affected by observation noise.
+A modified real-time Chow test approach was proposed for fast deformation monitoring\citep{bellone2016real}. This kind of method based on statistical index is easily affected by observation noise, and is not suitable for small displacement detection\citep{pirotti2015micro}.
 
 
 %本文拟采取的措施弥补这些短板
