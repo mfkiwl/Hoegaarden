@@ -404,15 +404,20 @@ Among these means, $\mu_2$ has the highest estimation accuracy, and its correspo
 
 
 \subsection{Field experiment}
-The experiment was carried out on the roof of a building on the campus of Wuhan University. In the experiment, the equipment deployment is shown in Fig. \ref{fig_v_field_exp_config}. A hard plank is pressed with large stones to ensure that the plank remains as fixed as possible during moving the object hanging on the plank. One receiver antenna is fixed on the plank as a rover; the other receiver antenna is fixed on a tripod beside it as the base station. Both antennas are connected to BD992 OEM boards on the table, and the OEM boards are connected to the laptops for data collection. As shown in subgraphs (c) and (d), the height of the antenna is measured with a tape before and after each movement of the object hanging on the plank. Besides, markers are made on the ground and on the antenna respectively to ensure that the same position is referenced for each measurement. The sampling frequency of the GNSS receiver is set to 1 Hz. The whole experiment lasted for nearly one hour, during which the object hanging on the plank was moved several times manually.
-
-The GNSS observation data collected above are processed by the open-source software RTKLIB\citep{takasu2011rtklib}. In this data processing, GNSS data were processed epoch by epoch using RTK mode. The coordinate output of the positioning mode is the only input of the proposed method. In the experiment, only the vertical displacement is triggered, so only the up-coordinate component is displayed. The results of RTK positioning are shown in Fig. \ref{fig_v_bd9_3_up_tau}.
+The experiment was carried out on the roof of a building on the campus of Wuhan University. In the experiment, the equipment deployment is shown in Fig. \ref{fig_v_field_exp_config}. A hard plank is pressed with large stones to ensure that the plank remains as fixed as possible during moving the object hanging on the plank. One receiver antenna is fixed on the plank as a rover; the other receiver antenna is fixed on a tripod beside it as the base station. Both antennas are connected to BD992 OEM boards on the table, and the OEM boards are connected to the laptops for data collection. 
+As shown in subgraphs (c) and (d), the height of the antenna is measured with a tape before and after each movement of the object hanging on the plank. Five readings are taken for each measurement to ensure data reliability.
+Besides, markers are made on the ground and on the antenna respectively to ensure that the same position is referenced for each measurement. The sampling frequency of the GNSS receiver is set to 1 Hz. 
+We did two experiments, each lasting nearly 45 minutes. In the experiment, the objects hanging on the board were manually moved several times. The displacement amplitude of the second experiment is smaller than that of the first experiment.
+The GNSS observation data collected above are processed by the open-source software RTKLIB\citep{takasu2011rtklib}. 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=10 cm]{v_field_exp_config}
 	\caption{Filed experiment configuration. (a) Overview; (b) Working platform; (c) Displacement control platform; (d) Displacement measurement by tape. }
 	\label{fig_v_field_exp_config}
 \end{figure} 
+
+\subsubsection{Field experiment 1}
+In this data processing, GNSS data were processed epoch by epoch using RTK mode. The coordinate output of the positioning mode is the only input of the proposed method. In the experiment, only the vertical displacement is triggered, so only the up-coordinate component is displayed. The results of RTK positioning are shown in Fig. \ref{fig_v_bd9_3_up_tau}.
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=10 cm]{v_bd9_3_up_ts}
@@ -420,7 +425,7 @@ The GNSS observation data collected above are processed by the open-source softw
 	\label{fig_v_bd9_3_up_ts}
 \end{figure} 
 
-For such a short baseline, most of the errors can be eliminated by the double-difference observation. As can be seen from Fig. \ref{fig_v_bd9_3_up_ts}, there are still some unmodeled errors, such as multipath that have not been eliminated. The RTK positioning results are processed by the proposed model, and Bayesian inference is realized by MCMC sampling. The histogram of posterior estimation of displacement change points is shown in Fig. \ref{fig_v_bd9_3_up_tau}.
+For such a short baseline, most of the errors can be eliminated by the double-difference observation. As can be seen from Fig. \ref{fig_v_bd9_3_up_ts}, there are still some unmodeled errors, such as multipath that have not been eliminated. The RTK positioning results are processed by the proposed model, and Bayesian inference is implemented by MCMC sampling. The histogram of posterior estimation of displacement change points is shown in Fig. \ref{fig_v_bd9_3_up_tau}.
 
 \begin{figure}[htbp]
 	\centering
@@ -468,31 +473,20 @@ The $\mu_0$, $\mu_1$, and $\mu_2$ obtained by the mean of the posterior samples 
 	\label{fig_v_bd9_3_up_sigma}
 \end{figure} 
 
+\subsubsection{Field experiment 2}
+This experiment is similar to the previous one except that the displacement amplitude is smaller than that of the last one. For the data collected in this experiment,  the coordinate time series is obtained by RTKLIB with the same processing strategy as the previous experimrnt, and the up component of the time series is shown in Fig. \ref{fig_v_bd9_4_up_ts}. In this experiment, the displacement measured by tape is shown in Table \ref{tab_measured_height}.
+
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=10 cm]{v_bd9_4_up_ts}
-	\caption{Daily displacement of experimental data obtained by the ionosphere-free PPP static model.}
+	\caption{The vertical component of coordinates obtained by RTK positioning in field experiment 2.}
 	\label{fig_v_bd9_4_up_ts}
 \end{figure} 
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=10 cm]{v_bd9_4_up_tau}
-	\caption{Histogram of posterior estimation of displacement change points in field experiment 1.}
-	\label{fig_v_bd9_4_up_tau}
-\end{figure} 
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=10 cm]{v_bd9_4_up_mu}
-	\caption{Histogram of posterior estimation of the mean in field experiment 1.}
-	\label{fig_v_bd9_4_up_mu}
-\end{figure} 
-
-
 \begin{table*}[h!t]
 	\centering
 	%	\fontsize{6.5}{8}\selectfont
 	\begin{threeparttable}
-		\caption{Measured height before and after each movement of the object hanging on the plank, unit (mm).}
+		\caption{Measured height before and after each movement of the object hanging on the plank in field experiment 2, unit (mm).}
 		\label{tab_measured_height}
 		\begin{tabular}{ccccccccc}
 			\toprule
@@ -504,21 +498,36 @@ The $\mu_0$, $\mu_1$, and $\mu_2$ obtained by the mean of the posterior samples 
 			& & $\Delta h$ &-21.4&	-21.0&	-21.5&	-21.5&	-21.3&	-21.3\\
 			\hline               
 			\multirow{3}*{Step 2}
-			& & ${h_0}$    &325.0&	325.1&	324.9&	325.0&	325.2&	325.0\\
+			& & ${h_
+				0}$    &325.0&	325.1&	324.9&	325.0&	325.2&	325.0\\
 			& & ${h_1}$    &305.5&	305.3&	305.4&	305.5&	305.6&	305.5\\
 			& & $\Delta h$ &-19.5&	-19.8&	-19.5&	-19.5&	-19.6&	-19.6\\
 			\bottomrule
 		\end{tabular}
 	\end{threeparttable}
 \end{table*}
+As can be seen from Fig. \ref{fig_v_bd9_4_up_ts} and Table \ref{tab_measured_height}, the amplitude of the two displacements is smaller than that of the previous experiment. The time series are processed by the proposed model, and Bayesian inference is implemented by MCMC sampling. The results are shown in Fig. \ref{fig_v_bd9_4_up_tau}, \ref{fig_v_bd9_4_up_mu}, and \ref{fig_v_bd9_4_up_sigma}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=10 cm]{v_bd9_4_up_tau}
+	\caption{Histogram of posterior estimation of displacement change points in field experiment 2.}
+	\label{fig_v_bd9_4_up_tau}
+\end{figure} 
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=10 cm]{v_bd9_4_up_mu}
+	\caption{Histogram of posterior estimation of the mean in field experiment 2.}
+	\label{fig_v_bd9_4_up_mu}
+\end{figure} 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=10 cm]{v_bd9_4_up_sigma}
-	\caption{Histogram of posterior estimation of the observation noise in field experiment 1.}
+	\caption{Histogram of posterior estimation of the observation noise in field experiment 2.}
 	\label{fig_v_bd9_4_up_sigma}
-\end{figure} 
-
-
+\end{figure}
+Due to the decrease of displacement amplitude, the results are not as good as the previous experimental results. 
+It can be seen from Fig. \ref{fig_v_bd9_4_up_tau} that there are two peaks in the posterior sample histogram of $\tau_1$. Unlike Fig. \ref{fig_v_bd9_3_up_tau} of the previous experimental results, the two peaks are far away from each other, exceeding 500 s. Accordingly, there are two peaks in the posterior sample distribution of $\mu_0$, $\mu_1$ and $\sigma$. In addition, we found that the second peak of $\tau_1$ is very close to the peak of $\tau_2$, which is not what we want because we do not want to get very short segments. In the next section, we will discuss adding these additional priors to the model to improve the performance of Bayesian inference.
 \section{Discussion}
 
 
