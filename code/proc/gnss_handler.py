@@ -28,7 +28,7 @@ def bayes_multiple_detector(t, s, n):
 
     with abrupt_model:
         pm.find_MAP()
-        trace = pm.sample(40000, tune=10000)
+        trace = pm.sample(20000, tune=5000)
         az.plot_trace(trace)
         az.to_netcdf(trace, getpath('tracepath') + 'bd9_4')
         plt.show()
@@ -54,7 +54,3 @@ if __name__ == '__main__':
     plt.show()
     io.savemat(getpath('data4origin') + 'bd9_4_up_raw.mat', {'t': t, 'x': s}, oned_as='column')
     bayes_multiple_detector(t, s, 2)
-    #
-    # trace = az.from_netcdf(getpath('tracepath') + 'test')
-    # az.plot_trace(trace)
-    # plt.show()

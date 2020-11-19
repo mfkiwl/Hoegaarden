@@ -128,41 +128,38 @@ In \cite{csanliouglu2016landslide} and \cite{lytvyn2012real}, the feasibility of
 This kind of method mainly focuses on how to improve the positioning accuracy, and the research on how to identify and extract the displacement from the coordinate sequence obtained by GNSS is limited.
 
 In another category of GNSS-based displacement detection research, GNSS is only used as a long-term monitoring method.
-\cite{gili2000using} was one of the first landslide monitoring studies using GNSS displacement detection technology, in which traditional measurement data are used as a comparison. The results showed that the accuracy of GPS measurement was 12 to 16 mm in the horizontal plane and 18 to 24 mm in the elevation.
+\cite{gili2000using} was one of the first landslide monitoring studies using GNSS displacement detection technology, in which traditional measurement data are used as a comparison. The results showed that the accuracy of Global positioning system (GPS) measurement was 12 to 16 mm in the horizontal plane and 18 to 24 mm in the elevation.
 A prototype of a low-cost GNSS has been developed for deep-seated landslide monitoring\citep{rs12203375}. The results of a nine-month filed monitoring period provided a detailed insight into the spatial and temporal pattern of deep-seated landslide surface movements, in which the displacement is obtained by the direct difference between the coordinates of the start and end periods.
 In addition, GNSS is also combined with synthetic aperture radar technology for displacement detection, in which long-term GNSS measurements are used as references\citep{atanasova2018ground,fuhrmann2015estimation}.
 In these studies, the GNSS static positioning mode is usually adopted.
 
-%目前针对GNSS动态定位时间序列的位移识别和提取的研究还很少。
+%目前针对GNSS动态定位时间序列的位移识别和提取的研究还很少。目前研究都是基于长周期时间序列进行分析，对于动态定位结果分析的研究还是有限。
 At present, there are few studies on displacement identification and extraction of GNSS kinematic positioning time series. In \cite{li2010deformation}, a multiple Kalman filters model was proposed for deformation detection in the GPS real-time series. Different filters in the model represent different displacement models, which need to be defined in advance. In addition, epoch by epoch displacement detection is easily affected by observation noise.
-A modified real-time Chow test approach was proposed for fast deformation monitoring\citep{bellone2016real}. This kind of method based on statistical index is easily affected by observation noise, and is not suitable for small displacement detection\citep{pirotti2015micro}.
-
+A modified real-time Chow test approach was proposed for fast deformation monitoring\citep{bellone2016real}. This kind of method based on statistical index is easily affected by observation noise, and is not suitable for small displacement detection\citep{pirotti2015micro}. Besides, \cite{dabove2016fast} introduced a cluster-based method for dynamic deformation analysis, but this method did not perform well on real data.
 
 %本文拟采取的措施弥补这些短板
-%目前研究都是基于长周期时间序列进行分析，对于动态定位结果分析的研究还是有限。
 %Bayes的优势，并且调研一下前人是否尝试同样的方法干过这类事情
-
+Previous studies provide an important information for the application of displacement detection based on GNSS, but most of them focus on the detection of long term displacement. Few studies have explored the use of GNSS kinematic positioning for short-term displacement detection. Although the displacement can be obtained directly by the difference of GNSS positioning coordinates, the identification and extraction of displacement are still challenging due to the influence of measurement errors.
+At present, most of the displacement detection methods based on GNSS kinematic positioning are based on single epoch observations, which are easily affected by measurement noise and gross error.
 
 %引入本文的研究内容和贡献
-
+The primary aim of this paper is to explore using the context data of change point from GNSS kinematic positioning for displacement detection. This study utilized Bayesian inference to identify and extract displacement, and the Markov Chain Monte Carlo (MCMC) technique is adopted to implement the Bayesian inference. Simulation experiments and field experiments were carried out to verify the feasibility of the proposed method. The posterior sample distribution of parameters is used to analyze the reliability of displacement detection. The study presented here is one of the first investigations to utilize Bayesian inference for displacement detection based on GNSS kinematic positioning. The remaining part is as follows. Section \ref{method} shows the methodology used for this study, Section \ref{exp} presents the experimental results, the discussion is given in Section \ref{disc}, and finally, the conclusion is given in the last section.
 
 %引入文章结构
 
 
 \section{Methodology}
 \label{method}
+In this section, the Bayesian model of displacement detection and its implementation based on MCMC are presented first. Then the GNSS  real-time kinematic positioning model is introduced.
+\subsection{Bayesian Model for Displacement Detection}
 
 
-
-
-
-\subsection{Displacement Detection}
 The displacement time series is described as $\left[ {{x_1},{x_2}, \cdots {x_m}} \right]$,  and the corresponding time is denoted as $\left[ {{t_1},{t_2}, \cdots {t_m}} \right]$, where $m$ is the number of coordinate displacements. The time of displacement changes is expressed as $\left[ {{\tau _1},{\tau _2}, \cdots {\tau _n}} \right]$, which is a subset of $\left[ {{t_1},{t_2}, \cdots {t_m}} \right]$.  
 The time corresponding to the $n$ change points satisfies the following relationship:$ {{\tau _1}<{\tau _2}<\cdots {\tau _{n-1}}<{\tau _n}} $.
 The problem of displacement detection is defined as finding out the change points of displacement and giving the effective estimation of displacement.
 
 \subsubsection{Bayesian Inference}
-Bayesian inference is one of the most important skills in statistics. Bayesian inference deduces the posterior probability as the result of a priori probability and likelihood function. Bayesian inference calculates the posterior probability according to the Bayesian theorem
+Bayesian inference is one of the most important skills in statistics. Bayesian inference deduces the posterior probability as the result of a priori probability and likelihood function. Bayesian inference calculates the posterior probability according to the Bayesian theorem\citep{chen2009modulation,chen2013bayesian}
 
 \begin{equation}\label{eq_bayesian_inference}
 P({\bf{\theta }}\left| {\bf{x}} \right.) = \frac{{P({\bf{\theta }})P({\bf{x}}\left| {\bf{\theta }} \right.)}}{{P({\bf{x}})}}
@@ -256,13 +253,14 @@ Continue to expand in a similar way, and finally get
 \begin{equation}\label{eq_bayesian_prior_tau_5}
 P({\bf{\tau }}) = P({\tau _n}\left| {{\tau _{n - 1}}} \right.) \cdots P({\tau _3}\left| {{\tau _2}} \right.)P(\left. {{\tau _2}} \right|{\tau _1})P({\tau _1})
 \end{equation}
-Through \ref{eq_bayesian_prior_tau_basic} and \ref{eq_bayesian_prior_tau_5}, the joint probability of all change points can be determined. Finally, the prior distribution of parameter ${\bf{\theta }}$ can be determined by formula \ref{eq_bayesian_prior}, \ref{eq_bayesian_prior_sigma}, \ref{eq_bayesian_prior_mu_sum}, \ref{eq_bayesian_prior_tau_5}.
+Through \ref{eq_bayesian_prior_tau_basic} and \ref{eq_bayesian_prior_tau_5}, the joint probability of all change points can be determined. Finally, the prior distribution of parameter ${\bf{\theta }}$ can be determined by formula \ref{eq_bayesian_prior}, \ref{eq_bayesian_prior_sigma}, \ref{eq_bayesian_prior_mu_sum}, \ref{eq_bayesian_prior_tau_5}. The graphical representation of the Bayesian model of displacement detection is shown in Fig. \ref{fig_v_simple_p_model}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=8 cm]{v_simple_p_model}
-	\caption{Daily displacement of experimental data obtained by the ionosphere-free PPP static model.}
+	\caption{Bayesian model for displacement detection.}
 	\label{fig_v_simple_p_model}
 \end{figure} 
+As shown in Fig. \ref{fig_v_simple_p_model}, green represents the independent distribution, blue denotes the distribution dependent on other random variables, and red is the distribution of observations. After the Bayesian model of displacement detection is given, MCMC, one of the implementation methods of Bayesian inference, is introduced.
 
 \subsubsection{Markov Chain Monte Carlo (MCMC)}
 The posterior distribution of the parameters depends on the prior distribution and the likelihood function. Obtaining the posterior probability of parameters by direct integration or sum requires a lot of operations, which is difficult to achieve. In this work, the Markov chain Monte Carlo technique is used to approximate the integral or sum value. Monte Carlo sampling is to construct the integral or sum function as the expectation under a certain distribution, and then approximate the expectation by the corresponding average value\citep{goodfellow2016deep}.
@@ -294,7 +292,7 @@ There exists $n$ which satisfies the following conditions
 \begin{equation}\label{eq_markov_chain_3}
 \pi_{n}(x)=\pi_{n+1}(x)=\pi_{n+2}(x)\cdots
 \end{equation}
-This is the target distribution we want to construct. Based on the initial arbitrary simple probability distribution such as Gaussian distribution $\pi_{0}(x)$, the state value $x_0$ is obtained by sampling. Based on the probability distribution $\pi_{1}(x)=\pi_{0}(x)P(x\left| {{x_0}} \right.)$ sampling state value $x_1$, using the same method, execute $n$ times. Sample $(x_{n},x_{n+1},x_{n+2}\cdots)$ is the corresponding sample set of the target distribution. However, the implementation of MCMC also needs to consider other factors such as constructing the state transition matrix according to the target distribution, which is beyond the scope of this work. Two implementations of MCMC,  the Metropolis-Hasting sampler\citep{chib1995understanding} and the No-U-Turn sampler\citep{hoffman2014no}, are used to sample discrete random variables and continuous random variables, respectively.
+This is the target distribution we want to construct. Based on the initial arbitrary simple probability distribution such as Gaussian distribution $\pi_{0}(x)$, the state value $x_0$ is obtained by sampling. Based on the probability distribution $\pi_{1}(x)=\pi_{0}(x)P(x\left| {{x_0}} \right.)$ sampling state value $x_1$, using the same method, execute $n$ times. Sample $(x_{n},x_{n+1},x_{n+2}\cdots)$ is the corresponding sample set of the target distribution. However, the implementation of MCMC also needs to consider other factors such as constructing the state transition matrix according to the target distribution, which is beyond the scope of this work. Two implementations of MCMC,  the Metropolis-Hasting sampler\citep{chib1995understanding} and the No-U-Turn sampler\citep{hoffman2014no}, are used to sample discrete random variables and continuous random variables, respectively. Next, the data source of the proposed method: GNSS real-time kinematic positioning is introduced.
 
 \subsection{Relative real-time kinematic (RTK)}
 RTK is widely used in structural health monitoring, landslide monitoring, and other fields due to its high positioning accuracy and real-time efficiency. The observation model, the state model, and the extended Kalman filtering process of RTK are introduced below. 
@@ -370,6 +368,7 @@ where ${{\mathbf{v}}_{k}}$ denotes the innovation vector, and ${{\mathbf{S}}_{k}
 where ${{\mathbf{\hat{x}}}_{k}}$ is the final estimate, and ${{\mathbf{Q}}_{k}}$ is the corresponding covariance matrix; ${{\mathbf{\hat{x}}}_{k}}$ is the only input of the proposed method.  
 
 \section{Experiments and Results}
+\label{exp}
 To verify the feasibility of the proposed method, we carried out a series of experiments, including simulation and field experiments. In the simulation experiment, the data affected by different noises are simulated. In the field experiment, several displacement changes were triggered manually, and the relative real-time kinematic model is used to process the GNSS observations.
 \subsection{Simulation experiment}
 In the experiment, we only simulate the position measurement. In this simulation data, Gaussian white noise with mean 0 mm and standard deviation 30 mm is added. At 1000 s, 2500 s, and 3200 s, the displacements of -50 mm, -50 mm, and 100 mm are added, respectively. The simulation results are shown in Fig. \ref{fig_v_sim_simple_gauss_ts}.
@@ -405,9 +404,6 @@ Among these means, $\mu_2$ has the highest estimation accuracy, and its correspo
 	\caption{Histogram of posterior estimation of the observation noise in the simulation experiment.}
 	\label{fig_v_sigma_sim_simple}
 \end{figure} 
-
-
-
 \subsection{Field experiment}
 The experiment was carried out on the roof of a building on the campus of Wuhan University. In the experiment, the equipment deployment is shown in Fig. \ref{fig_v_field_exp_config}. A hard plank is pressed with large stones to ensure that the plank remains as fixed as possible during moving the object hanging on the plank. One receiver antenna is fixed on the plank as a rover; the other receiver antenna is fixed on a tripod beside it as the base station. Both antennas are connected to BD992 OEM boards on the table, and the OEM boards are connected to the laptops for data collection. 
 As shown in subgraphs (c) and (d), the height of the antenna is measured with a tape before and after each movement of the object hanging on the plank. Five readings are taken for each measurement to ensure data reliability.
@@ -534,10 +530,10 @@ As can be seen from Fig. \ref{fig_v_bd9_4_up_ts} and Table \ref{tab_measured_hei
 Due to the decrease of displacement amplitude, the results are not as good as the previous experimental results. 
 It can be seen from Fig. \ref{fig_v_bd9_4_up_tau} that there are two peaks in the posterior sample histogram of $\tau_1$. Unlike Fig. \ref{fig_v_bd9_3_up_tau} of the previous experimental results, the two peaks are far away from each other, exceeding 500 s. Accordingly, there are two peaks in the posterior sample distribution of $\mu_0$, $\mu_1$ and $\sigma$. In addition, we found that the second peak of $\tau_1$ is very close to the peak of $\tau_2$, which is not what we want because we do not want to get very short segments. In the next section, we will discuss adding these additional priors to the model to improve the performance of Bayesian inference.
 \section{Discussion}
-
+\label{disc}
 
 \section{Conclusions}
-
+\label{concl}
 
 \begin{acknowledgements}
 This research was funded by the National Key Research and Development Programs 2018YFB0505400, the Natural Science Fund of Hubei Province 2018CFA007.
