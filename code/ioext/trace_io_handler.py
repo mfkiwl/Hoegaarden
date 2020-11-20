@@ -10,7 +10,7 @@ def trace_export_4_mat(srcname, destname, n):
     data = {}
     size = trace.posterior.sigma.data.size
     data['sigma'] = trace.posterior.sigma.data.reshape(size, 1)
-    # data['dtau'] = trace.posterior.dtau.data.reshape(size, 1)
+    data['dtau'] = trace.posterior.dtau.data.reshape(size, 1)
 
 
     for i in np.arange(1, n + 1):
@@ -22,5 +22,5 @@ def trace_export_4_mat(srcname, destname, n):
 
 if __name__ == '__main__':
     # trace_export_4_mat(getpath('tracepath') + 'sim_simple', getpath('data4origin') + 'sim_simple_posterior.mat', 3)
-    trace_export_4_mat(getpath('tracepath') + 'bd9_4', getpath('data4origin') + 'bd9_4_up.mat', 2)
+    trace_export_4_mat(getpath('tracepath') + 'bd9_4_add_new_rule_1', getpath('data4origin') + 'bd9_4_up_posterior_add_new_rule_.mat', 2)
 
