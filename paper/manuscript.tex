@@ -528,9 +528,14 @@ As can be seen from Fig. \ref{fig_v_bd9_4_up_ts} and Table \ref{tab_measured_hei
 	\label{fig_v_bd9_4_up_sigma}
 \end{figure}
 Due to the decrease of displacement amplitude, the results are not as good as the previous experimental results. 
-It can be seen from Fig. \ref{fig_v_bd9_4_up_tau} that there are two peaks in the posterior sample histogram of $\tau_1$. Unlike Fig. \ref{fig_v_bd9_3_up_tau} of the previous experimental results, the two peaks are far away from each other, exceeding 500 s. Accordingly, there are two peaks in the posterior sample distribution of $\mu_0$, $\mu_1$ and $\sigma$. In addition, we found that the second peak of $\tau_1$ is very close to the peak of $\tau_2$, which is not what we want because we do not want to get very short segments. In the next section, we will discuss adding these additional priors to the model to improve the performance of Bayesian inference.
+It can be seen from Fig. \ref{fig_v_bd9_4_up_tau} that there are two peaks in the posterior sample histogram of $\tau_1$. Unlike Fig. \ref{fig_v_bd9_3_up_tau} of the previous experimental results, the two peaks are far away from each other, exceeding 500 s. Accordingly, there are two peaks in the posterior sample distribution of $\mu_0$, $\mu_1$ and $\sigma$. In addition, we found that the second peak of $\tau_1$ is very close to the peak of $\tau_2$, which is not what we want because we do not want to get very short segments. In the next section, we will discuss adding an additional prior to the model to improve the performance of Bayesian inference.
 \section{Discussion}
 \label{disc}
+In the above experiment, due to the influence of observation noise, there are several significant peaks of posterior samples, and the posterior distribution of change points is close to each other. The interval between adjacent change points is constrained by adding an additional prior. The random variable $d\tau$, the distance between continuous change points, is added, which obeys the  discrete uniform distribution.
+\begin{equation}\label{eq_bayesian_prior_d_tau}
+P(d\tau_{i})=DiscreteU(\tau_{i} + d,\tau_{i+1})
+\end{equation}
+where $d$ is the shortest time interval to be restricted. The new Bayesian probability model with additional prior is shown in Fig. \ref{fig_v_simple_p_model_add_new_rule}.
 
 \begin{figure}[H]
 	\centering
