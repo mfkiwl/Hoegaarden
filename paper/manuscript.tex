@@ -434,7 +434,11 @@ For such a short baseline, most of the errors can be eliminated by the double-di
 	\caption{Histogram of posterior estimation of displacement change points in field experiment 1.}
 	\label{fig_v_bd9_3_up_tau}
 \end{figure} 
-From the posterior sample distribution of $\tau_2$ in Fig. \ref{fig_v_bd9_3_up_tau}, one of the change points can be identified as 1897 s. The change point determined according to the maximum value of the posterior sample histogram of $\tau_1$ is 781 s.It can be seen from Fig. \ref{fig_v_bd9_3_up_tau} that there are two peaks in the posterior sample histogram of change point $\tau_1$, and the posterior distribution is not as obvious as in the simulation experiment.The main reason is that the displacement control device is not completely controllable, and the plank floats up and down when moving the object. In addition, since the antenna is close to the ground, the antenna vibration caused by breeze or touch causes an increase in the multipath phase rate or fading frequency\citep{teunissen2017springer}. The posterior sample histogram of the mean value of each segment divided by the change point and the displacement measured by the tape are shown in Fig. \ref{fig_v_bd9_3_up_mu} and Table \ref{tab_measured_height}, respectively.
+From the posterior sample distribution of $\tau_2$ in Fig. \ref{fig_v_bd9_3_up_tau}, one of the change points can be identified as 1897 s. The change point determined according to the maximum value of the posterior sample histogram of $\tau_1$ is 781 s.
+However, as can be seen from Fig. \ref{fig_v_bd9_3_up_tau}, there are two peaks in the posterior sample histogram of change point $\tau_1$, and the posterior distribution is not as obvious as in the simulation experiment.
+The main reason is that the displacement control device is not completely controllable, and the plank floats up and down when moving the object. 
+In addition, since the antenna is close to the ground, the antenna vibration caused by breeze or touch causes an increase in the multipath phase rate or fading frequency\citep{teunissen2017springer}. 
+The posterior sample histogram of the mean value of each segment divided by the change point and the displacement measured by the tape are shown in Fig. \ref{fig_v_bd9_3_up_mu} and Table \ref{tab_measured_height}, respectively.
 
 \begin{figure}[htbp]
 	\centering
@@ -466,6 +470,10 @@ From the posterior sample distribution of $\tau_2$ in Fig. \ref{fig_v_bd9_3_up_t
 	\end{threeparttable}
 \end{table*}
 The $\mu_0$, $\mu_1$, and $\mu_2$ obtained by the mean of the posterior samples are -1446.03 mm, -1474.11 mm, and -1489.83 mm, respectively, and the two displacements obtained by the difference of these mean values are -28.08 mm, -15.72 mm, respectively. The two displacements measured by tape are -29.66 mm and -27.18 mm respectively. To our surprise, the displacement difference between the two methods at the two change points is 1.58 mm and 11.46 mm, respectively. The main reason is that the displacement control device is not fully controllable. It can be seen from Fig. \ref{fig_v_bd9_3_up_ts} that before the second displacement change, the plank appears obvious floating when measuring with the tape. As shown in Fig. \ref{fig_v_bd9_3_up_sigma}, the estimated value of $\sigma$ is 12.58 mm through the posterior sample mean of $\sigma$.
+%我们发现此处变点后验样本中的两个峰值对于均值和标准差中没有出现。
+%主要原因是变点的峰值距离很近，对于划分的段没有很明显的影响，因此对后验均值和标准差的浮动没有很大影响。
+%而在现实中，这种情况是会发生的，例如滑坡或者沉降，整个位移变化过程需要一定的时间，存在多个变化点。
+%然而，我们可能更加关注主要变化点，后面通过加入额外先验来提升主要变化点的识别，弱化次要变化点。
 
 \begin{figure}[htbp]
 	\centering
@@ -473,6 +481,12 @@ The $\mu_0$, $\mu_1$, and $\mu_2$ obtained by the mean of the posterior samples 
 	\caption{Histogram of posterior estimation of the observation noise in field experiment 1.}
 	\label{fig_v_bd9_3_up_sigma}
 \end{figure} 
+The two peaks in the posterior sample of the change point do not appear in $\mu$ and $\sigma$. 
+The main reason is that the peak interval of change points is very close, which has no obvious influence on the segments divided, so it has little influence on the posterior mean and standard deviation.
+In reality, this kind of situation exists, for example, in the process of landslide or subsidence, multiple displacements occur in a short time, so there are multiple change points. 
+However, people pay more attention to the main change points.
+By adding additional priors to improve the identification of major change points, weakening secondary change points will be discussed later.
+
 
 \subsubsection{Field experiment 2}
 This experiment is similar to the previous one except that the displacement amplitude is smaller than that of the last one. For the data collected in this experiment,  the coordinate time series is obtained by RTKLIB with the same processing strategy as the previous experimrnt, and the up component of the time series is shown in Fig. \ref{fig_v_bd9_4_up_ts}. In this experiment, the displacement measured by tape is shown in Table \ref{tab_measured_height}.
@@ -531,7 +545,10 @@ Due to the decrease of displacement amplitude, the results are not as good as th
 It can be seen from Fig. \ref{fig_v_bd9_4_up_tau} that there are two peaks in the posterior sample histogram of $\tau_1$. Unlike Fig. \ref{fig_v_bd9_3_up_tau} of the previous experimental results, the two peaks are far away from each other, exceeding 500 s. Accordingly, there are two peaks in the posterior sample distribution of $\mu_0$, $\mu_1$ and $\sigma$. In addition, we found that the second peak of $\tau_1$ is very close to the peak of $\tau_2$, which is not what we want because we do not want to get very short segments. In the next section, we will discuss adding an additional prior to the model to improve the performance of Bayesian inference.
 \section{Discussion}
 \label{disc}
-In the above experiment, due to the influence of observation noise, there are several significant peaks of posterior samples, and the posterior distribution of change points is close to each other. The interval between adjacent change points is constrained by adding an additional prior. The random variable $d\tau$, the distance between continuous change points, is added, which obeys the  discrete uniform distribution.
+In field experiment 1, there are two significant peaks in the posterior sample distribution at the same change point. In addition, in field experiment 2, the posterior distribution interval of two different change points is close.
+The interval between adjacent change points is constrained by adding an additional prior. 
+The random variable $d\tau$, the distance between continuous change points, is added, which obeys the  discrete uniform distribution.
+
 \begin{equation}\label{eq_bayesian_prior_d_tau}
 P(d\tau_{i})=DiscreteU(\tau_{i} + d,\tau_{i+1})
 \end{equation}
@@ -543,10 +560,26 @@ where $d$ is the shortest time interval to be restricted. The new Bayesian proba
 	\caption{Bayesian model for displacement detection with an additional prior.}
 	\label{fig_v_simple_p_model_add_new_rule}
 \end{figure} 
+As shown in Formula \ref{eq_bayesian_prior_d_tau} and Fig. \ref{fig_v_simple_p_model_add_new_rule}, the distribution of newly added random variables depends on the change points and the constrained interval. 
+In the following data processing, the interval $d$ is set to 300.
+The data in field experiment 1 is reprocessed with the new Bayesian model, and the posterior distribution of displacement change points is shown in Fig. \ref{fig_v_bd9_3_up_tau_add_new_rule}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=10 cm]{v_bd9_3_up_tau_add_new_rule}
+	\caption{Histogram of posterior estimation of displacement change points in field experiment 2 with an additional prior.}
+	\label{fig_v_bd9_3_up_tau_add_new_rule}
+\end{figure} 
+
+%从图16和图14的对比中可以看出，图14中t1次峰值得到了有效抑制，更加有利于主要变化点的识别。
+%此外，t2以及均值和方差的的后验分布没有明显变化。
+From the comparison between Fig. \ref{fig_v_bd9_3_up_tau_add_new_rule} and Fig. \ref{fig_v_bd9_3_up_tau}, it can be seen that the secondary peak of $\tau_1$ posterior distribution in Fig. \ref{fig_v_bd9_3_up_tau} is effectively suppressed, which is more conducive to the identification of the primary change point. There is no significant change in the posterior distribution of $\tau_2$, $\mu$, and  $\sigma$.
+The data in field experiment 2 is also reprocessed with the new Bayesian model, and the results are shown in Figs. \ref{fig_v_bd9_4_up_tau_add_new_rule}, \ref{fig_v_bd9_4_up_mu_add_new_rule}, and \ref{fig_v_bd9_4_up_sigma_add_new_rule}.
+
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=10 cm]{v_bd9_4_up_tau_add_new_rule}
-	\caption{Histogram of posterior estimation of displacement change points in field experiment 2 with an additional prior.}
+	\caption{Histogram of posterior estimation of displacement change points in field experiment 1 with an additional prior.}
 	\label{fig_v_bd9_4_up_tau_add_new_rule}
 \end{figure} 
 \begin{figure}[htbp]
@@ -561,9 +594,30 @@ where $d$ is the shortest time interval to be restricted. The new Bayesian proba
 	\caption{Histogram of posterior estimation of the observation noise in field experiment 2 with an additional prior.}
 	\label{fig_v_bd9_4_up_sigma_add_new_rule}
 \end{figure}
+%与图12中变化点t1后验样本相比，图17所示中后验样本分布更加有利于变化点的识别。
+%尽管在1200秒附近还存在一些样本点，但几乎微乎其微，基本都在100以下。
+%t2的后验分布出现了些许变化，在1750s出现了少许样本点，不足以影响变化点的识别。
+%从图13和图18的对比中，可以看出均值后验分布的次峰基本消失。
+%但是依然存在，为了减小这些样本点的影响，采用样本的中位数作为均值的最终估值，得到的均值分别为1,2,3.
+%利用这些均值计算的位移分别为4,5.
+%而表格2中测量得到的位移分别为7,8.
+%主要是由于。。引起，从图2中可以看出存在明显浮动。
+
+%同理，从图19和图14的对比中，可以看出方差估值的次峰得到了显著削弱。
+
+%从以上的讨论中，可以看出添加的先验能够有效的提升辩护点的可识别性。
+%另一方面也说明，本文提出的基于贝叶斯推理方法足够灵活，可以根据需求添加先验的方式满足不同的分析需求。
+
 
 \section{Conclusions}
 \label{concl}
+This study set out to develop a Bayesian model for displacement identification and extraction. 
+The second aim of this study was to investigate the effects of various parameters and models on the performance of the proposed algorithm. 
+State models and measurement models under different state parameters are designed for the IMM-KF algorithm, and the verification schemes based on vision and segmental integration are proposed.
+Four sets of experiments were carried out to verify the effectiveness of the designed algorithm. 
+These experiments confirmed the effectiveness of the algorithm in displacement extraction and vibration detection.
+
+For obvious vibration, the IMM Kalman filter based on the CP + DV model set can be effectively performed for online displacement extraction and vibration detection. The CV, CA, and CJ models are not conducive to displacement extraction due to the displacement drift, although this drift can be suppressed by the virtual measurement model. For slight vibration, the performance of the IMM Kalman filter with CP + DV model set is poor. But the performance of the IMM-SIS with the CP+CA model set is good. These findings have significant implications for the understanding of how to carry out online displacement extraction and vibration detection. This study provides the first comprehensive assessment of interactive multiple models for displacement extraction and vibration detection in SHM.
 
 \begin{acknowledgements}
 This research was funded by the National Key Research and Development Programs 2018YFB0505400, the Natural Science Fund of Hubei Province 2018CFA007.
