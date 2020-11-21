@@ -97,8 +97,19 @@
 \maketitle
 
 \begin{abstract}
-
-\keywords{GNSS\and unmodeled error\and machine learning\and convolutional neural network\and wavelet coherence}
+For decades, displacement detection base on the Global navigation satellite system (GNSS) has increasingly been important for a wide range of applications, from landslide monitoring, subsidence survey, to industrial measurement. 
+Most of the GNSS-based displacement detection methods in these applications are based on GNSS long-term static positioning results.
+With the development of Internet of Things (IOT), high-precision GNSS positioning, and GNSS related transmission protocol, kinematic positioning results can be transmitted to the cloud in real-time.
+However, due to the influence of measurement noise, it is still a challenge to identify and extract displacement from GNSS kinematic positioning results in a short time.
+To resolve this, we propose a novel displacement detection approach with the purpose of identifying and extracting displacement from GNSS kinematic positioning in a short time.
+Specifically, we use the Bayesian inference model to obtain the displacement change time from the coordinate time series of GNSS kinematic positioning. 
+The likelihood function of the observation and the prior distribution of the parameters to be estimated are provided.
+Finally, Bayesian inference was implemented by Markov Chain Monte Carlo (MCMC) sampling.
+By investigating the posterior distribution of the designed change point parameter, we can identify the change points.
+Furthermore, we derive the mean value from the posterior distribution of the mean parameter, and further obtain the displacement.
+Results from simulation experiments and field experiments have demonstrated the effectiveness and flexibility of the proposed method.
+For significant displacement, it can be clearly identified; for small displacement, it can be identified by adding additional prior. The accuracy of up-displacement extraction from  GNSS real-time kinematic positioning can reach within 2 mm in 15 minutes.
+\keywords{GNSS\and displacement detection \and Bayesian inference \and Markov Chain Monte Carlo \and real-time kinematic positioning}
 % \PACS{PACS code1 \and PACS code2 \and more}
 % \subclass{MSC code1 \and MSC code2 \and more}
 \end{abstract}
@@ -594,17 +605,6 @@ The data in field experiment 2 is also reprocessed with the new Bayesian model, 
 	\caption{Histogram of posterior estimation of the observation noise in field experiment 2 with an additional prior.}
 	\label{fig_v_bd9_4_up_sigma_add_new_rule}
 \end{figure}
-%与图12中变化点t1后验样本相比，图17所示中后验样本分布更加有利于变化点的识别。
-%尽管在1200秒附近还存在一些样本点，但几乎微乎其微，基本都在1000以下。
-%t2的后验分布出现了些许变化，在1750s出现了少许样本点，不足以影响变化点的识别。
-%从图13和图18的对比中，可以看出均值后验分布的次峰基本消失。
-%但是依然存在，为了减小这些样本点的影响，采用样本的中位数作为均值的最终估值，得到的均值分别为1,2,3.
-%利用这些均值计算的位移分别为4,5.
-%而表格2中测量得到的位移分别为7,8.
-%主要是由于。。引起，从图2中可以看出存在明显浮动。
-%同理，从图19和图14的对比中，可以看出方差估值的次峰得到了显著削弱。
-%从以上的讨论中，可以看出添加的先验能够有效的提升辩护点的可识别性。
-%另一方面也说明，本文提出的基于贝叶斯推理方法足够灵活，可以根据需求添加先验的方式满足不同的分析需求。
 Compared with the posterior sample distribution of change point $\tau_1$ in Fig. \ref{fig_v_bd9_4_up_tau}, the posterior sample distribution in Fig. \ref{fig_v_bd9_4_up_tau_add_new_rule} is more conducive to the identification of the change point.
 Although there are still some sample points around 1200 seconds, most of them are below 1000, which has little effect.
 The posterior distribution of $\tau_2$ has slightly changed. A few sample points appear around 1750 s, but it is not enough to affect the identification of the change point.
