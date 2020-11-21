@@ -595,18 +595,24 @@ The data in field experiment 2 is also reprocessed with the new Bayesian model, 
 	\label{fig_v_bd9_4_up_sigma_add_new_rule}
 \end{figure}
 %与图12中变化点t1后验样本相比，图17所示中后验样本分布更加有利于变化点的识别。
-%尽管在1200秒附近还存在一些样本点，但几乎微乎其微，基本都在100以下。
+%尽管在1200秒附近还存在一些样本点，但几乎微乎其微，基本都在1000以下。
 %t2的后验分布出现了些许变化，在1750s出现了少许样本点，不足以影响变化点的识别。
 %从图13和图18的对比中，可以看出均值后验分布的次峰基本消失。
 %但是依然存在，为了减小这些样本点的影响，采用样本的中位数作为均值的最终估值，得到的均值分别为1,2,3.
 %利用这些均值计算的位移分别为4,5.
 %而表格2中测量得到的位移分别为7,8.
 %主要是由于。。引起，从图2中可以看出存在明显浮动。
-
 %同理，从图19和图14的对比中，可以看出方差估值的次峰得到了显著削弱。
-
 %从以上的讨论中，可以看出添加的先验能够有效的提升辩护点的可识别性。
 %另一方面也说明，本文提出的基于贝叶斯推理方法足够灵活，可以根据需求添加先验的方式满足不同的分析需求。
+Compared with the posterior sample distribution of change point $\tau_1$ in Fig. \ref{fig_v_bd9_4_up_tau}, the posterior sample distribution in Fig. \ref{fig_v_bd9_4_up_tau_add_new_rule} is more conducive to the identification of the change point.
+Although there are still some sample points around 1200 seconds, most of them are below 1000, which has little effect.
+The posterior distribution of $\tau_2$ has slightly changed. A few sample points appear around 1750 s, but it is not enough to affect the identification of the change point.
+From the comparison between Fig. \ref{fig_v_bd9_4_up_mu} and Fig. \ref{fig_v_bd9_4_up_mu_add_new_rule}, it can be seen that the secondary peak of $\mu_1$ almost disappears.
+However, there are still some sample points which deviate from the main peak.
+In order to reduce the influence of these sampling points, the median value of the sample is used as the final estimation of \textbf{$\mu$}, and $\mu_0$, $\mu_1$ and $\mu_2$ are obtained as -1461.18 mm, -1482.37 mm and -1509.09 mm respectively.
+The two displacements obtained by these means are -21.19 mm and -26.72 mm, respectively, and the displacements measured in Table \ref{tab_measured_height} are -21.3 mm and -19.6 mm respectively.  The displacement difference between the two methods at the two change points is 0.11 mm and 7.12 mm, respectively. The larger displacement error at $\tau_2$ is mainly due to the incompletely controllable experimental equipment. But on the whole, using the proposed method, the displacement extraction accuracy in the experiment can reach less than 2 mm. However, as mentioned in the simulation experiment, the accuracy of displacement extraction in practical application also depends on the number of available samples near the change point.
+
 
 
 \section{Conclusions}
