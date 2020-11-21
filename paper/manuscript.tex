@@ -612,18 +612,31 @@ From the comparison between Fig. \ref{fig_v_bd9_4_up_mu} and Fig. \ref{fig_v_bd9
 However, there are still some sample points which deviate from the main peak.
 In order to reduce the influence of these sampling points, the median value of the sample is used as the final estimation of \textbf{$\mu$}, and $\mu_0$, $\mu_1$ and $\mu_2$ are obtained as -1461.18 mm, -1482.37 mm and -1509.09 mm respectively.
 The two displacements obtained by these means are -21.19 mm and -26.72 mm, respectively, and the displacements measured in Table \ref{tab_measured_height} are -21.3 mm and -19.6 mm respectively.  The displacement difference between the two methods at the two change points is 0.11 mm and 7.12 mm, respectively. The larger displacement error at $\tau_2$ is mainly due to the incompletely controllable experimental equipment. But on the whole, using the proposed method, the displacement extraction accuracy in the experiment can reach less than 2 mm. However, as mentioned in the simulation experiment, the accuracy of displacement extraction in practical application also depends on the number of available samples near the change point.
-
-
+It can be seen from Fig. \ref{fig_v_bd9_4_up_sigma_add_new_rule} and Fig. \ref{fig_v_bd9_4_up_sigma} that the secondary peak of $\sigma$ posterior distribution has been significantly weakened.
+From the above discussion, we can see that the added prior can effectively improve the identifiability of change points.
+On the other hand, it also shows that the Bayesian inference-based displacement detection method proposed in this paper is flexible enough to meet different analysis needs by adding a priori.
 
 \section{Conclusions}
 \label{concl}
-This study set out to develop a Bayesian model for displacement identification and extraction. 
-The second aim of this study was to investigate the effects of various parameters and models on the performance of the proposed algorithm. 
-State models and measurement models under different state parameters are designed for the IMM-KF algorithm, and the verification schemes based on vision and segmental integration are proposed.
-Four sets of experiments were carried out to verify the effectiveness of the designed algorithm. 
-These experiments confirmed the effectiveness of the algorithm in displacement extraction and vibration detection.
+This study set out to develop a Bayesian model for displacement detection from GNSS kinematic positioning in a short time. 
+The definition of multiple displacements is given, and the Bayesian model for multiple displacement detection is proposed.
+The principle of Bayesian inference and its implementation based on MCMC sampling are presented.
+To provide epoch by epoch coordinate time series for displacement detection, the principle of GNSS kinematic positioning mode RTK is introduced.
+The likelihood function of the observation and the prior distribution of the parameters to be estimated are provided.
+Simulation experiments and field experiments were carried out to verify the effectiveness of the proposed method. 
+These experiments confirmed the effectiveness of the method in displacement identification and extraction.
 
-For obvious vibration, the IMM Kalman filter based on the CP + DV model set can be effectively performed for online displacement extraction and vibration detection. The CV, CA, and CJ models are not conducive to displacement extraction due to the displacement drift, although this drift can be suppressed by the virtual measurement model. For slight vibration, the performance of the IMM Kalman filter with CP + DV model set is poor. But the performance of the IMM-SIS with the CP+CA model set is good. These findings have significant implications for the understanding of how to carry out online displacement extraction and vibration detection. This study provides the first comprehensive assessment of interactive multiple models for displacement extraction and vibration detection in SHM.
+Significant displacements can be effectively detected by the displacement Bayesian inference model.
+The displacement is obtained by the difference of the mean of the coordinates before and after the change point, which can be obtained by the mean of the posterior sample.
+The accuracy of the final displacement is determined by the number of available samples before and after the change point.
+The more samples are, the higher the accuracy is.
+When the amplitude of displacement is small, the posterior distribution of change points appears multiple peaks, which is not conducive to the effective identification of change points.
+By adding an additional prior, that is, it is impossible to have two change points in a certain time interval, which can effectively weaken the influence of secondary change points.
+To reduce the influence of the sample points of the secondary change point on the displacement extraction, the coordinate mean before and after the change point can be estimated by the median of the posterior sample.
+
+The displacement detection based on Bayesian inference can add priors to meet different analysis needs, which is flexible enough.
+In addition, the Bayesian inference implementation based on MCMC sampling used in this paper provides posterior samples, which is more conducive to problem analysis.
+This study provides the first comprehensive assessment of the Bayesian inference model for displacement identification and extraction from GNSS kinematic positioning.
 
 \begin{acknowledgements}
 This research was funded by the National Key Research and Development Programs 2018YFB0505400, the Natural Science Fund of Hubei Province 2018CFA007.
