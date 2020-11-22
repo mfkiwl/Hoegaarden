@@ -791,18 +791,18 @@ In the experiment, we only simulate the up coordinate component, in which Gaussi
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=8 cm]{v_sim_simple_gauss_ts}
+	\includegraphics[scale=0.35]{v_sim_simple_gauss_ts}
 	\caption{Simulation data with multiple displacement change points.}
 	\label{fig_v_sim_simple_gauss_ts}
 \end{figure} 
 As shown in Fig. \ref{fig_v_sim_simple_gauss_ts}, the whole time series is divided into four segments by three displacement change points. Using the model designed above, Bayesian inference is implemented by MCMC sampling. 
-The histogram of the posterior sample of $\bf{\tau}$ is shown in Fig. \ref{fig_v_tau_sim_simple}.
+The posterior sample distribution of $\bf{\tau}$ is shown in Fig. \ref{fig_v_tau_sim_simple}.
 
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=8 cm]{v_tau_sim_simple}
-	\caption{Histogram of posterior estimation of displacement change points in the simulation experiment.}
+	\includegraphics[scale=0.35]{v_tau_sim_simple}
+	\caption{Posterior sample distribution of $\tau$ in the simulation experiment.}
 	\label{fig_v_tau_sim_simple}
 \end{figure} 
 As can be seen from Fig. \ref{fig_v_tau_sim_simple}, all the designed displacement change points are identified. $\tau_3$ is the easiest to be identified, mainly due to the largest displacement amplitude. 
@@ -811,8 +811,8 @@ The histogram of the posterior sample of $\bf{\mu}$ is shown in Fig. \ref{fig_v_
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=8 cm]{v_mu_sim_simple}
-	\caption{Histogram of posterior estimation of the mean in the simulation experiment.}
+	\includegraphics[scale=0.35]{v_mu_sim_simple}
+	\caption{Histogram of posterior estimation of $\mu$ in the simulation experiment.}
 	\label{fig_v_mu_sim_simple}
 \end{figure} 
 The blue curve in Fig. \ref{fig_v_mu_sim_simple} is the fitting result of Gaussian distribution of the histogram.
@@ -825,7 +825,7 @@ As shown in Fig. \ref{fig_v_sigma_sim_simple}, $\sigma$ is also accurately estim
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=8 cm]{v_sigma_sim_simple}
+	\includegraphics[scale=0.3]{v_sigma_sim_simple}
 	\caption{Histogram of posterior estimation of the observation noise in the simulation experiment.}
 	\label{fig_v_sigma_sim_simple}
 \end{figure} 
@@ -844,7 +844,7 @@ The displacement amplitude of the second experiment is smaller than that of the 
 The GNSS observation data collected above are processed by the open-source software RTKLIB\cite{takasu2011rtklib}. 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=8 cm]{v_field_exp_config}
+	\includegraphics[scale=0.5]{v_field_exp_config}
 	\caption{Filed experiment configuration. (a) Overview; (b) Working platform; (c) Displacement control platform; (d) Displacement measurement by tape. }
 	\label{fig_v_field_exp_config}
 \end{figure} 
@@ -855,7 +855,7 @@ In the experiment, only the vertical displacement was triggered, so only the up 
 The results of RTK positioning are shown in Fig. \ref{fig_v_bd9_3_up_tau}.
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=8 cm]{v_bd9_3_up_ts}
+	\includegraphics[scale=0.35]{v_bd9_3_up_ts}
 	\caption{The up component of coordinates obtained by RTK positioning in field experiment 1.}
 	\label{fig_v_bd9_3_up_ts}
 \end{figure} 
@@ -867,7 +867,7 @@ The histogram of the posterior sample of $\tau$ is shown in Fig. \ref{fig_v_bd9_
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=8 cm]{v_bd9_3_up_tau}
+	\includegraphics[scale=0.35]{v_bd9_3_up_tau}
 	\caption{Posterior sample distribution of $\tau$ in field experiment 1.}
 	\label{fig_v_bd9_3_up_tau}
 \end{figure} 
@@ -880,7 +880,7 @@ The posterior sample histogram of the $\mu$ of each segment divided by the chang
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=8 cm]{v_bd9_3_up_mu}
+	\includegraphics[scale=0.35]{v_bd9_3_up_mu}
 	\caption{Histogram of posterior sample of $\mu$ in field experiment 1.}
 	\label{fig_v_bd9_3_up_mu}
 \end{figure} 
@@ -919,7 +919,7 @@ As shown in Fig. \ref{fig_v_bd9_3_up_sigma}, the estimated value of $\sigma$ is 
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=8 cm]{v_bd9_3_up_sigma}
+	\includegraphics[scale=0.3]{v_bd9_3_up_sigma}
 	\caption{Histogram of posterior sample of $\sigma$ in field experiment 1.}
 	\label{fig_v_bd9_3_up_sigma}
 \end{figure} 
@@ -931,12 +931,13 @@ By adding a prior to the model to improve the identification of the primary chan
 
 \subsubsection{Field Experiment 2}
 This experiment is similar to the previous one except that the displacement amplitude is smaller. 
-For the data collected in this experiment,  the coordinate time series is obtained by RTKLIB with the same processing strategy as the previous experimrnt, and the up component of the time series is shown in Fig. \ref{fig_v_bd9_4_up_ts}. In this experiment, the displacement measured by tape is shown in Table \ref{tab_measured_height}.
+For the data collected in this experiment,  the coordinate time series is obtained by RTKLIB with the same processing strategy as the previous experiment, and the up component of the time series is shown in Fig. \ref{fig_v_bd9_4_up_ts}. 
+In this experiment, the displacement measured by tape is shown in Table \ref{tab_measured_height_9_4}.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=8 cm]{v_bd9_4_up_ts}
-	\caption{The vertical component of coordinates obtained by RTK positioning in field experiment 2.}
+	\includegraphics[scale=0.35]{v_bd9_4_up_ts}
+	\caption{The up component of coordinates obtained by RTK positioning in field experiment 2.}
 	\label{fig_v_bd9_4_up_ts}
 \end{figure} 
 \begin{table}[h!t]
@@ -944,7 +945,7 @@ For the data collected in this experiment,  the coordinate time series is obtain
 	%	\fontsize{6.5}{8}\selectfont
 	\begin{threeparttable}
 		\caption{Measured height before and after each movement of the object hanging on the plank in field experiment 2, unit (mm).}
-		\label{tab_measured_height}
+		\label{tab_measured_height_9_4}
 		\begin{tabular}{ccccccccc}
 			\toprule
 			&&&\textbf{1}&\textbf{2}&\textbf{3}&\textbf{4}&\textbf{5}&\textbf{mean}\cr
@@ -963,109 +964,120 @@ For the data collected in this experiment,  the coordinate time series is obtain
 		\end{tabular}
 	\end{threeparttable}
 \end{table}
-As can be seen from Fig. \ref{fig_v_bd9_4_up_ts} and Table \ref{tab_measured_height}, the amplitude of the two displacements is smaller than that of the previous experiment. The time series are processed by the proposed model, and Bayesian inference is implemented by MCMC sampling. The results are shown in Fig. \ref{fig_v_bd9_4_up_tau}, \ref{fig_v_bd9_4_up_mu}, and \ref{fig_v_bd9_4_up_sigma}.
+As can be seen from Fig. \ref{fig_v_bd9_4_up_ts} and Table \ref{tab_measured_height_9_4}, the amplitude of the two displacements is smaller than that of the previous experiment. 
+The time series are processed by the proposed model, and Bayesian inference is implemented by MCMC sampling. The results are shown in Fig. \ref{fig_v_bd9_4_up_tau}, \ref{fig_v_bd9_4_up_mu}, and \ref{fig_v_bd9_4_up_sigma}.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=8 cm]{v_bd9_4_up_tau}
-	\caption{Histogram of posterior estimation of displacement change points in field experiment 2.}
+	\includegraphics[scale=0.35]{v_bd9_4_up_tau}
+	\caption{Posterior sample distribution of $\tau$ in field experiment 2.}
 	\label{fig_v_bd9_4_up_tau}
 \end{figure} 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=8 cm]{v_bd9_4_up_mu}
-	\caption{Histogram of posterior estimation of the mean in field experiment 2.}
+	\includegraphics[scale=0.35]{v_bd9_4_up_mu}
+	\caption{Histogram of posterior sample of $\mu$ in field experiment 2.}
 	\label{fig_v_bd9_4_up_mu}
 \end{figure} 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=8 cm]{v_bd9_4_up_sigma}
-	\caption{Histogram of posterior estimation of the observation noise in field experiment 2.}
+	\includegraphics[scale=0.3]{v_bd9_4_up_sigma}
+	\caption{Histogram of posterior sample of $\sigma$ in field experiment 2.}
 	\label{fig_v_bd9_4_up_sigma}
 \end{figure}
 Due to the decrease of displacement amplitude, the results are not as good as the previous experimental results. 
-It can be seen from Fig. \ref{fig_v_bd9_4_up_tau} that there are two peaks in the posterior sample histogram of $\tau_1$. Unlike Fig. \ref{fig_v_bd9_3_up_tau} of the previous experimental results, the two peaks are far away from each other, exceeding 500 s. Accordingly, there are two peaks in the posterior sample distribution of $\mu_0$, $\mu_1$ and $\sigma$. In addition, we found that the second peak of $\tau_1$ is very close to the peak of $\tau_2$, which is not what we want because we do not want to get very short segments. In the next section, we will discuss adding an additional prior to the model to improve the performance of Bayesian inference.
+It can be seen from Fig. \ref{fig_v_bd9_4_up_tau} that there are two peaks in the posterior sample distribution of $\tau_1$. Unlike Fig. \ref{fig_v_bd9_3_up_tau} of the previous experimental results, the two peaks are far away from each other, exceeding 500 s. 
+Accordingly, there are two peaks in the posterior sample distribution of $\mu_0$, $\mu_1$ and $\sigma$. 
+In addition, we found that the second peak of $\tau_1$ is very close to the peak of $\tau_2$, which is not what we want because we do not want to get very short segments. 
+In the next section, we will discuss adding a prior to the model to improve the performance of Bayesian inference.
 \section{Discussion}
 \label{disc}
-In field experiment 1, there are two significant peaks in the posterior sample distribution at the same change point. In addition, in field experiment 2, the posterior distribution interval of two different change points is close.
-The interval between adjacent change points is constrained by adding an additional prior. 
+In field experiment 1, there are two significant peaks in the posterior sample distribution at the same change point. 
+In addition, in field experiment 2, the posterior distribution interval of two different change points is close.
+The interval between adjacent change points is constraint by adding a prior. 
 The random variable $d\tau$, the distance between continuous change points, is added, which obeys the  discrete uniform distribution.
 
 \begin{equation}\label{eq_bayesian_prior_d_tau}
 P(d\tau_{i})=DiscreteU(\tau_{i} + d,\tau_{i+1})
 \end{equation}
-where $d$ is the shortest time interval to be restricted. The new Bayesian probability model with additional prior is shown in Fig. \ref{fig_v_simple_p_model_add_new_rule}.
+where $d$ is the shortest time interval to be constraint. The new Bayesian probability model with the prior is shown in Fig. \ref{fig_v_simple_p_model_add_new_rule}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=8 cm]{v_simple_p_model_add_new_rule}
-	\caption{Bayesian model for displacement detection with an additional prior.}
+	\includegraphics[scale=0.35]{v_simple_p_model_add_new_rule}
+	\caption{Bayesian model for displacement detection with an interval constraint prior.}
 	\label{fig_v_simple_p_model_add_new_rule}
 \end{figure} 
-As shown in Formula \ref{eq_bayesian_prior_d_tau} and Fig. \ref{fig_v_simple_p_model_add_new_rule}, the distribution of newly added random variables depends on the change points and the constrained interval. 
+As shown in (\ref{eq_bayesian_prior_d_tau}) and Fig. \ref{fig_v_simple_p_model_add_new_rule}, the prior distribution of newly added random variables depends on the change points and the constraint interval. 
 In the following data processing, the interval $d$ is set to 300.
-The data in field experiment 1 is reprocessed with the new Bayesian model, and the posterior distribution of displacement change points is shown in Fig. \ref{fig_v_bd9_3_up_tau_add_new_rule}.
+The data in field experiment 1 is reprocessed with the new Bayesian model, and the posterior distribution of $\tau$ is shown in Fig. \ref{fig_v_bd9_3_up_tau_add_new_rule}.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=8 cm]{v_bd9_3_up_tau_add_new_rule}
-	\caption{Histogram of posterior estimation of displacement change points in field experiment 2 with an additional prior.}
+	\includegraphics[scale=0.35]{v_bd9_3_up_tau_add_new_rule}
+	\caption{Posterior sample distribution of $\tau$ in field experiment 1 with an interval constraint prior.}
 	\label{fig_v_bd9_3_up_tau_add_new_rule}
 \end{figure} 
 
 %从图16和图14的对比中可以看出，图14中t1次峰值得到了有效抑制，更加有利于主要变化点的识别。
 %此外，t2以及均值和方差的的后验分布没有明显变化。
-From the comparison between Fig. \ref{fig_v_bd9_3_up_tau_add_new_rule} and Fig. \ref{fig_v_bd9_3_up_tau}, it can be seen that the secondary peak of $\tau_1$ posterior distribution in Fig. \ref{fig_v_bd9_3_up_tau} is effectively suppressed, which is more conducive to the identification of the primary change point. There is no significant change in the posterior distribution of $\tau_2$, $\mu$, and  $\sigma$.
-The data in field experiment 2 is also reprocessed with the new Bayesian model, and the results are shown in Figs. \ref{fig_v_bd9_4_up_tau_add_new_rule}, \ref{fig_v_bd9_4_up_mu_add_new_rule}, and \ref{fig_v_bd9_4_up_sigma_add_new_rule}.
+From the comparison between Fig. \ref{fig_v_bd9_3_up_tau_add_new_rule} and Fig. \ref{fig_v_bd9_3_up_tau}, it can be seen that the secondary peak of $\tau_1$ posterior distribution in Fig. \ref{fig_v_bd9_3_up_tau} is effectively suppressed, which is more conducive to the identification of the primary change point. 
+There is no significant change in the posterior distribution of $\tau_2$, $\mu$, and  $\sigma$.
+The data in field experiment 2 is also reprocessed with the new Bayesian model, and the results are shown in Fig. \ref{fig_v_bd9_4_up_tau_add_new_rule}, \ref{fig_v_bd9_4_up_mu_add_new_rule}, and \ref{fig_v_bd9_4_up_sigma_add_new_rule}.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=8 cm]{v_bd9_4_up_tau_add_new_rule}
-	\caption{Histogram of posterior estimation of displacement change points in field experiment 1 with an additional prior.}
+	\includegraphics[scale=0.35]{v_bd9_4_up_tau_add_new_rule}
+	\caption{Posterior sample distribution of $\tau$ in field experiment 2 with an interval constraint prior.}
 	\label{fig_v_bd9_4_up_tau_add_new_rule}
 \end{figure} 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=8 cm]{v_bd9_4_up_mu_add_new_rule}
-	\caption{Histogram of posterior estimation of the mean in field experiment 2 with an additional prior.}
+	\includegraphics[scale=0.35]{v_bd9_4_up_mu_add_new_rule}
+	\caption{Histogram of posterior sample of $\mu$ in field experiment 2 with an interval constraint prior.}
 	\label{fig_v_bd9_4_up_mu_add_new_rule}
 \end{figure} 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=8 cm]{v_bd9_4_up_sigma_add_new_rule}
-	\caption{Histogram of posterior estimation of the observation noise in field experiment 2 with an additional prior.}
+	\includegraphics[scale=0.3]{v_bd9_4_up_sigma_add_new_rule}
+	\caption{Histogram of posterior sample of $\sigma$ in field experiment 2 with an interval constraint prior.}
 	\label{fig_v_bd9_4_up_sigma_add_new_rule}
 \end{figure}
-Compared with the posterior sample distribution of change point $\tau_1$ in Fig. \ref{fig_v_bd9_4_up_tau}, the posterior sample distribution in Fig. \ref{fig_v_bd9_4_up_tau_add_new_rule} is more conducive to the identification of the change point.
-Although there are still some sample points around 1200 seconds, most of them are below 1000, which has little effect.
-The posterior distribution of $\tau_2$ has slightly changed. A few sample points appear around 1750 s, but it is not enough to affect the identification of the change point.
+Compared with the posterior sample distribution of $\tau_1$ in Fig. \ref{fig_v_bd9_4_up_tau}, the posterior sample distribution in Fig. \ref{fig_v_bd9_4_up_tau_add_new_rule} is more conducive to the identification of the change point.
+Although there are still some sampling points around 1200 seconds, most of the sample number is below 1000, which has little effect.
+The posterior distribution of $\tau_2$ has slightly changed. 
+There are a few sampling points around 1750 s, which are not enough to affect the identification of change points.
 From the comparison between Fig. \ref{fig_v_bd9_4_up_mu} and Fig. \ref{fig_v_bd9_4_up_mu_add_new_rule}, it can be seen that the secondary peak of $\mu_1$ almost disappears.
 However, there are still some sample points which deviate from the main peak.
 In order to reduce the influence of these sampling points, the median value of the sample is used as the final estimation of \textbf{$\mu$}, and $\mu_0$, $\mu_1$ and $\mu_2$ are obtained as -1461.18 mm, -1482.37 mm and -1509.09 mm respectively.
-The two displacements obtained by these means are -21.19 mm and -26.72 mm, respectively, and the displacements measured in Table \ref{tab_measured_height} are -21.3 mm and -19.6 mm respectively.  The displacement difference between the two methods at the two change points is 0.11 mm and 7.12 mm, respectively. The larger displacement error at $\tau_2$ is mainly due to the incompletely controllable experimental equipment. But on the whole, using the proposed method, the displacement extraction accuracy in the experiment can reach less than 2 mm. However, as mentioned in the simulation experiment, the accuracy of displacement extraction in practical application also depends on the number of available samples near the change point.
+The two displacements obtained by these means are -21.19 mm and -26.72 mm, respectively, and the displacements measured in Table \ref{tab_measured_height_9_4} are -21.3 mm and -19.6 mm respectively.  
+The displacement difference between the two methods at the two change points is 0.11 mm and 7.12 mm, respectively. 
+The larger displacement error at $\tau_2$ is mainly due to the incompletely controllable experimental equipment. 
+But on the whole, using the proposed method, the displacement extraction accuracy in the experiment can reach less than 2 mm. However, as mentioned in the simulation experiment, the accuracy of displacement extraction in practical application also depends on the number of available samples near the change point.
 It can be seen from Fig. \ref{fig_v_bd9_4_up_sigma_add_new_rule} and Fig. \ref{fig_v_bd9_4_up_sigma} that the secondary peak of $\sigma$ posterior distribution has been significantly weakened.
-From the above discussion, we can see that the added prior can effectively improve the identifiability of change points.
+As can be seen from the above discussion that the interval constraint prior can effectively improve the identifiability of change points.
 On the other hand, it also shows that the Bayesian inference-based displacement detection method proposed in this paper is flexible enough to meet different analysis needs by adding a priori.
 
 \section{Conclusions}
 \label{concl}
 This study set out to develop a Bayesian model for displacement detection from GNSS kinematic positioning in a short time. 
-The definition of multiple displacements is given, and the Bayesian model for multiple displacement detection is proposed.
+The description of multiple displacements is given, and the Bayesian model for multiple displacement detection is proposed.
 The principle of Bayesian inference and its implementation based on MCMC sampling are presented.
 To provide epoch by epoch coordinate time series for displacement detection, the principle of GNSS kinematic positioning mode RTK is introduced.
 The likelihood function of the observation and the prior distribution of the parameters to be estimated are provided.
-Simulation experiments and field experiments were carried out to verify the effectiveness of the proposed method. 
+Simulation and field experiments were carried out to verify the effectiveness of the proposed method. 
 These experiments confirmed the effectiveness of the method in displacement identification and extraction.
 
 Significant displacements can be effectively detected by the displacement Bayesian inference model.
 The displacement is obtained by the difference of the mean of the coordinates before and after the change point, which can be obtained by the mean of the posterior sample.
 The accuracy of the final displacement is determined by the number of available samples before and after the change point.
 The more samples are, the higher the accuracy is.
+
 When the amplitude of displacement is small, the posterior distribution of change points appears multiple peaks, which is not conducive to the effective identification of change points.
-By adding an additional prior, that is, it is impossible to have two change points in a certain time interval, which can effectively weaken the influence of secondary change points.
+By adding an interval constraint prior, the influence of secondary change points can be effectively weakened.
 To reduce the influence of the sample points of the secondary change point on the displacement extraction, the coordinate mean before and after the change point can be estimated by the median of the posterior sample.
 
-The displacement detection based on Bayesian inference can add priors to meet different analysis needs, which is flexible enough.
+The displacement detection based on Bayesian inference can meet different needs by adding a priori, and has sufficient flexibility.
 In addition, the Bayesian inference implementation based on MCMC sampling used in this paper provides posterior samples, which is more conducive to problem analysis.
 This study provides the first comprehensive assessment of the Bayesian inference model for displacement identification and extraction from GNSS kinematic positioning.
 	
