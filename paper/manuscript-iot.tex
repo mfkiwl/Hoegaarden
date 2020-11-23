@@ -438,9 +438,9 @@
 	% As a general rule, do not put math, special symbols or citations
 	% in the abstract or keywords.
 	\begin{abstract}
-For decades, deformation monitoring based on the Global navigation satellite system (GNSS) has increasingly been important for a wide range of applications, from landslide monitoring, subsidence survey, to industrial measurement. 
+For decades, displacement detection based on the Global navigation satellite system (GNSS) has increasingly been important for a wide range of applications, from landslide monitoring, subsidence survey, to industrial measurement. 
 Most of the GNSS-based displacement detection methods in these applications are based on GNSS long-term static positioning results.
-With the development of Internet of Things (IOT), high-precision GNSS positioning, and GNSS related transmission protocol, kinematic positioning results can be transmitted to the cloud in real-time.
+With the development of Internet of Things (IoT), high-precision GNSS positioning, and GNSS related transmission protocol, kinematic positioning results can be transmitted to the cloud in real-time.
 However, due to the influence of measurement noise, it is still a challenge to identify and extract displacement from GNSS kinematic positioning results in a short time.
 To resolve this, we propose a novel displacement detection approach with the purpose of identifying and extracting displacement from GNSS kinematic positioning in a short time.
 Specifically, we use the Bayesian inference model to obtain the displacement change time from the coordinate time series of GNSS kinematic positioning. 
@@ -496,11 +496,11 @@ For significant displacement, it can be clearly identified; for small displaceme
 	%传统测量仪器的弊端，GNSS位移探测的优势。
 	%GNSS在位移探测中扮演的角色，以及位移探测的要求
 	%目前人们对于基于GNSS位移探测的研究更过的关注与如何提高定位的精度，而忽略了如何从GNSS获取的坐标序列中识别并提取位移。
-	\IEEEPARstart{I}{n}  recent decades, Global navigation satellite system (GNSS) has been widely used in navigation, surveying, and civil aviation as a positioning method\cite{teunissen2017springer}. 
-	Besides, as a displacement detection method in deformation monitoring, GNSS has been applied to natural landslide monitoring\cite{awange2012environmental}, industrial measurement\cite{pavasovic2011application}, and other fields. 
+	\IEEEPARstart{I}{n}  recent decades, the Global navigation satellite system (GNSS) has been widely used in surveying\cite{barry2011surveying}, and civil aviation\cite{iatsouk2004development}, and autonomous vehicle\cite{kuutti2018survey} as a positioning method. 
+	Besides, as a displacement detection method in deformation monitoring, GNSS has been applied to landslide monitoring\cite{awange2012environmental}, subsidence survey\cite{bian2014monitoring}, industrial measurement\cite{pavasovic2011application}, and other fields. 
 	Compared with traditional displacement detection technology, GNSS-based displacement detection has many advantages, such as real-time, high precision, and weather independence\cite{shen2019a}. 
 	%随着物联网通信技术标准的制订和创新，高精度定位技术，例如RTK，PPP，以及GNSS传输协议NTRIP的发展，GNSS定位结果可以被实时传输到云端。
-	With the improvement of the Internet of things (IOT), GNSS high-precision positioning technology, and GNSS enhanced information transmission protocol, high-precision GNSS positioning results can be transmitted to the cloud in real-time.
+	With the development of the Internet of things (IoT), GNSS high-precision positioning technology, and GNSS enhanced information transmission protocol, high-precision GNSS positioning results can be transmitted to the cloud in real-time\cite{mei2019survey}.
 	%Displacement detection involves displacement identification and extraction. 
 	GNSS-based displacement detection is generally performed by the time-domain difference of GNSS positioning results\cite{abidin2004use,rs12203375}. 
 	There are many researches on displacement detection based on GNSS, which can be divided into two categories.
@@ -1011,8 +1011,8 @@ In the next section, we will discuss adding a prior to the model to improve the 
 \label{disc}
 In field experiment 1, there are two significant peaks in the posterior sample distribution at the same change point. 
 In addition, in field experiment 2, the posterior distribution interval of two different change points is close.
-The interval between adjacent change points is constrained by adding a prior. 
-The random variable $d\tau$, the distance between continuous change points, is added, which obeys the  discrete uniform distribution.
+Here, the interval between adjacent change points is constrained by adding a prior. 
+A random variable $d\tau$, the distance between continuous change points, is added, which obeys the  discrete uniform distribution.
 
 \begin{equation}\label{eq_bayesian_prior_d_tau}
 P(d\tau_{i})=DiscreteU(\tau_{i} + d,\tau_{i+1})
