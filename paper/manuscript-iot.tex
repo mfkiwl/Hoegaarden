@@ -381,7 +381,7 @@
 	%
 	
 	\author{Nan Shen, Liang Chen\textsuperscript{*}, and Ruizhi Chen% <-this % stops a space
-		\thanks{This research was funded by the National Key Research and Development Program (2018YFB0505400), the Natural Science Fund of Hubei Province with Project No. 2018CFA007, and the Zhejiang Lab’s International Talent Fund for Young Professionals.}% <-this % stops a space
+		\thanks{This research was funded by the National Key Research and Development Program (2018YFB0505400), the Natural Science Fund of Hubei Province with Project No. 2018CFA007.}% <-this % stops a space
 	}
 	
 	% note the % following the last \IEEEmembership and also \thanks - 
@@ -438,7 +438,7 @@
 	% As a general rule, do not put math, special symbols or citations
 	% in the abstract or keywords.
 	\begin{abstract}
-For decades, deformation monitoring base on the global navigation satellite system (GNSS) has increasingly been important for a wide range of applications, from landslide monitoring, subsidence survey, to industrial measurement. 
+For decades, deformation monitoring based on the Global navigation satellite system (GNSS) has increasingly been important for a wide range of applications, from landslide monitoring, subsidence survey, to industrial measurement. 
 Most of the GNSS-based displacement detection methods in these applications are based on GNSS long-term static positioning results.
 With the development of Internet of Things (IOT), high-precision GNSS positioning, and GNSS related transmission protocol, kinematic positioning results can be transmitted to the cloud in real-time.
 However, due to the influence of measurement noise, it is still a challenge to identify and extract displacement from GNSS kinematic positioning results in a short time.
@@ -448,8 +448,8 @@ Specifically, we use the Bayesian inference model to obtain the displacement cha
 %Finally, Bayesian inference was implemented by Markov Chain Monte Carlo (MCMC) sampling.
 By investigating the posterior distribution of the designed change point parameter, we can identify the change points.
 Furthermore, we derive the mean value from the posterior distribution of the mean parameter, and further obtain the displacement.
-Results from simulation experiments and field experiments have demonstrated the effectiveness and flexibility of the proposed method.
-For significant displacement, it can be clearly identified; for small displacement, it can be identified by adding additional prior. The accuracy of up-displacement extraction from GNSS real-time kinematic positioning can reach within 2 mm in 15 minutes.
+Results from simulation and field experiments have demonstrated the effectiveness and flexibility of the proposed method.
+For significant displacement, it can be clearly identified; for small displacement, it can be identified by adding an interval constraint prior. The accuracy of up-displacement extraction from GNSS real-time kinematic positioning can reach within 2 mm in 15 minutes.
 	\end{abstract}
 	
 	% Note that keywords are not normally used for peerreview papers.
@@ -497,29 +497,31 @@ For significant displacement, it can be clearly identified; for small displaceme
 	%GNSS在位移探测中扮演的角色，以及位移探测的要求
 	%目前人们对于基于GNSS位移探测的研究更过的关注与如何提高定位的精度，而忽略了如何从GNSS获取的坐标序列中识别并提取位移。
 	\IEEEPARstart{I}{n}  recent decades, Global navigation satellite system (GNSS) has been widely used in navigation, surveying, and civil aviation as a positioning method\cite{teunissen2017springer}. 
-	Besides, as a displacement detection method in deformation monitoring, GNSS has been applied to natural disaster monitoring\cite{awange2012environmental}, industrial measurement\cite{pavasovic2011application}, and other fields. 
+	Besides, as a displacement detection method in deformation monitoring, GNSS has been applied to natural landslide monitoring\cite{awange2012environmental}, industrial measurement\cite{pavasovic2011application}, and other fields. 
 	Compared with traditional displacement detection technology, GNSS-based displacement detection has many advantages, such as real-time, high precision, and weather independence\cite{shen2019a}. 
 	%随着物联网通信技术标准的制订和创新，高精度定位技术，例如RTK，PPP，以及GNSS传输协议NTRIP的发展，GNSS定位结果可以被实时传输到云端。
 	With the improvement of the Internet of things (IOT), GNSS high-precision positioning technology, and GNSS enhanced information transmission protocol, high-precision GNSS positioning results can be transmitted to the cloud in real-time.
 	%Displacement detection involves displacement identification and extraction. 
-	GNSS-based displacement detection is generally performed by the time-domain difference of GNSS positioning results. 
+	GNSS-based displacement detection is generally performed by the time-domain difference of GNSS positioning results\cite{abidin2004use,rs12203375}. 
 	There are many researches on displacement detection based on GNSS, which can be divided into two categories.
-	
-	
+		
 	%位移探测算法回顾，
 	%传统位移探测的弊端
 	%位移探测的短板1,关注与定位算法，忽略探测算法2，关注与longterm忽略shortterm
 	%随着在线监测系统的普及，急需对于单历元动态监测数据进行分析处理，今早发现识别和确定位移。
 	The first category is about the research of measurement technology in GNSS-based displacement detection.
-	In order to evaluate the performance of single base station real time kinematic(RTK) and network RTK(NRTK) in displacement detection, the data of different observation duration were compared\cite{wang2011gps}.The results showed that NRTK has advantages in accuracy and robustness.
+	In order to evaluate the performance of single base station real time kinematic(RTK) and network RTK(NRTK) in displacement detection, the data of different observation duration were compared\cite{wang2011gps}. The results showed that NRTK has advantages in accuracy and robustness.
 	A displacement monitoring system was designed to evaluate NRTK for displacement detection\cite{GUMUS2019131}. The results showed that NRTK can achieve an accuracy of 4.7 mm and 7.9 mm in the horizontal and vertical directions respectively.
-	In \cite{csanliouglu2016landslide} and \cite{lytvyn2012real}, the feasibility of displacement detection using PPP has been studied. There are also some studies using the time-differenced carrier phases (TDCP) technique\cite{freda2015time,colosimo2011real} to obtain velocity estimates for displacement detection. This kind of method obtains displacement by integrating velocity, which is mainly used in displacement detection and extraction of large earthquakes.
-	This kind of method mainly focuses on how to improve the positioning accuracy, and the research on how to identify and extract the displacement from the coordinate sequence obtained by GNSS is limited.
+	In \cite{csanliouglu2016landslide} and \cite{lytvyn2012real}, the feasibility of displacement detection for landslides  using PPP has been studied. The results showed that PPP can be capable of detecting large landslides.
+	There are also some studies using the time-differenced carrier phases (TDCP) technique\cite{freda2015time,colosimo2011real} to obtain velocity estimates for displacement detection. This kind of method obtains displacement by integrating velocity, which is mainly used in displacement detection and extraction of large earthquakes.
+	In general, the above research mainly focuses on how to improve the positioning accuracy, and the research on how to identify and extract the displacement from the coordinate sequence obtained by GNSS is limited.
 	
-	In another category of GNSS-based displacement detection research, GNSS is only used as a long-term monitoring method.
-	Gili et al.\cite{gili2000using} was one of the first landslide monitoring studies using GNSS technology, in which traditional measurement data are used as a comparison. The results showed that the accuracy of Global positioning system (GPS) measurement was 12 to 16 mm in the horizontal plane and 18 to 24 mm in the elevation.
-	A prototype of a low-cost GNSS has been developed for deep-seated landslide monitoring\cite{rs12203375}. The results of a nine-month filed monitoring period provided a detailed insight into the spatial and temporal pattern of deep-seated landslide surface movements, in which the displacement is obtained by the direct difference between the coordinates of the start and end periods.
-	In addition, GNSS is also combined with synthetic aperture radar technology for displacement detection, in which long-term GNSS measurements are used as references\cite{atanasova2018ground,fuhrmann2015estimation}.
+	In another category of GNSS-based displacement detection research, GNSS is only used as a static positioning method.
+	Gili et al.\cite{gili2000using} was one of the first landslide monitoring studies using GNSS technology, in which traditional measurement data are used as a comparison. 
+	The results showed that the accuracy of the Global positioning system (GPS) measurement over a period of 26 months was 12 to 16 mm in the horizontal plane and 18 to 24 mm in the elevation.
+	A prototype of a low-cost GNSS has been developed for deep-seated landslide monitoring\cite{rs12203375}. 
+	The results of a nine-month filed monitoring period provided a detailed insight into the spatial and temporal pattern of deep-seated landslide surface movements, in which the displacement was obtained by the direct difference between the coordinates of the start and end periods.
+	In addition, GNSS was also combined with synthetic aperture radar technology for displacement detection, in which long-term GNSS measurements were used as references\cite{atanasova2018ground,fuhrmann2015estimation}.
 	In these studies, the GNSS static positioning mode is usually adopted.
 	
 	%目前针对GNSS动态定位时间序列的位移识别和提取的研究还很少。目前研究都是基于长周期时间序列进行分析，对于动态定位结果分析的研究还是有限。
@@ -528,11 +530,18 @@ For significant displacement, it can be clearly identified; for small displaceme
 	
 	%本文拟采取的措施弥补这些短板
 	%Bayes的优势，并且调研一下前人是否尝试同样的方法干过这类事情
-	Previous studies provide an important information for the application of displacement detection based on GNSS, but most of them focus on the detection of long term displacement. Few studies have explored the use of GNSS kinematic positioning for short-term displacement detection. Although the displacement can be obtained directly by the difference of GNSS positioning coordinates, the identification and extraction of displacement are still challenging due to the influence of measurement errors.
+	Previous studies provide an important information for the application of displacement detection based on GNSS, but most of them focus on the detection of long term displacement. 
+	Few studies have explored the use of GNSS kinematic positioning for short-term displacement detection. 
+	Although the displacement can be obtained directly by the difference of GNSS positioning coordinates, the identification and extraction of displacement are still challenging due to the influence of measurement errors.
 	At present, most of the displacement detection methods based on GNSS kinematic positioning are based on single epoch observations, which are easily affected by measurement noise and gross error.
 	
 	%引入本文的研究内容和贡献
-	The primary aim of this paper is to explore using the context data of change point from GNSS kinematic positioning for displacement detection. This study utilized Bayesian inference to identify and extract displacement, and the Markov Chain Monte Carlo (MCMC) technique is adopted to implement the Bayesian inference. Simulation experiments and field experiments were carried out to verify the feasibility of the proposed method. The posterior sample distribution of parameters is used to analyze the reliability of displacement detection. The study presented here is one of the first investigations to utilize Bayesian inference for displacement detection based on GNSS kinematic positioning. The remaining part is as follows. Section \ref{method} shows the methodology used for this study, Section \ref{exp} presents the experimental results, the discussion is given in Section \ref{disc}, and finally, the conclusion is given in the last section.
+	The primary aim of this paper is to explore using the context data of change point from GNSS kinematic positioning for displacement detection. 
+	This study utilized Bayesian inference to identify and extract displacement, and the Markov Chain Monte Carlo (MCMC) technique is adopted to implement the Bayesian inference. 
+	Simulation and field experiments were carried out to verify the feasibility of the proposed method. 
+	The posterior sample distribution of parameters is used to analyze the reliability of displacement detection. 
+	The study presented here is one of the first investigations to utilize Bayesian inference for displacement detection based on GNSS kinematic positioning. 
+	The remaining part is as follows. Section \ref{method} shows the methodology used for this study, Section \ref{exp} presents the experimental results, the discussion is given in Section \ref{disc}, and finally, the conclusion is given in the last section.
 	
 	%引入文章结构
 	
@@ -543,21 +552,21 @@ In this section, the Bayesian model of displacement detection and its implementa
 \subsection{Bayesian Model for Displacement Detection}
 
 
-The displacement time series is described as $\left[ {{x_1},{x_2}, \cdots {x_m}} \right]$,  and the corresponding time is denoted as $\left[ {{t_1},{t_2}, \cdots {t_m}} \right]$, where $m$ is the number of coordinate. The displacement occurrence time is expressed as $\left[ {{\tau _1},{\tau _2}, \cdots {\tau _n}} \right]$, which is a subset of $\left[ {{t_1},{t_2}, \cdots {t_m}} \right]$.  
+The displacement time series is described as $\left[ {{x_1},{x_2}, \cdots {x_m}} \right]$, and the corresponding time is denoted as $\left[ {{t_1},{t_2}, \cdots {t_m}} \right]$, where $m$ is the number of coordinate. The displacement occurrence time is expressed as $\left[ {{\tau _1},{\tau _2}, \cdots {\tau _n}} \right]$, which is a subset of $\left[ {{t_1},{t_2}, \cdots {t_m}} \right]$.  
 The time corresponding to the $n$ change points satisfies the following relationship:$ {{\tau _1}<{\tau _2}<\cdots {\tau _{n-1}}<{\tau _n}} $.
-The problem of displacement detection is to find out the time of displacement and estimate the displacement effectively.
+The problem of displacement detection is to find out the time of displacement and estimate the displacement.
 
 \subsubsection{Bayesian Inference}
-Bayesian inference is one of the most important skills in statistics. Bayesian inference deduces the posterior probability as the result of a priori probability and likelihood function. Bayesian inference calculates the posterior probability according to the Bayesian theorem\cite{chen2009modulation,chen2013bayesian}
+Bayesian inference is one of the most important skills in statistics, and deduces the posterior probability as the result of a priori probability and likelihood function\cite{robert2014machine}. Bayesian inference calculates the posterior probability according to the Bayesian theorem\cite{chen2009modulation,chen2013bayesian}
 
 \begin{equation}\label{eq_bayesian_inference}
 P({\bf{\theta }}\left| {\bf{x}} \right.) = \frac{{P({\bf{\theta }})P({\bf{x}}\left| {\bf{\theta }} \right.)}}{{P({\bf{x}})}}
 \end{equation}
-where $\bf{\theta }$ is the parameter to be estimated and $\bf{x}$ is the observation;$P({\bf{\theta }}\left| {\bf{x}} \right.)$ denotes the posterior probability; $P({\bf{\theta }})$ represents a priori probability, which refers to the probability obtained from previous experience and analysis;
+where $\bf{\theta }$ is the parameter to be estimated and $\bf{x}$ is the observation; $P({\bf{\theta }}\left| {\bf{x}} \right.)$ denotes the posterior probability; $P({\bf{\theta }})$ represents a priori probability, which refers to the probability obtained from previous experience and analysis;
 $P({\bf{x}}\left| {\bf{\theta }} \right.)$ is the likelihood function, which represents the probability of $x$ when a priori is established. ${P({\bf{x}})}$ is the total likelihood, which is a constant value.
 
 \subsubsection{Likelihood Function}
-It is assumed that the displacement obtained by GNSS obeys Gaussian normal distribution. The displacement of each segment segmented by the change point obeys the Gaussian distribution of different mean and same variance, which is expressed as follows
+It is assumed that the displacement obtained by GNSS kinematic positioning obeys Gaussian normal distribution.  The displacement of each segment segmented by the change points obeys the Gaussian distribution of different mean and same variance, which is expressed as follows
 
 \begin{equation}\label{eq_ts_cps}
 x \sim \left\{ {\begin{array}{*{20}{r}}
@@ -565,9 +574,9 @@ x \sim \left\{ {\begin{array}{*{20}{r}}
 	{N({\mu _1},\sigma ),}&{{\tau _1} \le t < {\tau _2}}\\
 	\vdots &{}\\
 	{\begin{array}{*{20}{c}}
-		{N({\mu _n},\sigma ),}
+		{N({\mu _{n-1}},\sigma ),}
 		\end{array}}&{{\tau _{n - 1}} \le t < {\tau _n}}\\
-	{N({\mu _{n + 1}},\sigma ),}&{{\tau _n} \le t}
+	{N({\mu _{n}},\sigma ),}&{{\tau _n} \le t}
 	\end{array}} \right.
 \end{equation}
 where the $n$ change points divide the time series into $n+1$ segments, and the mean values of each segment are ${\mu _0},{\mu _1},\cdots,{\mu _n}$; $\sigma$ is the standard deviation of each normal distribution; Then the likelihood probability is expressed as follows
@@ -590,12 +599,12 @@ P({\bf{x}}\left| {\bf{\theta }} \right.) = \frac{1}{{{{(2\pi {\sigma ^2})}^{m/2}
 \end{figure*}
 
 \subsubsection{Prior Distribution}
-Assuming that the parameters ${\bf{\tau }}=(\tau_1,\mu_2,\cdots,\tau_n)$, ${\bf{\mu }}=(\mu_0,\mu_1,\cdots,\mu_n)$ and $\sigma$ are independent of each other, then:
+Assuming that the parameters ${\bf{\tau }}=(\tau_1,\tau_2,\cdots,\tau_n)$, ${\bf{\mu }}=(\mu_0,\mu_1,\cdots,\mu_n)$ and $\sigma$ are independent of each other, then:
 
 \begin{equation}\label{eq_bayesian_prior}
 P({\bf{\theta }}) = P({\bf{\tau }},{\bf{\mu }},\sigma ) = P({\bf{\tau }})P({\bf{\mu }})P(\sigma )
 \end{equation}
-The posterior distribution consists of three parts, including the prior distribution of change point, mean value and standard deviation. It is assumed that the standard deviation $\sigma$ obeys the Gaussian normal distribution and is expressed as follows
+The prior distribution consists of three parts, including the prior distribution of change point, mean value and standard deviation. It is assumed that the standard deviation $\sigma$ obeys the Gaussian normal distribution and is expressed as follows
 
 \begin{equation}\label{eq_bayesian_prior_sigma}
 \sigma  \sim N({\mu _\sigma },{\sigma _\sigma })
@@ -604,9 +613,9 @@ where $\mu_{\sigma}$ and $\sigma_{\sigma}$ are determined according to the noise
 For the mean value of the segments divided by the change point, it is assumed to obey the continuous uniform distribution, that is
 
 \begin{equation}\label{eq_bayesian_prior_mu}
-{\mu _i} \sim U({x_l },{x_u })(i = 0,1, \cdots ,n)
+{\mu _i} \sim U({\mu_l },{\mu_u })(i = 0,1, \cdots ,n)
 \end{equation}
-where $x_l$ and $x_u$ represent the lower limit and  upper limit of the uniform distribution, which are determined by the mean value of the coordinate time series and the possible range of variation. Assuming that the mean values of each segment are independent of each other, then
+where $\mu_l$ and $\mu_u$ represent the lower limit and  upper limit of the uniform distribution, which are determined by the mean value of the coordinate time series and the possible range of variation. Assuming that the mean values of each segment are independent of each other, then
 
 \begin{equation}\label{eq_bayesian_prior_mu_sum}
 P({\bf{\mu }}) = \prod\limits_{i = 0}^n {P({\mu _i})}
@@ -648,7 +657,7 @@ P({\bf{\tau }}) = P({\tau _n}\left| {{\tau _{n - 1}}} \right.) \cdots P({\tau _3
 Through (\ref{eq_bayesian_prior_tau_basic}) and (\ref{eq_bayesian_prior_tau_5}), the joint probability of all change points can be determined. Finally, the prior distribution of parameter ${\bf{\theta }}$ can be determined by formula (\ref{eq_bayesian_prior}), (\ref{eq_bayesian_prior_sigma}), (\ref{eq_bayesian_prior_mu_sum}), (\ref{eq_bayesian_prior_tau_5}).  After the Bayesian model of displacement detection is given, MCMC, one of the implementation methods of Bayesian inference, is introduced.
 
 \subsubsection{Markov Chain Monte Carlo (MCMC)}
-The posterior distribution of the parameters depends on the prior distribution and the likelihood function. Obtaining the posterior probability of parameters by direct integration or sum requires a lot of operations, which is difficult to achieve. In this work, the Markov chain Monte Carlo technique is used to approximate the integral or sum value. Monte Carlo sampling is to construct the integral or sum function as the expectation under a certain distribution, and then approximate the expectation by the corresponding average value\cite{goodfellow2016deep}.
+The posterior distribution of the parameters depends on the prior distribution and the likelihood function. Obtaining the posterior probability of parameters by direct integration or sum requires a lot of operations, which is difficult to achieve\cite{robert2013monte}. In this work, the Markov chain Monte Carlo technique is used to approximate the integral or sum value. Monte Carlo sampling is to construct the integral or sum function as the expectation under a certain distribution, and then approximate the expectation by the corresponding average value\cite{goodfellow2016deep}.
 
 \begin{equation}\label{eq_monte_carlo_1}
 s =\sum\limits_x g(x)= \sum\limits_x {p(x)f(x) = {E_p}[f(x)]}
@@ -656,17 +665,17 @@ s =\sum\limits_x g(x)= \sum\limits_x {p(x)f(x) = {E_p}[f(x)]}
 \begin{equation}\label{eq_monte_carlo_2}
 s =\int {g(x)}= \int {p(x)f(x)dx}  = {E_p}[f(x)]
 \end{equation}
-where $g(x)$ is the function to be integrated or summated; $p(x)$ is the probability distribution or probability density function of $x$. The integral or summation problem of $g(x)$ is transformed into the mathematical expectation problem of $f(x)$ under the distribution $p(x)$. This mathematical expectation can be approximated by sampling from $p(x)$.
+where $g(x)$ is the function to be integrated or summated; $p(x)$ is the probability distribution or probability density function of $x$. The integral or summation problem of $g(x)$ is transformed into the mathematical expectation problem of $f(x)$ under the distribution $p(x)$. This mathematical expectation can be approximated by sampling from $p(x)$\cite{goodfellow2016deep}.
 
 \begin{equation}\label{eq_monte_carlo_3}
 \hat s = \frac{1}{n}\sum\limits_{i = 1}^n {f({x_i})}
 \end{equation}
-where $x_i$ is the sample with the distribution of $p(x)$. As can be seen from the above, Monte Carlo method as a general sampling simulation sum or integration method, depends on sampling from the distribution of $p(x)$. However, it is not easy to directly sample from the target distribution of $p(x)$. At present, the most popular solution is to use Markov chain Monte Carlo sampling, which provides a general way to construct a sequence that converges to the target distribution. According to Markov chain, the probability of state transition at a certain time only depends on its previous state, which is expressed as follows
+where $x_i$ is the sample with the distribution of $p(x)$. As can be seen from the above, Monte Carlo method as a general sampling simulation sum or integration method, depends on sampling from the distribution of $p(x)$. However, it is not easy to directly sample from the target distribution of $p(x)$. At present, the most popular solution is to use Markov chain Monte Carlo sampling, which provides a general way to construct a sequence that converges to the target distribution. According to Markov chain, the probability of state transition at a certain time only depends on its previous state, which is expressed as follows\cite{robert2013monte}
 
 \begin{equation}\label{eq_markov_chain_1}
 P({x_{n + 1}}\left| {{x_n},{x_{n - 1}}} \right.,{x_{n - 2}}, \cdots ,{x_2},{x_1}) = P({x_{n + 1}}\left| {{x_n}} \right.)
 \end{equation}
-If a Markov process is neither periodic nor irreducible, then the Markov process is ergodic, that is, each state appears with a certain probability. The Markov process of ergodic states has an important property: no matter what the initial state probability is, the Markov process of the ergodic state tends to be a stable distribution after enough state transitions.
+If a Markov process is neither periodic nor irreducible, then the Markov process is ergodic, that is, each state appears with a certain probability. The Markov process of ergodic states has an important property: no matter what the initial state probability is, the Markov process of the ergodic state tends to be a stable distribution after enough state transitions\cite{robert2013monte}.
 That is, for the initial probability distribution is $\pi_0(x)$, the probability distribution after several rounds of state transition is as follows
 
 \begin{equation}\label{eq_markov_chain_2}
@@ -677,11 +686,11 @@ There exists $n$ which satisfies the following conditions
 \begin{equation}\label{eq_markov_chain_3}
 \pi_{n}(x)=\pi_{n+1}(x)=\pi_{n+2}(x)\cdots
 \end{equation}
-This is the target distribution we want to construct. Based on the initial arbitrary simple probability distribution such as Gaussian distribution $\pi_{0}(x)$, the state value $x_0$ is obtained by sampling. Based on the probability distribution $\pi_{1}(x)=\pi_{0}(x)P(x\left| {{x_0}} \right.)$ sampling state value $x_1$, using the same method, execute $n$ times. Sample $(x_{n},x_{n+1},x_{n+2}\cdots)$ is the corresponding sample set of the target distribution. However, the implementation of MCMC also needs to consider other factors such as constructing the state transition matrix according to the target distribution, which is beyond the scope of this work. Two implementations of MCMC,  the Metropolis-Hasting sampler\cite{chib1995understanding} and the No-U-Turn sampler\cite{hoffman2014no}, are used to sample discrete random variables and continuous random variables, respectively. Next, the data source of the proposed method: GNSS real-time kinematic positioning is introduced.
+This is the target distribution we want to construct. Based on the initial arbitrary simple probability distribution such as Gaussian distribution $\pi_{0}(x)$, the state value $x_0$ is obtained by sampling. Based on the probability distribution $\pi_{1}(x)=\pi_{0}(x)P(x\left| {{x_0}} \right.)$ sampling state value $x_1$, using the same method, execute $n$ times. Sample $(x_{n},x_{n+1},x_{n+2}\cdots)$ is the corresponding sample set of the target distribution. However, the implementation of MCMC also needs to consider other factors such as constructing the state transition matrix according to the target distribution\cite{robert2013monte}, which is beyond the scope of this work. Two implementations of MCMC,  the Metropolis-Hasting sampler\cite{chib1995understanding} and the No-U-Turn sampler\cite{hoffman2014no}, are used to sample discrete random variables and continuous random variables, respectively. Next, the data source of the proposed method: GNSS real-time kinematic positioning is introduced.
 
 \subsection{Relative real-time kinematic (RTK)}
 There are many real-time kinematic positioning models, among which RTK is the most widely used model in deformation monitoring.
-Kalman filter is used in the implementation of  RTK, and the corresponding observation model, the state model, and the extended Kalman filtering process of RTK are introduced below. 
+Kalman filter is used in the implementation of  RTK, and the observation model, the state model, and the extended Kalman filtering process of RTK are introduced below. 
 \subsubsection{Observation model}
 The double-difference(DD) observation model is usually used in RTK, and its definition is shown in (\ref{eq_dd_obs})\cite{teunissen2017springer}.
 \begin{figure*}
@@ -698,7 +707,7 @@ $\Delta \nabla P_{{{i}_{br}}}^{jk}$ and $\Delta \nabla \Phi _{{{i}_{br}}}^{jk}$ 
 $\Delta \nabla \rho _{br}^{jk}$ is the DD geometric distance between receivers and satellites; 
 $\Delta \nabla \delta M_{{{P}_{{{i}_{br}}}}}^{jk}$ and $\Delta \nabla \delta M_{{{\Phi }_{{{i}_{br}}}}}^{jk}$ denote pseudo-range and carrier-phase multipath error, respectively; 
 $\Delta \nabla \varepsilon _{{{P}_{{{i}_{br}}}}}^{jk}$ and $\Delta \nabla \varepsilon _{{{\Phi }_{{{i}_{br}}}}}^{jk}$ represent DD measurement noise of pseudo-range and carrier-phase, respectively; 
-$\Delta \nabla \delta I_{\Phi {{i}_{br}}}^{jk}$is the DD ionospheric delay between receivers and satellites, and the ionospheric error has the same absolute value but the opposite sign on pseudo-range and carrier-phase observations; $\Delta \nabla \delta _{tro{{p}_{br}}}^{jk}$is the DD tropospheric delay between receivers and satellites. 
+$\Delta \nabla \delta I_{\Phi {{i}_{br}}}^{jk}$is the DD ionospheric delay between receivers and satellites, and the ionospheric error has the same absolute value but the opposite sign on pseudo-range and carrier-phase observations\cite{teunissen2017springer}; $\Delta \nabla \delta _{tro{{p}_{br}}}^{jk}$is the DD tropospheric delay between receivers and satellites. 
 For the short baseline, the atmospheric error can be ignored, so the above DD observation equation is simplified as (\ref{eq_dd_obs_simplified}).
 \begin{figure*}
 	\begin{equation}
@@ -716,15 +725,17 @@ Ignoring the influence of multipath, the linearization form of formula (\ref{eq_
 \end{equation}
 where $\bf{y}$ is the observation minus the computed,  $\bf{H} $ is the linearized design matrix\cite{hofmann-wellenhof2007gnss}, $\bf{x}\triangleq {{[{{\mathbf{r}}_{r}},\Delta \nabla \mathbf{N}]}^{T}}$, is the state vector, which contains the rover station coordinate ${{\mathbf{r}}_{r}}$ and the DD integer ambiguity $\Delta \nabla \mathbf{N}$;  $\mathbf{\varepsilon } $ is the observation noise, and its covariance matrix is expressed as  ${{\mathbf{R}}_{\varepsilon }} $. 
 
-After forming the observation equation, the ‘float’ solution of the parameter can be obtained by the standard least square method. To obtain high precision positioning results, it is necessary to fix the integer ambiguity. 
-The 'float' solution and variance of integer ambiguity are expressed as  $\Delta \nabla \mathbf{\tilde{N}} $,  ${{\mathbf{Q}}_{\Delta \nabla \mathbf{\tilde{N}}}} $, respectively. Then the problem of ambiguity fixing can be described as (\ref{eq_lamda})\cite{teunissen1995the}.
+After forming the observation equation, the ‘float’ solution of the parameter can be obtained by the standard least square method. 
+The 'float' solution and variance of integer ambiguity are expressed as  $\Delta \nabla \mathbf{\tilde{N}} $,  ${{\mathbf{Q}}_{\Delta \nabla \mathbf{\tilde{N}}}} $, respectively. 
+To obtain high precision positioning results, it is necessary to fix the integer ambiguity. 
+Then the problem of ambiguity fixing can be described as (\ref{eq_lamda})\cite{teunissen1995the}.
 \begin{figure*}
 	\begin{equation}
-	\Delta \nabla {\bf{\hat N}} = \mathop {\arg min}\limits_{\Delta \nabla {\bf{N}} \in {\bf{Z}}} ((\Delta \nabla {\bf{\tilde N}} - \Delta \nabla {\bf{\hat N}}){\bf{Q}}_{\Delta \nabla {\bf{\tilde N}}}^{ - 1}{(\Delta \nabla {\bf{\tilde N}} - \Delta \nabla {\bf{\hat N}})^T})
+	\Delta \nabla {\bf{\hat N}} = \mathop {\arg min}\limits_{\Delta \nabla {\bf{N}} \in {\bf{Z}}} ((\Delta \nabla {\bf{N}} - \Delta  {\bf{\tilde N}}){\bf{Q}}_{\Delta \nabla {\bf{\tilde N}}}^{ - 1}{(\Delta \nabla {\bf{N}} - \Delta \nabla {\bf{\tilde N}})^T})
 	\label{eq_lamda}
 	\end{equation}
 \end{figure*}
-There are many methods referring to integer ambiguity resolution, among which LAMBDA (Least-squares Ambiguity Decorrelation Adjustment)\cite{teunissen1995the} method is the most widely used one. The integer ambiguity is obtained by the integer least square method. Then, the test process is executed to determine whether to accept or reject the integer ambiguity. If the test is passed, the fixed integer ambiguity can be substituted into (\ref{eq_rtk_measure}) to resolve the fixed solution, otherwise, the ‘float’ solution will be maintained.
+There are many methods referring to integer ambiguity resolution, among which LAMBDA (Least-squares Ambiguity Decorrelation Adjustment)\cite{teunissen1995the} method is the most widely used one. The integer ambiguity is obtained by the integer least square method. Then, the test process is executed to determine whether to accept or reject the integer ambiguity\cite{teunissen2003integer,teunissen2005gnss}. If the test is passed, the fixed integer ambiguity can be substituted into (\ref{eq_rtk_measure}) to resolve the fixed solution, otherwise, the ‘float’ solution will be maintained.
 
 \subsubsection{State model}
 The state model is defined as follows (Takasu 2013)
@@ -734,7 +745,10 @@ The state model is defined as follows (Takasu 2013)
 where ${\bf{F}} \buildrel \Delta \over = \left[ {\begin{array}{*{20}{c}}
 	{{{\bf{I}}_{3 \times 3}}}&{\bf{0}}\\
 	{\bf{0}}&{{{\bf{I}}_{(2n - 2)(2n - 2)}}}
-	\end{array}} \right]$ , is the transition matrix from $k-1$ to $k$; $\mathbf{I}$ denotes the identity matrix; $n$ represents the number of satellites observed simultaneously by the base station and the rover station; Only GPS ${{L}_{1}}$ and ${{L}_{2}}$ frequency observations are considered, so $2n-2$ DD ambiguities are formed. $\mathbf{w}$ is the process noise, and its covariance matrix is expressed as ${{\mathbf{G}}_{w}}$. For kinematic positioning, the coordinate covariance component is set to be large to capture dynamic features, while the ambiguity covariance component is set to $\mathbf{0}$ to ensure the stability of positioning.
+	\end{array}} \right]$ , is the transition matrix from $k-1$ to $k$; $\mathbf{I}$ denotes the identity matrix; $n$ represents the number of satellites observed simultaneously by the base station and the rover station; 
+Only GPS ${{L}_{1}}$ and ${{L}_{2}}$ frequency observations are considered, so $2n-2$ DD ambiguities are formed. 
+$\mathbf{w}$ is the process noise, and its covariance matrix is expressed as ${{\mathbf{G}}_{w}}$. 
+For kinematic positioning, the coordinate covariance component is set to be large to capture dynamic features, while the ambiguity covariance component is set to $\mathbf{0}$ to ensure the stability of positioning.
 \subsubsection{Extended Kalman filtering}
 Kalman filtering includes two processes: prediction update and measurement update\cite{grewal2001kalman}. The prediction process is as follows:
 \begin{equation}
@@ -763,7 +777,7 @@ where ${{\mathbf{v}}_{k}}$ denotes the innovation vector, and ${{\mathbf{S}}_{k}
 where ${{\mathbf{\hat{x}}}_{k}}$ is the final estimate, and ${{\mathbf{Q}}_{k}}$ is the corresponding covariance matrix; ${{\mathbf{\hat{x}}}_{k}}$ is the only input of the proposed method.
 
 \subsection{Workflow of displacement detection }  
-In the previous paragraphs, the displacement detection using Bayesian inference is proposed, and the principle of relative real-time kinematic positioning is given.
+In the previous paragraphs, the displacement detection model using Bayesian inference is proposed, and the principle of relative real-time kinematic positioning is presented.
 The workflow of the GNSS-based displacement detection using Bayesian inference is shown in Fig. \ref{fig_v_workflow}.
 \begin{figure*}[htpb]
 	\centering
@@ -773,9 +787,9 @@ The workflow of the GNSS-based displacement detection using Bayesian inference i
 \end{figure*} 
 
 As shown in Fig. \ref{fig_v_workflow}, to begin this process, the kinematic positioning is carried out to obtain the coordinates time series to form the data source of Bayesian inference. 
-Before the displacement detection, based on the coordinate time series and MCMC sampling, the posterior samples of model parameters are obtained by Bayesian inference.
-After obtaining the posterior distribution of the parameters, the displacement identification is achieved by the posterior distribution of the change points.
-On getting the change points, the displacement is extracted by the posterior sample distribution of the coordinate mean.
+Before the displacement detection,  the posterior samples of model parameters are obtained by Bayesian inference based on the MCMC sampling.
+After obtaining the posterior sample distribution of the parameters, the displacement identification is achieved by the posterior sample distribution of the change points.
+On getting the change points, the displacement is extracted by the posterior sample distribution of  the 'mean' parameters.
 Finally, according to the analysis of the posterior samples, the original Bayesian model is optimized as needed.
 The middle of Fig. \ref{fig_v_workflow} is a graphical description of the Bayesian model of displacement detection and its implementation described above.
 
@@ -783,11 +797,12 @@ The middle of Fig. \ref{fig_v_workflow} is a graphical description of the Bayesi
 \label{exp}
 To verify the feasibility of the proposed method, we carried out a series of experiments, including simulation and field experiments. 
 In the simulation experiment, the data is composed of designed displacement and noise.
-In the field experiment, the displacement is controlled manually by the designed displacement control platform.
+In the field experiment, the displacement is controlled manually by the  the self-built displacement control platform.
 
 \subsection{Simulation Experiment}
 In the experiment, we only simulate the up coordinate component, in which Gaussian white noise with the mean of 0 mm and the standard deviation of 30 mm is added.
- At 1000 s, 2500 s, and 3200 s, the displacements of -50 mm, -50 mm, and 100 mm are added, respectively. The simulation results are shown in Fig. \ref{fig_v_sim_simple_gauss_ts}.
+At 1000 s, 2500 s, and 3200 s, the displacements of -50 mm, -50 mm, and 100 mm are added, respectively. 
+The simulation results are shown in Fig. \ref{fig_v_sim_simple_gauss_ts}.
 
 \begin{figure}[htbp]
 	\centering
@@ -795,7 +810,8 @@ In the experiment, we only simulate the up coordinate component, in which Gaussi
 	\caption{Simulation data with multiple displacement change points.}
 	\label{fig_v_sim_simple_gauss_ts}
 \end{figure} 
-As shown in Fig. \ref{fig_v_sim_simple_gauss_ts}, the whole time series is divided into four segments by three displacement change points. Using the model designed above, Bayesian inference is implemented by MCMC sampling. 
+As shown in Fig. \ref{fig_v_sim_simple_gauss_ts}, the whole time series is divided into four segments by three displacement change points. 
+Using the model designed above, Bayesian inference is implemented by MCMC sampling. 
 The posterior sample distribution of $\bf{\tau}$ is shown in Fig. \ref{fig_v_tau_sim_simple}.
 
 
@@ -805,8 +821,9 @@ The posterior sample distribution of $\bf{\tau}$ is shown in Fig. \ref{fig_v_tau
 	\caption{Posterior sample distribution of $\tau$ in the simulation experiment.}
 	\label{fig_v_tau_sim_simple}
 \end{figure} 
-As can be seen from Fig. \ref{fig_v_tau_sim_simple}, all the designed displacement change points are identified. $\tau_3$ is the easiest to be identified, mainly due to the largest displacement amplitude. 
-Since the displacement amplitude at $\tau_2$ is small and there are fewer sample points on the right side, the estimated accuracy is worse than the other two points.
+As can be seen from Fig. \ref{fig_v_tau_sim_simple}, all the designed displacement change points are identified. 
+$\tau_3$ is the easiest to be identified, mainly due to the largest displacement amplitude. 
+Since the displacement amplitude at $\tau_2$ is small and there are fewer sample points on the right side, the estimated accuracy is worse than the other two change points.
 The histogram of the posterior sample of $\bf{\mu}$ is shown in Fig. \ref{fig_v_mu_sim_simple}.
 
 \begin{figure}[htbp]
@@ -816,9 +833,9 @@ The histogram of the posterior sample of $\bf{\mu}$ is shown in Fig. \ref{fig_v_
 	\label{fig_v_mu_sim_simple}
 \end{figure} 
 The blue curve in Fig. \ref{fig_v_mu_sim_simple} is the fitting result of Gaussian distribution of the histogram.
-It can be seen that although we assume that the prior distribution of $\bf{\mu}$ in the model obeys a uniform distribution, the posterior sample approximately obeys normal distribution. 
+Although we assume that the prior distribution of $\bf{\mu}$ in the model obeys a uniform distribution, the posterior sample approximately obeys normal distribution. 
 The vertical green dashed line in Fig. \ref{fig_v_mu_sim_simple} represents the mean value of posterior samples, and the mean values of the four segments are 1.17 mm, -49.58 mm, -98.9 mm, and -3.65 mm.
-Among these means, $\mu_2$ has the highest estimation accuracy, and its corresponding posterior sample coverage is the narrowest. 
+Among these means, $\mu_2$ has the highest accuracy, and its corresponding posterior sample coverage is the narrowest. 
 The estimation accuracy of $\mu_4$ is the lowest, and the corresponding posterior sample coverage is the widest. 
 These are mainly due to the fact that the most observation samples are used for $\mu_2$ estimation, while the least observation samples are used for $\mu_4$ estimation. 
 As shown in Fig. \ref{fig_v_sigma_sim_simple}, $\sigma$ is also accurately estimated.
@@ -826,7 +843,7 @@ As shown in Fig. \ref{fig_v_sigma_sim_simple}, $\sigma$ is also accurately estim
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.3]{v_sigma_sim_simple}
-	\caption{Histogram of posterior estimation of the observation noise in the simulation experiment.}
+	\caption{Histogram of posterior sample of $\sigma$ in the simulation experiment.}
 	\label{fig_v_sigma_sim_simple}
 \end{figure} 
 \subsection{Field Experiments}
@@ -994,13 +1011,13 @@ In the next section, we will discuss adding a prior to the model to improve the 
 \label{disc}
 In field experiment 1, there are two significant peaks in the posterior sample distribution at the same change point. 
 In addition, in field experiment 2, the posterior distribution interval of two different change points is close.
-The interval between adjacent change points is constraint by adding a prior. 
+The interval between adjacent change points is constrained by adding a prior. 
 The random variable $d\tau$, the distance between continuous change points, is added, which obeys the  discrete uniform distribution.
 
 \begin{equation}\label{eq_bayesian_prior_d_tau}
 P(d\tau_{i})=DiscreteU(\tau_{i} + d,\tau_{i+1})
 \end{equation}
-where $d$ is the shortest time interval to be constraint. The new Bayesian probability model with the prior is shown in Fig. \ref{fig_v_simple_p_model_add_new_rule}.
+where $d$ is the shortest time interval to be constrained. The new Bayesian probability model with the prior is shown in Fig. \ref{fig_v_simple_p_model_add_new_rule}.
 
 \begin{figure}[H]
 	\centering
