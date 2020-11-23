@@ -811,7 +811,7 @@ The simulation results are shown in Fig. \ref{fig_v_sim_simple_gauss_ts}.
 	\label{fig_v_sim_simple_gauss_ts}
 \end{figure} 
 As shown in Fig. \ref{fig_v_sim_simple_gauss_ts}, the whole time series is divided into four segments by three displacement change points. 
-Using the model designed above, Bayesian inference is implemented by MCMC sampling. 
+Using the model designed above, Bayesian inference is implemented by the MCMC sampling. 
 The posterior sample distribution of $\bf{\tau}$ is shown in Fig. \ref{fig_v_tau_sim_simple}.
 
 
@@ -867,9 +867,9 @@ The GNSS observation data collected above are processed by the open-source softw
 \end{figure} 
 
 \subsubsection{Field Experiment 1}
-In GNSS data processing,  the data was processed epoch by epoch by using RTK mode, and the corresponding coordinate output was the only input of the proposed displacement detection method.
-In the experiment, only the vertical displacement was triggered, so only the up coordinate component is displayed. 
+GNSS observations were processed epoch by epoch by using RTK mode, and the corresponding coordinate output was the only input of the proposed displacement detection method.
 The results of RTK positioning are shown in Fig. \ref{fig_v_bd9_3_up_tau}.
+Only the vertical displacement was triggered in the experiment, so only the up coordinate component is displayed. 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.35]{v_bd9_3_up_ts}
@@ -878,8 +878,8 @@ The results of RTK positioning are shown in Fig. \ref{fig_v_bd9_3_up_tau}.
 \end{figure} 
 
 For such a short baseline, most of the errors can be eliminated by the double-difference observation. 
-As can be seen from Fig. \ref{fig_v_bd9_3_up_ts}, there are still some unmodeled errors, such as multipath error that have not been eliminated. 
-The RTK positioning results are processed by the proposed model, and Bayesian inference is implemented by MCMC sampling. 
+As can be seen from Fig. \ref{fig_v_bd9_3_up_ts}, there are still some unmodeled errors, such as the multipath error that have not been eliminated. 
+The RTK positioning results are processed by the proposed method, and Bayesian inference is implemented by the MCMC sampling. 
 The histogram of the posterior sample of $\tau$ is shown in Fig. \ref{fig_v_bd9_3_up_tau}.
 
 \begin{figure}[htbp]
@@ -892,7 +892,7 @@ From the posterior sample distribution of $\tau_2$ in Fig. \ref{fig_v_bd9_3_up_t
 According to the maximum value in the bar chart of the posterior sample of $\tau_1$, the change point is identified as 781 s.
 However, as can be seen from Fig. \ref{fig_v_bd9_3_up_tau}, there are two peaks in the posterior sample distribution of change point $\tau_1$.
 The main reason is that the displacement control device is not completely controllable, and the plank floats up and down when moving the object. 
-In addition, since the antenna is close to the ground, the antenna vibration caused by breeze or touch causes an increase in the multipath phase rate or fading frequency\cite{teunissen2017springer}. 
+In addition, since the antenna is close to the ground, the antenna vibration caused by breeze or touch causes an increase in the multipath phase rate or fading frequency\cite{kelly2003characterization}. 
 The posterior sample histogram of the $\mu$ of each segment divided by the change point and the displacement measured by the tape are shown in Fig. \ref{fig_v_bd9_3_up_mu} and Table \ref{tab_measured_height_9_3}, respectively.
 
 \begin{figure}[htbp]
@@ -940,15 +940,15 @@ As shown in Fig. \ref{fig_v_bd9_3_up_sigma}, the estimated value of $\sigma$ is 
 	\caption{Histogram of posterior sample of $\sigma$ in field experiment 1.}
 	\label{fig_v_bd9_3_up_sigma}
 \end{figure} 
-The two peaks in the posterior sample of $\tau$ do not appear in $\mu$ and $\sigma$. 
-The main reason is that the interval of the two peaks is very close, which has no obvious influence on the segments divided, so it has little influence on the posterior mean and standard deviation.
-But in reality, this kind of situation exists, for example, in the process of landslide or subsidence, multiple displacements occur in a short time, so there are multiple change points. 
+Different from the posterior sample distribution of $\tau$, there is only one peak value in the posterior sample distribution of $\mu$ and $\sigma$.
+The main reason is that the interval of the two peaks is very close, which has little influence on the posterior mean and standard deviation.
+In reality, multiple change points exist, such as multiple displacements in a short period of time in the process of landslide or settlement.
 However, more attention is paid to the primary change points.
-By adding a prior to the model to improve the identification of the primary change points, and weaken the secondary change points will be discussed later.
+By adding a prior to the model to improve the identification of the primary change points, and weaken the influence of secondary change points will be discussed later.
 
 \subsubsection{Field Experiment 2}
 This experiment is similar to the previous one except that the displacement amplitude is smaller. 
-For the data collected in this experiment,  the coordinate time series is obtained by RTKLIB with the same processing strategy as the previous experiment, and the up component of the time series is shown in Fig. \ref{fig_v_bd9_4_up_ts}. 
+The coordinate time series is obtained by RTKLIB with the same processing strategy as the previous experiment, and the up component of the time series is shown in Fig. \ref{fig_v_bd9_4_up_ts}. 
 In this experiment, the displacement measured by tape is shown in Table \ref{tab_measured_height_9_4}.
 
 \begin{figure}[htbp]
@@ -982,7 +982,7 @@ In this experiment, the displacement measured by tape is shown in Table \ref{tab
 	\end{threeparttable}
 \end{table}
 As can be seen from Fig. \ref{fig_v_bd9_4_up_ts} and Table \ref{tab_measured_height_9_4}, the amplitude of the two displacements is smaller than that of the previous experiment. 
-The time series are processed by the proposed model, and Bayesian inference is implemented by MCMC sampling. The results are shown in Fig. \ref{fig_v_bd9_4_up_tau}, \ref{fig_v_bd9_4_up_mu}, and \ref{fig_v_bd9_4_up_sigma}.
+The time series are processed by the proposed method, and Bayesian inference is implemented by the MCMC sampling. The results are shown in Fig. \ref{fig_v_bd9_4_up_tau}, \ref{fig_v_bd9_4_up_mu}, and \ref{fig_v_bd9_4_up_sigma}.
 
 \begin{figure}[htbp]
 	\centering
