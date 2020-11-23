@@ -442,7 +442,7 @@ For decades, displacement detection based on the Global navigation satellite sys
 Most of the GNSS-based displacement detection methods in these applications are based on GNSS long-term static positioning results.
 With the development of Internet of Things (IoT), high-precision GNSS positioning, and GNSS related transmission protocol, kinematic positioning results can be transmitted to the cloud in real-time.
 However, due to the influence of measurement noise, it is still a challenge to identify and extract displacement from GNSS kinematic positioning results in a short time.
-To resolve this, we propose a novel displacement detection approach with the purpose of identifying and extracting displacement from GNSS kinematic positioning in a short time.
+To resolve this, we propose a novel displacement detection approach with the purpose of identifying and extracting displacement from GNSS kinematic positioning.
 Specifically, we use the Bayesian inference model to obtain the displacement change time from the coordinate time series of GNSS kinematic positioning. 
 %The likelihood function of the observation and the prior distribution of the parameters to be estimated are provided.
 %Finally, Bayesian inference was implemented by Markov Chain Monte Carlo (MCMC) sampling.
@@ -496,7 +496,7 @@ For significant displacement, it can be clearly identified; for small displaceme
 	%传统测量仪器的弊端，GNSS位移探测的优势。
 	%GNSS在位移探测中扮演的角色，以及位移探测的要求
 	%目前人们对于基于GNSS位移探测的研究更过的关注与如何提高定位的精度，而忽略了如何从GNSS获取的坐标序列中识别并提取位移。
-	\IEEEPARstart{I}{n}  recent decades, the Global navigation satellite system (GNSS) has been widely used in surveying\cite{barry2011surveying}, and civil aviation\cite{iatsouk2004development}, and autonomous vehicle\cite{kuutti2018survey} as a positioning method. 
+	\IEEEPARstart{I}{n}  recent decades, the Global navigation satellite system (GNSS) has been widely used in surveying\cite{barry2011surveying}, civil aviation\cite{iatsouk2004development}, and autonomous vehicle\cite{kuutti2018survey} as a positioning method. 
 	Besides, as a displacement detection method in deformation monitoring, GNSS has been applied to landslide monitoring\cite{awange2012environmental}, subsidence survey\cite{bian2014monitoring}, industrial measurement\cite{pavasovic2011application}, and other fields. 
 	Compared with traditional displacement detection technology, GNSS-based displacement detection has many advantages, such as real-time, high precision, and weather independence\cite{shen2019a}. 
 	%随着物联网通信技术标准的制订和创新，高精度定位技术，例如RTK，PPP，以及GNSS传输协议NTRIP的发展，GNSS定位结果可以被实时传输到云端。
@@ -510,9 +510,9 @@ For significant displacement, it can be clearly identified; for small displaceme
 	%位移探测的短板1,关注与定位算法，忽略探测算法2，关注与longterm忽略shortterm
 	%随着在线监测系统的普及，急需对于单历元动态监测数据进行分析处理，今早发现识别和确定位移。
 	The first category is about the research of measurement technology in GNSS-based displacement detection.
-	In order to evaluate the performance of single base station real time kinematic(RTK) and network RTK(NRTK) in displacement detection, the data of different observation duration were compared\cite{wang2011gps}. The results showed that NRTK has advantages in accuracy and robustness.
+	In order to evaluate the performance of single base station real time kinematic(RTK) and network real time kinematic(NRTK) in displacement detection, the data of different observation duration were compared\cite{wang2011gps}. The results showed that NRTK has advantages in accuracy and robustness.
 	A displacement monitoring system was designed to evaluate NRTK for displacement detection\cite{GUMUS2019131}. The results showed that NRTK can achieve an accuracy of 4.7 mm and 7.9 mm in the horizontal and vertical directions respectively.
-	In \cite{csanliouglu2016landslide} and \cite{lytvyn2012real}, the feasibility of displacement detection for landslides  using PPP has been studied. The results showed that PPP can be capable of detecting large landslides.
+	In \cite{csanliouglu2016landslide} and \cite{lytvyn2012real}, the feasibility of displacement detection for landslides  using precise point position(PPP) has been studied. The results showed that PPP can be capable of detecting large landslides.
 	There are also some studies using the time-differenced carrier phases (TDCP) technique\cite{freda2015time,colosimo2011real} to obtain velocity estimates for displacement detection. This kind of method obtains displacement by integrating velocity, which is mainly used in displacement detection and extraction of large earthquakes.
 	In general, the above research mainly focuses on how to improve the positioning accuracy, and the research on how to identify and extract the displacement from the coordinate sequence obtained by GNSS is limited.
 	
@@ -553,7 +553,7 @@ In this section, the Bayesian model of displacement detection and its implementa
 
 
 The displacement time series is described as $\left[ {{x_1},{x_2}, \cdots {x_m}} \right]$, and the corresponding time is denoted as $\left[ {{t_1},{t_2}, \cdots {t_m}} \right]$, where $m$ is the number of coordinate. The displacement occurrence time is expressed as $\left[ {{\tau _1},{\tau _2}, \cdots {\tau _n}} \right]$, which is a subset of $\left[ {{t_1},{t_2}, \cdots {t_m}} \right]$.  
-The time corresponding to the $n$ change points satisfies the following relationship:$ {{\tau _1}<{\tau _2}<\cdots {\tau _{n-1}}<{\tau _n}} $.
+The time corresponding to the $n$ change points satisfies the following relationship: $ {{\tau _1}<{\tau _2}<\cdots {\tau _{n-1}}<{\tau _n}} $.
 The problem of displacement detection is to find out the time of displacement and estimate the displacement.
 
 \subsubsection{Bayesian Inference}
@@ -663,7 +663,7 @@ The posterior distribution of the parameters depends on the prior distribution a
 s =\sum\limits_x g(x)= \sum\limits_x {p(x)f(x) = {E_p}[f(x)]}
 \end{equation}
 \begin{equation}\label{eq_monte_carlo_2}
-s =\int {g(x)}= \int {p(x)f(x)dx}  = {E_p}[f(x)]
+s =\int {g(x)dx}= \int {p(x)f(x)dx}  = {E_p}[f(x)]
 \end{equation}
 where $g(x)$ is the function to be integrated or summated; $p(x)$ is the probability distribution or probability density function of $x$. The integral or summation problem of $g(x)$ is transformed into the mathematical expectation problem of $f(x)$ under the distribution $p(x)$. This mathematical expectation can be approximated by sampling from $p(x)$\cite{goodfellow2016deep}.
 
@@ -688,16 +688,16 @@ There exists $n$ which satisfies the following conditions
 \end{equation}
 This is the target distribution we want to construct. Based on the initial arbitrary simple probability distribution such as Gaussian distribution $\pi_{0}(x)$, the state value $x_0$ is obtained by sampling. Based on the probability distribution $\pi_{1}(x)=\pi_{0}(x)P(x\left| {{x_0}} \right.)$ sampling state value $x_1$, using the same method, execute $n$ times. Sample $(x_{n},x_{n+1},x_{n+2}\cdots)$ is the corresponding sample set of the target distribution. However, the implementation of MCMC also needs to consider other factors such as constructing the state transition matrix according to the target distribution\cite{robert2013monte}, which is beyond the scope of this work. Two implementations of MCMC,  the Metropolis-Hasting sampler\cite{chib1995understanding} and the No-U-Turn sampler\cite{hoffman2014no}, are used to sample discrete random variables and continuous random variables, respectively. Next, the data source of the proposed method: GNSS real-time kinematic positioning is introduced.
 
-\subsection{Relative real-time kinematic (RTK)}
+\subsection{Relative Real-time Kinematic (RTK)}
 There are many real-time kinematic positioning models, among which RTK is the most widely used model in deformation monitoring.
 Kalman filter is used in the implementation of  RTK, and the observation model, the state model, and the extended Kalman filtering process of RTK are introduced below. 
-\subsubsection{Observation model}
+\subsubsection{Observation Model}
 The double-difference(DD) observation model is usually used in RTK, and its definition is shown in (\ref{eq_dd_obs})\cite{teunissen2017springer}.
 \begin{figure*}
 	\begin{equation}
 	\left. \begin{array}{l}
-	\Delta \nabla P_{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} - \Delta \nabla \delta I_{\Phi {i_{br}}}^{jk} + \Delta \nabla \delta _{tro{p_{br}}}^{jk} + \Delta \nabla \delta M_{{P_{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{P_{{i_{br}}}}}^{jk}\\
-	\Delta \nabla \Phi _{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} + \Delta \nabla \delta I_{{\Phi _{{i_{br}}}}}^{jk} + \Delta \nabla \delta _{tro{p_{br}}}^{jk} - {\lambda _i}\Delta \nabla N_{{i_{br}}}^{jk} + \Delta \nabla \delta M_{{\Phi _{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{\Phi _{{i_{br}}}}}^{jk}
+	\Delta \nabla P_{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} - \Delta \nabla I_{\Phi {i_{br}}}^{jk} + \Delta \nabla  T_{br}^{jk} + \Delta \nabla  M_{{P_{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{P_{{i_{br}}}}}^{jk}\\
+	\Delta \nabla \Phi _{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} + \Delta \nabla I_{{\Phi _{{i_{br}}}}}^{jk} + \Delta \nabla T_{br}^{jk} - {\lambda _i}\Delta \nabla N_{{i_{br}}}^{jk} + \Delta \nabla  M_{{\Phi _{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{\Phi _{{i_{br}}}}}^{jk}
 	\end{array} \right\}
 	\label{eq_dd_obs}
 	\end{equation}
@@ -705,15 +705,15 @@ The double-difference(DD) observation model is usually used in RTK, and its defi
 In this observation equation, $\Delta \nabla $ denotes the DD operator, $i$ denotes the frequency; $b$ and $r$ denote base station and rover station respectively; $j$ and $k$ represent the satellites;
 $\Delta \nabla P_{{{i}_{br}}}^{jk}$ and $\Delta \nabla \Phi _{{{i}_{br}}}^{jk}$ denote pseudo-range and carrier-phase DD observations, respectively; 
 $\Delta \nabla \rho _{br}^{jk}$ is the DD geometric distance between receivers and satellites; 
-$\Delta \nabla \delta M_{{{P}_{{{i}_{br}}}}}^{jk}$ and $\Delta \nabla \delta M_{{{\Phi }_{{{i}_{br}}}}}^{jk}$ denote pseudo-range and carrier-phase multipath error, respectively; 
+$\Delta \nabla  M_{{{P}_{{{i}_{br}}}}}^{jk}$ and $\Delta \nabla  M_{{{\Phi }_{{{i}_{br}}}}}^{jk}$ denote pseudo-range and carrier-phase multipath error, respectively; 
 $\Delta \nabla \varepsilon _{{{P}_{{{i}_{br}}}}}^{jk}$ and $\Delta \nabla \varepsilon _{{{\Phi }_{{{i}_{br}}}}}^{jk}$ represent DD measurement noise of pseudo-range and carrier-phase, respectively; 
-$\Delta \nabla \delta I_{\Phi {{i}_{br}}}^{jk}$is the DD ionospheric delay between receivers and satellites, and the ionospheric error has the same absolute value but the opposite sign on pseudo-range and carrier-phase observations\cite{teunissen2017springer}; $\Delta \nabla \delta _{tro{{p}_{br}}}^{jk}$is the DD tropospheric delay between receivers and satellites. 
+$\Delta \nabla  I_{\Phi {{i}_{br}}}^{jk}$is the DD ionospheric delay between receivers and satellites, and the ionospheric error has the same absolute value but the opposite sign on pseudo-range and carrier-phase observations\cite{teunissen2017springer}; $\Delta \nabla T_{br}^{jk}$is the DD tropospheric delay between receivers and satellites. 
 For the short baseline, the atmospheric error can be ignored, so the above DD observation equation is simplified as (\ref{eq_dd_obs_simplified}).
 \begin{figure*}
 	\begin{equation}
 	\left. \begin{array}{l}
-	\Delta \nabla P_{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} + \Delta \nabla \delta M_{{P_{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{P_{{i_{br}}}}}^{jk}\\
-	\Delta \nabla \Phi _{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} - {\lambda _i}\Delta \nabla N_{{i_{br}}}^{jk} + \Delta \nabla \delta M_{{\Phi _{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{\Phi _{{i_{br}}}}}^{jk}\end{array} \right\}
+	\Delta \nabla P_{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} + \Delta \nabla  M_{{P_{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{P_{{i_{br}}}}}^{jk}\\
+	\Delta \nabla \Phi _{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} - {\lambda _i}\Delta \nabla N_{{i_{br}}}^{jk} + \Delta \nabla  M_{{\Phi _{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{\Phi _{{i_{br}}}}}^{jk}\end{array} \right\}
 	\label{eq_dd_obs_simplified}
 	\end{equation}
 	
@@ -728,7 +728,7 @@ where $\bf{y}$ is the observation minus the computed,  $\bf{H} $ is the lineariz
 After forming the observation equation, the ‘float’ solution of the parameter can be obtained by the standard least square method. 
 The 'float' solution and variance of integer ambiguity are expressed as  $\Delta \nabla \mathbf{\tilde{N}} $,  ${{\mathbf{Q}}_{\Delta \nabla \mathbf{\tilde{N}}}} $, respectively. 
 To obtain high precision positioning results, it is necessary to fix the integer ambiguity. 
-Then the problem of ambiguity fixing can be described as (\ref{eq_lamda})\cite{teunissen1995the}.
+The problem of ambiguity fixing can be described as (\ref{eq_lamda})\cite{teunissen1995the}.
 \begin{figure*}
 	\begin{equation}
 	\Delta \nabla {\bf{\hat N}} = \mathop {\arg min}\limits_{\Delta \nabla {\bf{N}} \in {\bf{Z}}} ((\Delta \nabla {\bf{N}} - \Delta  {\bf{\tilde N}}){\bf{Q}}_{\Delta \nabla {\bf{\tilde N}}}^{ - 1}{(\Delta \nabla {\bf{N}} - \Delta \nabla {\bf{\tilde N}})^T})
@@ -737,7 +737,7 @@ Then the problem of ambiguity fixing can be described as (\ref{eq_lamda})\cite{t
 \end{figure*}
 There are many methods referring to integer ambiguity resolution, among which LAMBDA (Least-squares Ambiguity Decorrelation Adjustment)\cite{teunissen1995the} method is the most widely used one. The integer ambiguity is obtained by the integer least square method. Then, the test process is executed to determine whether to accept or reject the integer ambiguity\cite{teunissen2003integer,teunissen2005gnss}. If the test is passed, the fixed integer ambiguity can be substituted into (\ref{eq_rtk_measure}) to resolve the fixed solution, otherwise, the ‘float’ solution will be maintained.
 
-\subsubsection{State model}
+\subsubsection{State Model}
 The state model is defined as follows (Takasu 2013)
 \begin{equation}
 {{\bf{x}}_k} = {\bf{F}}{{\bf{x}}_{k - 1}} + {\bf{w}}
@@ -759,10 +759,10 @@ Kalman filtering includes two processes: prediction update and measurement updat
 \end{equation}
 According to the definition of the state transition matrix above, it can be seen that the state value of the previous epoch remains unchanged. However, the coordinate covariance component becomes larger, while the ambiguity covariance component remains unchanged. The measurement update process is as follows:
 \begin{equation}
-{{\bf{v}}_k} = {\bf{y}}(k) - {\bf{H}}(k){{\bf{\hat x}}_{k|k - 1}}
+{{\bf{v}}_k} = {\bf{y}}(k) - {\bf{H}}_k{{\bf{\hat x}}_{k|k - 1}}
 \end{equation}
 \begin{equation}
-{{\bf{S}}_k} = {\bf{H}}(k){{\bf{Q}}_{k|k - 1}}{\bf{H}}{(k)^{\rm{T}}} + {{\bf{R}}_\varepsilon }(k)
+{{\bf{S}}_k} = {\bf{H}}_k{{\bf{Q}}_{k|k - 1}}{\bf{H}}{_k^{\rm{T}}} + {{\bf{R}}_\varepsilon }(k)
 \end{equation}
 \begin{equation}
 {\bf{K}} = {{\bf{Q}}_{k|k - 1}}{\bf{H}}_k^T{\bf{S}}_k^{ - 1}
@@ -1072,6 +1072,7 @@ The displacement difference between the two methods at the two change points is 
 The larger displacement error at $\tau_2$ is mainly due to the incompletely controllable experimental equipment. 
 But on the whole, using the proposed method, the displacement extraction accuracy in the experiment can reach less than 2 mm. However, as mentioned in the simulation experiment, the accuracy of displacement extraction in practical application also depends on the number of available samples near the change point.
 It can be seen from Fig. \ref{fig_v_bd9_4_up_sigma_add_new_rule} and Fig. \ref{fig_v_bd9_4_up_sigma} that the secondary peak of $\sigma$ posterior distribution has been significantly weakened.
+
 As can be seen from the above discussion that the interval constraint prior can effectively improve the identifiability of change points.
 On the other hand, it also shows that the Bayesian inference-based displacement detection method proposed in this paper is flexible enough to meet different analysis needs by adding a priori.
 
