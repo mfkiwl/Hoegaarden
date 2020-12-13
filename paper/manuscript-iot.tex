@@ -511,13 +511,13 @@ For significant displacement, it can be clearly identified; for small displaceme
 	%随着在线监测系统的普及，急需对于单历元动态监测数据进行分析处理，今早发现识别和确定位移。
 	The first category is about the research of measurement technology in GNSS-based displacement detection.
 	In order to evaluate the performance of single base station real time kinematic(RTK) and network real time kinematic(NRTK) in displacement detection, the data of different observation duration were compared\cite{wang2011gps}. The results showed that NRTK has advantages in accuracy and robustness.
-	A displacement monitoring system was designed to evaluate NRTK for displacement detection\cite{GUMUS2019131}. The results showed that NRTK can achieve an accuracy of 4.7 mm and 7.9 mm in the horizontal and vertical directions respectively.
+	A displacement monitoring system was designed to evaluate NRTK for displacement detection\cite{GUMUS2019131}. The results showed that NRTK can achieve an accuracy of 4.7mm and 7.9mm in the horizontal and vertical directions respectively.
 	In \cite{csanliouglu2016landslide} and \cite{lytvyn2012real}, the feasibility of displacement detection for landslides  using precise point position(PPP) has been studied. The results showed that PPP can be capable of detecting large landslides.
 	There are also some studies using the time-differenced carrier phases (TDCP) technique\cite{freda2015time,colosimo2011real} to obtain velocity estimates for displacement detection. This kind of method obtains displacement by integrating velocity, which is mainly used in displacement detection and extraction of large earthquakes.
 	In general, the above research mainly focuses on how to improve the positioning accuracy, and the research on how to identify and extract the displacement from the coordinate sequence obtained by GNSS is limited.
 	
 	In another category of GNSS-based displacement detection research, GNSS is only used as a static positioning method.
-	Gili et al.\cite{gili2000using} was one of the first landslide monitoring studies using GNSS technology, in which traditional measurement data are used as a comparison. 
+	Gili et al.\cite{gili2000using} was one of the first landslide monitoring studies using GNSS technology, in which traditional measurement data were used as a comparison. 
 	The results showed that the accuracy of the Global positioning system (GPS) measurement over a period of 26 months was 12 to 16 mm in the horizontal plane and 18 to 24 mm in the elevation.
 	A prototype of a low-cost GNSS has been developed for deep-seated landslide monitoring\cite{rs12203375}. 
 	The results of a nine-month filed monitoring period provided a detailed insight into the spatial and temporal pattern of deep-seated landslide surface movements, in which the displacement was obtained by the direct difference between the coordinates of the start and end periods.
@@ -757,7 +757,7 @@ Kalman filtering includes two processes: prediction update and measurement updat
 \begin{equation}
 {{\bf{Q}}_{k|k - 1}} = {\bf{F}}{{\bf{Q}}_{k - 1}}{{\bf{F}}^T} + {{\bf{G}}_w}(k)
 \end{equation}
-According to the definition of the state transition matrix above, it can be seen that the state value of the previous epoch remains unchanged. However, the coordinate covariance component becomes larger, while the ambiguity covariance component remains unchanged. The measurement update process is as follows:
+where ${\bf{\hat x}}_{k|k - 1}$ is the predicted value and ${\bf{Q}}_{k|k - 1}$ is the corresponding covariance. According to the definition of the state transition matrix above, it can be seen that the state value of the previous epoch remains unchanged. However, the coordinate covariance component becomes larger, while the ambiguity covariance component remains unchanged. The measurement update process is as follows:
 \begin{equation}
 {{\bf{v}}_k} = {\bf{y}}(k) - {\bf{H}}_k{{\bf{\hat x}}_{k|k - 1}}
 \end{equation}
@@ -774,7 +774,7 @@ where ${{\mathbf{v}}_{k}}$ denotes the innovation vector, and ${{\mathbf{S}}_{k}
 \begin{equation}
 {{\bf{Q}}_k} = {{\bf{Q}}_{k|k - 1}} - {\bf{K}}{{\bf{S}}_k}{{\bf{K}}^T}
 \end{equation}
-where ${{\mathbf{\hat{x}}}_{k}}$ is the final estimate, and ${{\mathbf{Q}}_{k}}$ is the corresponding covariance matrix; ${{\mathbf{\hat{x}}}_{k}}$ is the only input of the proposed method.
+where ${{\mathbf{\hat{x}}}_{k}}$ is the final estimate, and ${{\mathbf{Q}}_{k}}$ is the corresponding covariance matrix; ${{\mathbf{\hat{x}}}_{k}}$ is the only input of the Bayesian inference.
 
 \subsection{Workflow of displacement detection }  
 In the previous paragraphs, the displacement detection model using Bayesian inference is proposed, and the principle of relative real-time kinematic positioning is presented.
