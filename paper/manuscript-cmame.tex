@@ -1,0 +1,761 @@
+%% 
+%% Copyright 2007-2019 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%% SP 2008/03/01
+%%
+%% 
+%%
+%% $Id: elsarticle-template-num.tex 168 2019-02-25 07:15:41Z apu.v $
+%%
+%%
+\documentclass[final,3p,times]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
+
+\usepackage{moreverb,url}
+
+\usepackage[colorlinks,bookmarksopen,bookmarksnumbered,citecolor=red,urlcolor=red]{hyperref}
+
+
+\usepackage{bm}
+\usepackage{amsmath} 
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{threeparttable}  
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{lipsum}
+\usepackage{stfloats}
+\usepackage{graphicx}      % insert graphic
+\usepackage{subcaption}
+\usepackage{lineno}
+\linenumbers 
+
+\graphicspath{{./fig/}}
+
+\journal{Computer Methods in Applied Mechanics and Engineering}
+
+\begin{document}
+	
+	\begin{frontmatter}
+		
+		%% Title, authors and addresses
+		
+		%% use the tnoteref command within \title for footnotes;
+		%% use the tnotetext command for theassociated footnote;
+		%% use the fnref command within \author or \address for footnotes;
+		%% use the fntext command for theassociated footnote;
+		%% use the corref command within \author for corresponding author footnotes;
+		%% use the cortext command for theassociated footnote;
+		%% use the ead command for the email address,
+		%% and the form \ead[url] for the home page:
+		%\title{Title\tnoteref{label1}}
+		%% \tnotetext[label1]{}
+		%% \author{Name\corref{cor1}\fnref{label2}}
+		%% \ead{email address}
+		%% \ead[url]{home page}
+		%% \fntext[label2]{}
+		%% \cortext[cor1]{}
+		%% \address{Address\fnref{label3}}
+		%% \fntext[label3]{}
+		
+		\title{GNSS-based Displacement Detection Using Bayesian Inference for Deformation Monitoring}
+		
+		
+		%% use optional labels to link authors explicitly to addresses:
+		%% \author[label1,label2]{}
+		%% \address[label1]{}
+		%% \address[label2]{}
+	
+		\author[a]{Nan Shen}
+		\author[a]{Liang Chen\corref{mycorrespondingauthor}}
+		\cortext[mycorrespondingauthor]{Corresponding author}
+		\ead{l.chen@whu.edu.cn}
+		\author[a]{Ruizhi Chen}
+		\address[a]{State Key Laboratory of Information Engineering in Surveying, Mapping and Remote Sensing, Wuhan University, Wuhan 430000, PR China}
+		\begin{abstract}
+		For decades, displacement detection based on the Global navigation satellite system (GNSS) has increasingly been important for a wide range of applications, from landslide monitoring, subsidence survey, to industrial measurement. 
+		Most of the GNSS-based displacement detection methods in these applications are based on GNSS long-term static positioning results.
+		With the development of Internet of Things (IoT), high-precision GNSS positioning, and GNSS related transmission protocol, kinematic positioning results can be transmitted to the cloud in real-time.
+		However, due to the influence of measurement noise, it is still a challenge to identify and extract displacement from GNSS kinematic positioning results in a short time.
+		To resolve this, we propose a novel displacement detection approach with the purpose of identifying and extracting displacement from GNSS kinematic positioning.
+		Specifically, we use the Bayesian inference model to obtain the displacement change time from the coordinate time series of GNSS kinematic positioning. 
+		%The likelihood function of the observation and the prior distribution of the parameters to be estimated are provided.
+		%Finally, Bayesian inference was implemented by Markov Chain Monte Carlo (MCMC) sampling.
+		By investigating the posterior distribution of the designed change point parameter, we can identify the change points.
+		Furthermore, we derive the mean value from the posterior distribution of the mean parameter, and further obtain the displacement.
+		Results from simulation and field experiments have demonstrated the effectiveness and flexibility of the proposed method.
+		For significant displacement, it can be clearly identified; for small displacement, it can be identified by adding an interval constraint prior. The accuracy of up-displacement extraction from GNSS real-time kinematic positioning can reach within 2 mm in 15 minutes.		
+		\end{abstract}
+		
+		%%Graphical abstract
+		%\begin{graphicalabstract}
+		%%\includegraphics{grabs}
+		%\end{graphicalabstract}
+		
+		%%Research highlights
+		%\begin{highlights}
+		%\item Research highlight 1
+		%\item Research highlight 2
+		%\end{highlights}
+		
+		\begin{keyword}
+		GNSS, displacement detection, Bayesian inference, Markov Chain Monte Carlo, real-time kinematic positioning
+		\end{keyword}
+		
+	\end{frontmatter}
+	
+	%% \linenumbers
+	
+	%% main text
+	\section{Introduction}
+	
+	\label{intro}
+	%全球定位系统系统的应用-》位移探测
+	%在自然灾害监测，或者工业测量等领域，GNSS被用于位移探测。
+	%传统测量仪器的弊端，GNSS位移探测的优势。
+	%GNSS在位移探测中扮演的角色，以及位移探测的要求
+	%目前人们对于基于GNSS位移探测的研究更过的关注与如何提高定位的精度，而忽略了如何从GNSS获取的坐标序列中识别并提取位移。
+	In recent decades, the Global navigation satellite system (GNSS) has been widely used in surveying\cite{barry2011surveying}, civil aviation\cite{iatsouk2004development}, and autonomous vehicle\cite{kuutti2018survey} as a positioning method. 
+	Besides, as a displacement detection method in deformation monitoring, GNSS has been applied to landslide monitoring\cite{awange2012environmental}, subsidence survey\cite{bian2014monitoring}, industrial measurement\cite{pavasovic2011application}, and other fields. 
+	Compared with traditional displacement detection technology, GNSS-based displacement detection has many advantages, such as real-time, high precision, and weather independence\cite{shen2019a}. 
+	%随着物联网通信技术标准的制订和创新，高精度定位技术，例如RTK，PPP，以及GNSS传输协议NTRIP的发展，GNSS定位结果可以被实时传输到云端。
+	With the development of the Internet of things (IoT), GNSS high-precision positioning technology, and GNSS enhanced information transmission protocol, high-precision GNSS positioning results can be transmitted to the cloud in real-time\cite{mei2019survey}.
+	%Displacement detection involves displacement identification and extraction. 
+	GNSS-based displacement detection is generally performed by the time-domain difference of GNSS positioning results\cite{abidin2004use,rs12203375}. 
+	There are many researches on displacement detection based on GNSS, which can be divided into two categories.
+	
+	%位移探测算法回顾，
+	%传统位移探测的弊端
+	%位移探测的短板1,关注与定位算法，忽略探测算法2，关注与longterm忽略shortterm
+	%随着在线监测系统的普及，急需对于单历元动态监测数据进行分析处理，今早发现识别和确定位移。
+	The first category is about the research of measurement technology in GNSS-based displacement detection.
+	In order to evaluate the performance of single base station real time kinematic(RTK) and network real time kinematic(NRTK) in displacement detection, the data of different observation duration were compared\cite{wang2011gps}. The results showed that NRTK has advantages in accuracy and robustness.
+	A displacement monitoring system was designed to evaluate NRTK for displacement detection\cite{GUMUS2019131}. The results showed that NRTK can achieve an accuracy of 4.7mm and 7.9mm in the horizontal and vertical directions respectively.
+	In \cite{csanliouglu2016landslide} and \cite{lytvyn2012real}, the feasibility of displacement detection for landslides  using precise point position(PPP) has been studied. The results showed that PPP can be capable of detecting large landslides.
+	There are also some studies using the time-differenced carrier phases (TDCP) technique\cite{freda2015time,colosimo2011real} to obtain velocity estimates for displacement detection. This kind of method obtains displacement by integrating velocity, which is mainly used in displacement detection and extraction of large earthquakes.
+	In general, the above research mainly focuses on how to improve the positioning accuracy, and the research on how to identify and extract the displacement from the coordinate sequence obtained by GNSS is limited.
+	
+	In another category of GNSS-based displacement detection research, GNSS is only used as a static positioning method.
+	Gili et al.\cite{gili2000using} was one of the first landslide monitoring studies using GNSS technology, in which traditional measurement data were used as a comparison. 
+	The results showed that the accuracy of the Global positioning system (GPS) measurement over a period of 26 months was 12 to 16 mm in the horizontal plane and 18 to 24 mm in the elevation.
+	A prototype of a low-cost GNSS has been developed for deep-seated landslide monitoring\cite{rs12203375}. 
+	The results of a nine-month filed monitoring period provided a detailed insight into the spatial and temporal pattern of deep-seated landslide surface movements, in which the displacement was obtained by the direct difference between the coordinates of the start and end periods.
+	In addition, GNSS was also combined with synthetic aperture radar technology for displacement detection, in which long-term GNSS measurements were used as references\cite{atanasova2018ground,fuhrmann2015estimation}.
+	In these studies, the GNSS static positioning mode is usually adopted.
+	
+	%目前针对GNSS动态定位时间序列的位移识别和提取的研究还很少。目前研究都是基于长周期时间序列进行分析，对于动态定位结果分析的研究还是有限。
+	At present, there are few studies on displacement identification and extraction of GNSS kinematic positioning time series. In \cite{li2010deformation}, a multiple Kalman filters model was proposed for deformation detection in the GPS real-time series. Different filters in the model represent different displacement models, which need to be defined in advance. In addition, epoch by epoch displacement detection is easily affected by observation noise.
+	A modified real-time Chow test approach was proposed for fast deformation monitoring\cite{bellone2016real}. This kind of method based on statistical index is easily affected by observation noise, and is not suitable for small displacement detection\cite{pirotti2015micro}. Besides, Dabove and Manzino\cite{dabove2016fast} introduced a cluster-based method for dynamic deformation analysis, but this method did not perform well on real data.
+	
+	%本文拟采取的措施弥补这些短板
+	%Bayes的优势，并且调研一下前人是否尝试同样的方法干过这类事情
+	Previous studies provide an important information for the application of displacement detection based on GNSS, but most of them focus on the detection of long term displacement. 
+	Few studies have explored the use of GNSS kinematic positioning for short-term displacement detection. 
+	Although the displacement can be obtained directly by the difference of GNSS positioning coordinates, the identification and extraction of displacement are still challenging due to the influence of measurement errors.
+	At present, most of the displacement detection methods based on GNSS kinematic positioning are based on single epoch observations, which are easily affected by measurement noise and gross error.
+	
+	%引入本文的研究内容和贡献
+	The primary aim of this paper is to explore using the context data of change point from GNSS kinematic positioning for displacement detection. 
+	This study utilized Bayesian inference to identify and extract displacement, and the Markov Chain Monte Carlo (MCMC) technique is adopted to implement the Bayesian inference. 
+	Simulation and field experiments were carried out to verify the feasibility of the proposed method. 
+	The posterior sample distribution of parameters is used to analyze the reliability of displacement detection. 
+	The study presented here is one of the first investigations to utilize Bayesian inference for displacement detection based on GNSS kinematic positioning. 
+	The remaining part is as follows. Section \ref{method} shows the methodology used for this study, Section \ref{exp} presents the experimental results, the discussion is given in Section \ref{disc}, and finally, the conclusion is given in the last section.
+	
+	%引入文章结构
+	
+	\section{Methodology}
+	\label{method}
+	In this section, the Bayesian model of displacement detection and its implementation based on MCMC are presented first. Then the GNSS  real-time kinematic positioning model is introduced.
+	\subsection{Bayesian Model for Displacement Detection}
+	
+	
+	The displacement time series is described as $\left[ {{x_1},{x_2}, \cdots {x_m}} \right]$, and the corresponding time is denoted as $\left[ {{t_1},{t_2}, \cdots {t_m}} \right]$, where $m$ is the number of coordinate. The displacement occurrence time is expressed as $\left[ {{\tau _1},{\tau _2}, \cdots {\tau _n}} \right]$, which is a subset of $\left[ {{t_1},{t_2}, \cdots {t_m}} \right]$.  
+	The time corresponding to the $n$ change points satisfies the following relationship: $ {{\tau _1}<{\tau _2}<\cdots {\tau _{n-1}}<{\tau _n}} $.
+	The problem of displacement detection is to find out the time of displacement and estimate the displacement.
+	
+	\subsubsection{Bayesian Inference}
+	Bayesian inference is one of the most important skills in statistics, and deduces the posterior probability as the result of a priori probability and likelihood function\cite{robert2014machine}. Bayesian inference calculates the posterior probability according to the Bayesian theorem\cite{chen2009modulation,chen2013bayesian}
+	
+	\begin{equation}\label{eq_bayesian_inference}
+	P({\bf{\theta }}\left| {\bf{x}} \right.) = \frac{{P({\bf{\theta }})P({\bf{x}}\left| {\bf{\theta }} \right.)}}{{P({\bf{x}})}}
+	\end{equation}
+	where $\bf{\theta }$ is the parameter to be estimated and $\bf{x}$ is the observation; $P({\bf{\theta }}\left| {\bf{x}} \right.)$ denotes the posterior probability; $P({\bf{\theta }})$ represents a priori probability, which refers to the probability obtained from previous experience and analysis;
+	$P({\bf{x}}\left| {\bf{\theta }} \right.)$ is the likelihood function, which represents the probability of $x$ when a priori is established. ${P({\bf{x}})}$ is the total likelihood, which is a constant value.
+	
+	\subsubsection{Likelihood Function}
+	It is assumed that the displacement obtained by GNSS kinematic positioning obeys Gaussian normal distribution.  The displacement of each segment segmented by the change points obeys the Gaussian distribution of different mean and same variance, which is expressed as follows
+	
+	\begin{equation}\label{eq_ts_cps}
+	x \sim \left\{ {\begin{array}{*{20}{r}}
+		{N({\mu _0},\sigma ),}&{t < {\tau _1}}\\
+		{N({\mu _1},\sigma ),}&{{\tau _1} \le t < {\tau _2}}\\
+		\vdots &{}\\
+		{\begin{array}{*{20}{c}}
+			{N({\mu _{n-1}},\sigma ),}
+			\end{array}}&{{\tau _{n - 1}} \le t < {\tau _n}}\\
+		{N({\mu _{n}},\sigma ),}&{{\tau _n} \le t}
+		\end{array}} \right.
+	\end{equation}
+	where the $n$ change points divide the time series into $n+1$ segments, and the mean values of each segment are ${\mu _0},{\mu _1},\cdots,{\mu _n}$; $\sigma$ is the standard deviation of each normal distribution; Then the likelihood probability is expressed as follows
+	
+	\begin{equation}\label{eq_likelihood}
+	P({\bf{x}}\left| {\bf{\theta }} \right.) = P({\bf{x}}\left| {{\mu_0},{\mu_1},} \right. \cdots {\mu_n},{\tau _1},{\tau _2}, \cdots ,{\tau _n},\sigma )
+	\end{equation}
+	where ${\bf{\theta }}=({{\mu_0},{\mu_1},} \cdots {\mu_n},{\tau _1},{\tau _2}, \cdots ,{\tau _n},\sigma) $; Assuming that the displacement observations are independent of each other, the likelihood probability can be expressed as
+	\begin{equation}\label{eq_likelihoodfunc}
+	P({\bf{x}}\left| {\bf{\theta }} \right.) = \prod\limits_{x \le {\tau _1}} {P(x\left| {{\mu_0},\sigma } \right.)} \prod\limits_{i = 1}^{n - 1} {\prod\limits_{{\tau _i} \le x < {\tau _{i + 1}}} {P(x\left| {{\mu_i},\sigma } \right.)} \prod\limits_{{\tau _n} \le x} {P(x\left| {{\mu_n},\sigma } \right.)} }.
+	\end{equation}
+	Combine (\ref{eq_ts_cps}) and (\ref{eq_likelihoodfunc}) to get the likelihood function as follows
+	\begin{equation}\label{eq_likelihoodfunc_detail}
+	P({\bf{x}}\left| {\bf{\theta }} \right.) = \frac{1}{{{{(2\pi {\sigma ^2})}^{m/2}}}}\exp \left\{ {\frac{1}{{ - 2{\sigma ^2}}}\left[ {\sum\limits_{x < {\tau _1}} {{{(x - {\mu_0})}^2}} {\rm{ + }}\sum\limits_{i = 1}^{n - 1} {\sum\limits_{{\tau _i} \le x < {\tau _{i + 1}}} {{{(x - {\mu_i})}^2}} } {\rm{ + }}\sum\limits_{{\tau _n} \le x} {{{(x - {\mu_n})}^2}} } \right]} \right\}
+	\end{equation}
+	\subsubsection{Prior Distribution}
+	Assuming that the parameters ${\bf{\tau }}=(\tau_1,\tau_2,\cdots,\tau_n)$, ${\bf{\mu }}=(\mu_0,\mu_1,\cdots,\mu_n)$ and $\sigma$ are independent of each other, then:
+	
+	\begin{equation}\label{eq_bayesian_prior}
+	P({\bf{\theta }}) = P({\bf{\tau }},{\bf{\mu }},\sigma ) = P({\bf{\tau }})P({\bf{\mu }})P(\sigma )
+	\end{equation}
+	The prior distribution consists of three parts, including the prior distribution of change point, mean value and standard deviation. It is assumed that the standard deviation $\sigma$ obeys the Gaussian normal distribution and is expressed as follows
+	
+	\begin{equation}\label{eq_bayesian_prior_sigma}
+	\sigma  \sim N({\mu _\sigma },{\sigma _\sigma })
+	\end{equation}
+	where $\mu_{\sigma}$ and $\sigma_{\sigma}$ are determined according to the noise level of GNSS positioning.
+	For the mean value of the segments divided by the change point, it is assumed to obey the continuous uniform distribution, that is
+	
+	\begin{equation}\label{eq_bayesian_prior_mu}
+	{\mu _i} \sim U({\mu_l },{\mu_u })(i = 0,1, \cdots ,n)
+	\end{equation}
+	where $\mu_l$ and $\mu_u$ represent the lower limit and  upper limit of the uniform distribution, which are determined by the mean value of the coordinate time series and the possible range of variation. Assuming that the mean values of each segment are independent of each other, then
+	
+	\begin{equation}\label{eq_bayesian_prior_mu_sum}
+	P({\bf{\mu }}) = \prod\limits_{i = 0}^n {P({\mu _i})}
+	\end{equation}
+	For the change point ${\bf{\tau }}$, we only know that it is a subset of the corresponding time series.
+	It is assumed to obey the discrete uniform distribution. However, it should be noted that the lower limit of the distribution of the $i$th change point is determined by the $(i-1)$th change point, that is
+	
+	\begin{equation}\label{eq_bayesian_prior_tau_basic}
+	P({\tau _i}\left| {{\tau _{i - 1}}} \right.) = \left\{ {\begin{array}{*{20}{r}}
+		{DiscreteU({t_1},{t_m}),}&{i = 1}\\
+		{DiscreteU({\tau _{i - 1}},{t_m}),}&{1 < i \le n}
+		\end{array}} \right.
+	\end{equation}
+	The joint probability of all change points is expressed as
+	
+	\begin{equation}\label{eq_bayesian_prior_tau_1}
+	P({\bf{\tau }}) = P({\tau _1},{\tau _2}, \cdots ,{\tau _{n - 1}},{\tau _n})
+	\end{equation}
+	According to the conditional probability at the change point ${\tau _1}$, the joint probability is expanded as
+	
+	\begin{equation}\label{eq_bayesian_prior_tau_2}
+	P({\bf{\tau }}) = P({\tau _n},{\tau _{n - 1}}, \cdots ,{\tau _2}\left| {{\tau _1}} \right.)P({\tau _1})
+	\end{equation}
+	Further conditionally expand at the change point ${\tau _2}$ to get
+	
+	\begin{equation}\label{eq_bayesian_prior_tau_3}
+	P({\bf{\tau }}) = P({\tau _n},{\tau _{n - 1}}, \cdots ,{\tau _3}\left| {{\tau _2},{\tau _1}} \right.)P(\left. {{\tau _2}} \right|{\tau _1})P({\tau _1})
+	\end{equation}
+	Since the conditional probability $P({\tau _n},{\tau _{n - 1}}, \cdots ,{\tau _3}\left| {{\tau _2},{\tau _1}} \right.)$ is directly determined by ${\tau _2}$, it has no direct relationship with ${\tau _1}$. So the above formula is reduced to
+	
+	\begin{equation}\label{eq_bayesian_prior_tau_4}
+	P({\bf{\tau }}) = P({\tau _n},{\tau _{n - 1}}, \cdots ,{\tau _3}\left| {{\tau _2}} \right.)P(\left. {{\tau _2}} \right|{\tau _1})P({\tau _1})
+	\end{equation}
+	Continue to expand in a similar way, and finally get
+	
+	\begin{equation}\label{eq_bayesian_prior_tau_5}
+	P({\bf{\tau }}) = P({\tau _n}\left| {{\tau _{n - 1}}} \right.) \cdots P({\tau _3}\left| {{\tau _2}} \right.)P(\left. {{\tau _2}} \right|{\tau _1})P({\tau _1})
+	\end{equation}
+	Through (\ref{eq_bayesian_prior_tau_basic}) and (\ref{eq_bayesian_prior_tau_5}), the joint probability of all change points can be determined. Finally, the prior distribution of parameter ${\bf{\theta }}$ can be determined by formula (\ref{eq_bayesian_prior}), (\ref{eq_bayesian_prior_sigma}), (\ref{eq_bayesian_prior_mu_sum}), (\ref{eq_bayesian_prior_tau_5}).  After the Bayesian model of displacement detection is given, MCMC, one of the implementation methods of Bayesian inference, is introduced.
+	
+	\subsubsection{Markov Chain Monte Carlo (MCMC)}
+	The posterior distribution of the parameters depends on the prior distribution and the likelihood function. Obtaining the posterior probability of parameters by direct integration or sum requires a lot of operations, which is difficult to achieve\cite{robert2013monte}. In this work, the Markov chain Monte Carlo technique is used to approximate the integral or sum value. Monte Carlo sampling is to construct the integral or sum function as the expectation under a certain distribution, and then approximate the expectation by the corresponding average value\cite{goodfellow2016deep}.
+	
+	\begin{equation}\label{eq_monte_carlo_1}
+	s =\sum\limits_x g(x)= \sum\limits_x {p(x)f(x) = {E_p}[f(x)]}
+	\end{equation}
+	\begin{equation}\label{eq_monte_carlo_2}
+	s =\int {g(x)dx}= \int {p(x)f(x)dx}  = {E_p}[f(x)]
+	\end{equation}
+	where $g(x)$ is the function to be integrated or summated; $p(x)$ is the probability distribution or probability density function of $x$. The integral or summation problem of $g(x)$ is transformed into the mathematical expectation problem of $f(x)$ under the distribution $p(x)$. This mathematical expectation can be approximated by sampling from $p(x)$\cite{goodfellow2016deep}.
+	
+	\begin{equation}\label{eq_monte_carlo_3}
+	\hat s = \frac{1}{n}\sum\limits_{i = 1}^n {f({x_i})}
+	\end{equation}
+	where $x_i$ is the sample with the distribution of $p(x)$. As can be seen from the above, Monte Carlo method as a general sampling simulation sum or integration method, depends on sampling from the distribution of $p(x)$. However, it is not easy to directly sample from the target distribution of $p(x)$. At present, the most popular solution is to use Markov chain Monte Carlo sampling, which provides a general way to construct a sequence that converges to the target distribution. According to Markov chain, the probability of state transition at a certain time only depends on its previous state, which is expressed as follows\cite{robert2013monte}
+	
+	\begin{equation}\label{eq_markov_chain_1}
+	P({x_{n + 1}}\left| {{x_n},{x_{n - 1}}} \right.,{x_{n - 2}}, \cdots ,{x_2},{x_1}) = P({x_{n + 1}}\left| {{x_n}} \right.)
+	\end{equation}
+	If a Markov process is neither periodic nor irreducible, then the Markov process is ergodic, that is, each state appears with a certain probability. The Markov process of ergodic states has an important property: no matter what the initial state probability is, the Markov process of the ergodic state tends to be a stable distribution after enough state transitions\cite{robert2013monte}.
+	That is, for the initial probability distribution is $\pi_0(x)$, the probability distribution after several rounds of state transition is as follows
+	
+	\begin{equation}\label{eq_markov_chain_2}
+	\pi_{0}(x),\pi_{1}(x),\pi_{2}(x),\cdots \pi_{n}(x),\pi_{n+1}(x),\pi_{n+2}(x)\cdots
+	\end{equation}
+	There exists $n$ which satisfies the following conditions
+	
+	\begin{equation}\label{eq_markov_chain_3}
+	\pi_{n}(x)=\pi_{n+1}(x)=\pi_{n+2}(x)\cdots
+	\end{equation}
+	This is the target distribution we want to construct. Based on the initial arbitrary simple probability distribution such as Gaussian distribution $\pi_{0}(x)$, the state value $x_0$ is obtained by sampling. Based on the probability distribution $\pi_{1}(x)=\pi_{0}(x)P(x\left| {{x_0}} \right.)$ sampling state value $x_1$, using the same method, execute $n$ times. Sample $(x_{n},x_{n+1},x_{n+2}\cdots)$ is the corresponding sample set of the target distribution. However, the implementation of MCMC also needs to consider other factors such as constructing the state transition matrix according to the target distribution\cite{robert2013monte}, which is beyond the scope of this work. Two implementations of MCMC,  the Metropolis-Hasting sampler\cite{chib1995understanding} and the No-U-Turn sampler\cite{hoffman2014no}, are used to sample discrete random variables and continuous random variables, respectively. Next, the data source of the proposed method: GNSS real-time kinematic positioning is introduced.
+	
+	\subsection{Relative Real-time Kinematic (RTK)}
+	There are many real-time kinematic positioning models, among which RTK is the most widely used model in deformation monitoring.
+	Kalman filter is used in the implementation of  RTK, and the observation model, the state model, and the extended Kalman filtering process of RTK are introduced below. 
+	\subsubsection{Observation Model}
+	The double-difference(DD) observation model is usually used in RTK, and its definition is as follows\cite{teunissen2017springer}.
+	\begin{equation}
+	\left. \begin{array}{l}
+	\Delta \nabla P_{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} - \Delta \nabla I_{\Phi {i_{br}}}^{jk} + \Delta \nabla  T_{br}^{jk} + \Delta \nabla  M_{{P_{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{P_{{i_{br}}}}}^{jk}\\
+	\Delta \nabla \Phi _{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} + \Delta \nabla I_{{\Phi _{{i_{br}}}}}^{jk} + \Delta \nabla T_{br}^{jk} - {\lambda _i}\Delta \nabla N_{{i_{br}}}^{jk} + \Delta \nabla  M_{{\Phi _{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{\Phi _{{i_{br}}}}}^{jk}
+	\end{array} \right\}
+	\label{eq_dd_obs}
+	\end{equation}
+	In this observation equation, $\Delta \nabla $ denotes the DD operator, $i$ denotes the frequency; $b$ and $r$ denote base station and rover station respectively; $j$ and $k$ represent the satellites;
+	$\Delta \nabla P_{{{i}_{br}}}^{jk}$ and $\Delta \nabla \Phi _{{{i}_{br}}}^{jk}$ denote pseudo-range and carrier-phase DD observations, respectively; 
+	$\Delta \nabla \rho _{br}^{jk}$ is the DD geometric distance between receivers and satellites; 
+	$\Delta \nabla  M_{{{P}_{{{i}_{br}}}}}^{jk}$ and $\Delta \nabla  M_{{{\Phi }_{{{i}_{br}}}}}^{jk}$ denote pseudo-range and carrier-phase multipath error, respectively; 
+	$\Delta \nabla \varepsilon _{{{P}_{{{i}_{br}}}}}^{jk}$ and $\Delta \nabla \varepsilon _{{{\Phi }_{{{i}_{br}}}}}^{jk}$ represent DD measurement noise of pseudo-range and carrier-phase, respectively; 
+	$\Delta \nabla  I_{\Phi {{i}_{br}}}^{jk}$is the DD ionospheric delay between receivers and satellites, and the ionospheric error has the same absolute value but the opposite sign on pseudo-range and carrier-phase observations\cite{teunissen2017springer}; $\Delta \nabla T_{br}^{jk}$is the DD tropospheric delay between receivers and satellites. 
+	For the short baseline, the atmospheric error can be ignored, so the above DD observation equation is simplified as
+	\begin{equation}
+	\left. \begin{array}{l}
+	\Delta \nabla P_{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} + \Delta \nabla  M_{{P_{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{P_{{i_{br}}}}}^{jk}\\
+	\Delta \nabla \Phi _{{i_{br}}}^{jk} = \Delta \nabla \rho _{br}^{jk} - {\lambda _i}\Delta \nabla N_{{i_{br}}}^{jk} + \Delta \nabla  M_{{\Phi _{{i_{br}}}}}^{jk} + \Delta \nabla \varepsilon _{{\Phi _{{i_{br}}}}}^{jk}\end{array} \right\}
+	\label{eq_dd_obs_simplified}
+	\end{equation}
+	Ignoring the influence of multipath, the linearization form of formula (\ref{eq_dd_obs_simplified}) is expressed as
+	\begin{equation}
+	\label{eq_rtk_measure}
+	{\bf{y}} = {\bf{Hx}} + {\bf{\varepsilon }}
+	\end{equation}
+	where $\bf{y}$ is the observation minus the computed,  $\bf{H} $ is the linearized design matrix\cite{hofmann-wellenhof2007gnss}, $\bf{x}\triangleq {{[{{\mathbf{r}}_{r}},\Delta \nabla \mathbf{N}]}^{T}}$, is the state vector, which contains the rover station coordinate ${{\mathbf{r}}_{r}}$ and the DD integer ambiguity $\Delta \nabla \mathbf{N}$;  $\mathbf{\varepsilon } $ is the observation noise, and its covariance matrix is expressed as  ${{\mathbf{R}}_{\varepsilon }} $. 
+	
+	After forming the observation equation, the ‘float’ solution of the parameter can be obtained by the standard least square method. 
+	The 'float' solution and variance of integer ambiguity are expressed as  $\Delta \nabla \mathbf{\tilde{N}} $,  ${{\mathbf{Q}}_{\Delta \nabla \mathbf{\tilde{N}}}} $, respectively. 
+	To obtain high precision positioning results, it is necessary to fix the integer ambiguity. 
+	The problem of ambiguity fixing can be described as\cite{teunissen1995the}.
+	\begin{equation}
+	\Delta \nabla {\bf{\hat N}} = \mathop {\arg min}\limits_{\Delta \nabla {\bf{N}} \in {\bf{Z}}} ((\Delta \nabla {\bf{N}} - \Delta  {\bf{\tilde N}}){\bf{Q}}_{\Delta \nabla {\bf{\tilde N}}}^{ - 1}{(\Delta \nabla {\bf{N}} - \Delta \nabla {\bf{\tilde N}})^T})
+	\label{eq_lamda}
+	\end{equation}
+	There are many methods referring to integer ambiguity resolution, among which LAMBDA (Least-squares Ambiguity Decorrelation Adjustment)\cite{teunissen1995the} method is the most widely used one. The integer ambiguity is obtained by the integer least square method. Then, the test process is executed to determine whether to accept or reject the integer ambiguity\cite{teunissen2003integer,teunissen2005gnss}. If the test is passed, the fixed integer ambiguity can be substituted into (\ref{eq_rtk_measure}) to resolve the fixed solution, otherwise, the ‘float’ solution will be maintained.
+	
+	\subsubsection{State Model}
+	The state model is defined as follows (Takasu 2013)
+	\begin{equation}
+	{{\bf{x}}_k} = {\bf{F}}{{\bf{x}}_{k - 1}} + {\bf{w}}
+	\end{equation}
+	where ${\bf{F}} \buildrel \Delta \over = \left[ {\begin{array}{*{20}{c}}
+		{{{\bf{I}}_{3 \times 3}}}&{\bf{0}}\\
+		{\bf{0}}&{{{\bf{I}}_{(2n - 2)(2n - 2)}}}
+		\end{array}} \right]$ , is the transition matrix from $k-1$ to $k$; $\mathbf{I}$ denotes the identity matrix; $n$ represents the number of satellites observed simultaneously by the base station and the rover station; 
+	Only GPS ${{L}_{1}}$ and ${{L}_{2}}$ frequency observations are considered, so $2n-2$ DD ambiguities are formed. 
+	$\mathbf{w}$ is the process noise, and its covariance matrix is expressed as ${{\mathbf{G}}_{w}}$. 
+	For kinematic positioning, the coordinate covariance component is set to be large to capture dynamic features, while the ambiguity covariance component is set to $\mathbf{0}$ to ensure the stability of positioning.
+	\subsubsection{Extended Kalman filtering}
+	Kalman filtering includes two processes: prediction update and measurement update\cite{grewal2001kalman}. The prediction process is as follows:
+	\begin{equation}
+	{{\bf{\hat x}}_{k|k - 1}} = {\bf{F}}{{\bf{\hat x}}_{k - 1}}
+	\end{equation}
+	\begin{equation}
+	{{\bf{Q}}_{k|k - 1}} = {\bf{F}}{{\bf{Q}}_{k - 1}}{{\bf{F}}^T} + {{\bf{G}}_w}(k)
+	\end{equation}
+	where ${\bf{\hat x}}_{k|k - 1}$ is the predicted value and ${\bf{Q}}_{k|k - 1}$ is the corresponding covariance. According to the definition of the state transition matrix above, it can be seen that the state value of the previous epoch remains unchanged. However, the coordinate covariance component becomes larger, while the ambiguity covariance component remains unchanged. The measurement update process is as follows:
+	\begin{equation}
+	{{\bf{v}}_k} = {\bf{y}}(k) - {\bf{H}}_k{{\bf{\hat x}}_{k|k - 1}}
+	\end{equation}
+	\begin{equation}
+	{{\bf{S}}_k} = {\bf{H}}_k{{\bf{Q}}_{k|k - 1}}{\bf{H}}{_k^{\rm{T}}} + {{\bf{R}}_\varepsilon }(k)
+	\end{equation}
+	\begin{equation}
+	{\bf{K}} = {{\bf{Q}}_{k|k - 1}}{\bf{H}}_k^T{\bf{S}}_k^{ - 1}
+	\end{equation}
+	where ${{\mathbf{v}}_{k}}$ denotes the innovation vector, and ${{\mathbf{S}}_{k}}$ is the covariance matrix of the innovation vector; $\mathbf{K}$ is the state estimation gain matrix. The final state is estimated as follows:
+	\begin{equation}
+	{{\bf{\hat x}}_k} = {{\bf{\hat x}}_{k|k - 1}} + {\bf{K}}{{\bf{v}}_k}
+	\end{equation}
+	\begin{equation}
+	{{\bf{Q}}_k} = {{\bf{Q}}_{k|k - 1}} - {\bf{K}}{{\bf{S}}_k}{{\bf{K}}^T}
+	\end{equation}
+	where ${{\mathbf{\hat{x}}}_{k}}$ is the final estimate, and ${{\mathbf{Q}}_{k}}$ is the corresponding covariance matrix; ${{\mathbf{\hat{x}}}_{k}}$ is the only input of the Bayesian inference.
+	
+	\subsection{Workflow of displacement detection }  
+	In the previous paragraphs, the displacement detection model using Bayesian inference is proposed, and the principle of relative real-time kinematic positioning is presented.
+	The workflow of the GNSS-based displacement detection using Bayesian inference is shown in Fig. \ref{fig_v_workflow}.
+	\begin{figure*}[htpb]
+		\centering
+		\includegraphics[scale=0.45]{v_workflow}
+		\caption{Bayesian model for displacement detection.}
+		\label{fig_v_workflow}
+	\end{figure*} 
+	
+	As shown in Fig. \ref{fig_v_workflow}, to begin this process, the kinematic positioning is carried out to obtain the coordinates time series to form the data source of Bayesian inference. 
+	Before the displacement detection,  the posterior samples of model parameters are obtained by Bayesian inference based on the MCMC sampling.
+	After obtaining the posterior sample distribution of the parameters, the displacement identification is achieved by the posterior sample distribution of the change points.
+	On getting the change points, the displacement is extracted by the posterior sample distribution of  the 'mean' parameters.
+	Finally, according to the analysis of the posterior samples, the original Bayesian model is optimized as needed.
+	The middle of Fig. \ref{fig_v_workflow} is a graphical description of the Bayesian model of displacement detection and its implementation described above.
+	
+	\section{Experiments and Results}
+	\label{exp}
+	To verify the feasibility of the proposed method, we carried out a series of experiments, including simulation and field experiments. 
+	In the simulation experiment, the data is composed of designed displacement and noise.
+	In the field experiment, the displacement is controlled manually by the  the self-built displacement control platform.
+	
+	\subsection{Simulation Experiment}
+	In the experiment, we only simulate the up coordinate component, in which Gaussian white noise with the mean of 0 mm and the standard deviation of 30 mm is added.
+	At 1000 s, 2500 s, and 3200 s, the displacements of -50 mm, -50 mm, and 100 mm are added, respectively. 
+	The simulation results are shown in Fig. \ref{fig_v_sim_simple_gauss_ts}.
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.45]{v_sim_simple_gauss_ts}
+		\caption{Simulation data with multiple displacement change points.}
+		\label{fig_v_sim_simple_gauss_ts}
+	\end{figure} 
+	As shown in Fig. \ref{fig_v_sim_simple_gauss_ts}, the whole time series is divided into four segments by three displacement change points. 
+	Using the model designed above, Bayesian inference is implemented by the MCMC sampling. 
+	The posterior sample distribution of $\bf{\tau}$ is shown in Fig. \ref{fig_v_tau_sim_simple}.
+	
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.45]{v_tau_sim_simple}
+		\caption{Posterior sample distribution of $\tau$ in the simulation experiment.}
+		\label{fig_v_tau_sim_simple}
+	\end{figure} 
+	As can be seen from Fig. \ref{fig_v_tau_sim_simple}, all the designed displacement change points are identified. 
+	$\tau_3$ is the easiest to be identified, mainly due to the largest displacement amplitude. 
+	Since the displacement amplitude at $\tau_2$ is small and there are fewer sample points on the right side, the estimated accuracy is worse than the other two change points.
+	The histogram of the posterior sample of $\bf{\mu}$ is shown in Fig. \ref{fig_v_mu_sim_simple}.
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.45]{v_mu_sim_simple}
+		\caption{Histogram of posterior estimation of $\mu$ in the simulation experiment.}
+		\label{fig_v_mu_sim_simple}
+	\end{figure} 
+	The blue curve in Fig. \ref{fig_v_mu_sim_simple} is the fitting result of Gaussian distribution of the histogram.
+	Although we assume that the prior distribution of $\bf{\mu}$ in the model obeys a uniform distribution, the posterior sample approximately obeys normal distribution. 
+	The vertical green dashed line in Fig. \ref{fig_v_mu_sim_simple} represents the mean value of posterior samples, and the mean values of the four segments are 1.17 mm, -49.58 mm, -98.9 mm, and -3.65 mm.
+	Among these means, $\mu_2$ has the highest accuracy, and its corresponding posterior sample coverage is the narrowest. 
+	The estimation accuracy of $\mu_4$ is the lowest, and the corresponding posterior sample coverage is the widest. 
+	These are mainly due to the fact that the most observation samples are used for $\mu_2$ estimation, while the least observation samples are used for $\mu_4$ estimation. 
+	As shown in Fig. \ref{fig_v_sigma_sim_simple}, $\sigma$ is also accurately estimated.
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.45]{v_sigma_sim_simple}
+		\caption{Histogram of posterior sample of $\sigma$ in the simulation experiment.}
+		\label{fig_v_sigma_sim_simple}
+	\end{figure} 
+	\subsection{Field Experiments}
+	The experiments were carried out on the roof of a building on the campus of Wuhan University, and the equipment deployment is shown in Fig. \ref{fig_v_field_exp_config}. 
+	A hard plank was pressed with large stones to ensure that the plank remains as fixed as possible during moving the object hanging on the plank. 
+	One receiver antenna was fixed on the plank as a rover, and the other receiver antenna was installed on a tripod beside it as the base station. 
+	Both antennas were connected to BD992 OEM boards on the table, and the OEM boards were connected to the laptops for data collection. 
+	As shown in subgraphs (c) and (d), the height of the antenna was measured with a tape before and after each movement of the object hanging on the plank. 
+	Five readings were taken for each measurement to ensure data reliability.
+	Besides, markers are made on the ground and on the antenna respectively to ensure that the same position was referenced for each measurement. 
+	The sampling frequency of the GNSS receiver is set to 1 Hz. 
+	We did two experiments, each lasting nearly 45 minutes. 
+	During the experiment, the object hanging on the board was manually moved several times.
+	The displacement amplitude of the second experiment is smaller than that of the first experiment.
+	The GNSS observation data collected above are processed by the open-source software RTKLIB\cite{takasu2011rtklib}. 
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.5]{v_field_exp_config}
+		\caption{Filed experiment configuration. (a) Overview; (b) Working platform; (c) Displacement control platform; (d) Displacement measurement by tape. }
+		\label{fig_v_field_exp_config}
+	\end{figure} 
+	
+	\subsubsection{Field Experiment 1}
+	GNSS observations were processed epoch by epoch by using RTK mode, and the corresponding coordinate output was the only input of the proposed displacement detection method.
+	The results of RTK positioning are shown in Fig. \ref{fig_v_bd9_3_up_tau}.
+	Only the vertical displacement was triggered in the experiment, so only the up coordinate component is displayed. 
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.45]{v_bd9_3_up_ts}
+		\caption{The up component of coordinates obtained by RTK positioning in field experiment 1.}
+		\label{fig_v_bd9_3_up_ts}
+	\end{figure} 
+	
+	For such a short baseline, most of the errors can be eliminated by the double-difference observation. 
+	As can be seen from Fig. \ref{fig_v_bd9_3_up_ts}, there are still some unmodeled errors, such as the multipath error that have not been eliminated. 
+	The RTK positioning results are processed by the proposed method, and Bayesian inference is implemented by the MCMC sampling. 
+	The histogram of the posterior sample of $\tau$ is shown in Fig. \ref{fig_v_bd9_3_up_tau}.
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.45]{v_bd9_3_up_tau}
+		\caption{Posterior sample distribution of $\tau$ in field experiment 1.}
+		\label{fig_v_bd9_3_up_tau}
+	\end{figure} 
+	From the posterior sample distribution of $\tau_2$ in Fig. \ref{fig_v_bd9_3_up_tau}, one of the change points can be identified as 1897 s. 
+	According to the maximum value in the bar chart of the posterior sample of $\tau_1$, the change point is identified as 781 s.
+	However, as can be seen from Fig. \ref{fig_v_bd9_3_up_tau}, there are two peaks in the posterior sample distribution of change point $\tau_1$.
+	The main reason is that the displacement control device is not completely controllable, and the plank floats up and down when moving the object. 
+	In addition, since the antenna is close to the ground, the antenna vibration caused by breeze or touch causes an increase in the multipath phase rate or fading frequency\cite{kelly2003characterization}. 
+	The posterior sample histogram of the $\mu$ of each segment divided by the change point and the displacement measured by the tape are shown in Fig. \ref{fig_v_bd9_3_up_mu} and Table \ref{tab_measured_height_9_3}, respectively.
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.45]{v_bd9_3_up_mu}
+		\caption{Histogram of posterior sample of $\mu$ in field experiment 1.}
+		\label{fig_v_bd9_3_up_mu}
+	\end{figure} 
+	\begin{table}[htbp]
+		\centering
+		%	\fontsize{6.5}{8}\selectfont
+		\begin{threeparttable}
+			\caption{Measured height before and after each movement of the object hanging on the plank in field experiment 1, unit (mm).}
+			\label{tab_measured_height_9_3}
+			\begin{tabular}{ccccccccc}
+				\toprule
+				&&&\textbf{1}&\textbf{2}&\textbf{3}&\textbf{4}&\textbf{5}&\textbf{mean}\cr
+				\midrule
+				\multirow{3}*{Step 1} 
+				& & ${h_0}$    &371.0&370.9&370.9&371.1&370.9&370.96\\
+				& & ${h_1}$    &341.0&341.1&341.5&341.9&341.0&341.30\\
+				& & $\Delta h$ & -30.0& -29.8& -29.4& -29.2& -29.9&-29.66\\
+				\hline
+				\multirow{3}*{Step 2} 
+				& & ${h_0}$    &340.5&340.1&340.0&340.0&340.1&340.14\\
+				& & ${h_1}$    &313.0&312.9&312.9&313.0&313.0&312.96\\
+				& & $\Delta h$ &-27.5& -27.2& -27.1& -27.0& -27.1& -27.18\\
+				\bottomrule
+			\end{tabular}
+		\end{threeparttable}
+	\end{table}
+	The $\mu_0$, $\mu_1$, and $\mu_2$ obtained by the mean of the posterior samples are -1446.03 mm, -1474.11 mm, and -1489.83 mm, respectively, and the two displacements obtained by the difference of these mean values are -28.08 mm, -15.72 mm, respectively. The two displacements measured by tape are -29.66 mm and -27.18 mm respectively. 
+	To our surprise, the displacement difference between the two methods at the two change points is 1.58 mm and 11.46 mm, respectively. 
+	The main reason is that the displacement control device is not fully controllable. 
+	It can be seen from Fig. \ref{fig_v_bd9_3_up_ts} that before the second displacement change, the plank appears obvious floating when measuring with the tape. 
+	As shown in Fig. \ref{fig_v_bd9_3_up_sigma}, the estimated value of $\sigma$ is 12.58 mm through the posterior sample mean of $\sigma$.
+	%我们发现此处变点后验样本中的两个峰值对于均值和标准差中没有出现。
+	%主要原因是变点的峰值距离很近，对于划分的段没有很明显的影响，因此对后验均值和标准差的浮动没有很大影响。
+	%而在现实中，这种情况是会发生的，例如滑坡或者沉降，整个位移变化过程需要一定的时间，存在多个变化点。
+	%然而，我们可能更加关注主要变化点，后面通过加入额外先验来提升主要变化点的识别，弱化次要变化点。
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.45]{v_bd9_3_up_sigma}
+		\caption{Histogram of posterior sample of $\sigma$ in field experiment 1.}
+		\label{fig_v_bd9_3_up_sigma}
+	\end{figure} 
+	Different from the posterior sample distribution of $\tau$, there is only one peak value in the posterior sample distribution of $\mu$ and $\sigma$.
+	The main reason is that the interval of the two peaks is very close, which has little influence on the posterior mean and standard deviation.
+	In reality, multiple change points exist, such as multiple displacements in a short period of time in the process of landslide or settlement.
+	However, more attention is paid to the primary change points.
+	By adding a prior to the model to improve the identification of the primary change points, and weaken the influence of secondary change points will be discussed later.
+	
+	\subsubsection{Field Experiment 2}
+	This experiment is similar to the previous one except that the displacement amplitude is smaller. 
+	The coordinate time series is obtained by RTKLIB with the same processing strategy as the previous experiment, and the up component of the time series is shown in Fig. \ref{fig_v_bd9_4_up_ts}. 
+	In this experiment, the displacement measured by tape is shown in Table \ref{tab_measured_height_9_4}.
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.45]{v_bd9_4_up_ts}
+		\caption{The up component of coordinates obtained by RTK positioning in field experiment 2.}
+		\label{fig_v_bd9_4_up_ts}
+	\end{figure} 
+	\begin{table}[h!t]
+		\centering
+		%	\fontsize{6.5}{8}\selectfont
+		\begin{threeparttable}
+			\caption{Measured height before and after each movement of the object hanging on the plank in field experiment 2, unit (mm).}
+			\label{tab_measured_height_9_4}
+			\begin{tabular}{ccccccccc}
+				\toprule
+				&&&\textbf{1}&\textbf{2}&\textbf{3}&\textbf{4}&\textbf{5}&\textbf{mean}\cr
+				\midrule              
+				\multirow{3}*{Step 1}
+				& & ${h_0}$    &347.5&	347.3&	347.6&	347.5&	347.4&	347.5\\
+				& & ${h_1}$    &326.1&	326.3&	326.1&	326.0&	326.1&	326.1\\
+				& & $\Delta h$ &-21.4&	-21.0&	-21.5&	-21.5&	-21.3&	-21.3\\
+				\hline               
+				\multirow{3}*{Step 2}
+				& & ${h_
+					0}$    &325.0&	325.1&	324.9&	325.0&	325.2&	325.0\\
+				& & ${h_1}$    &305.5&	305.3&	305.4&	305.5&	305.6&	305.5\\
+				& & $\Delta h$ &-19.5&	-19.8&	-19.5&	-19.5&	-19.6&	-19.6\\
+				\bottomrule
+			\end{tabular}
+		\end{threeparttable}
+	\end{table}
+	As can be seen from Fig. \ref{fig_v_bd9_4_up_ts} and Table \ref{tab_measured_height_9_4}, the amplitude of the two displacements is smaller than that of the previous experiment. 
+	The time series are processed by the proposed method, and Bayesian inference is implemented by the MCMC sampling. The results are shown in Fig. \ref{fig_v_bd9_4_up_tau}, \ref{fig_v_bd9_4_up_mu}, and \ref{fig_v_bd9_4_up_sigma}.
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.45]{v_bd9_4_up_tau}
+		\caption{Posterior sample distribution of $\tau$ in field experiment 2.}
+		\label{fig_v_bd9_4_up_tau}
+	\end{figure} 
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.45]{v_bd9_4_up_mu}
+		\caption{Histogram of posterior sample of $\mu$ in field experiment 2.}
+		\label{fig_v_bd9_4_up_mu}
+	\end{figure} 
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.45]{v_bd9_4_up_sigma}
+		\caption{Histogram of posterior sample of $\sigma$ in field experiment 2.}
+		\label{fig_v_bd9_4_up_sigma}
+	\end{figure}
+	Due to the decrease of displacement amplitude, the results are not as good as the previous experimental results. 
+	It can be seen from Fig. \ref{fig_v_bd9_4_up_tau} that there are two peaks in the posterior sample distribution of $\tau_1$. Unlike Fig. \ref{fig_v_bd9_3_up_tau} of the previous experimental results, the two peaks are far away from each other, exceeding 500 s. 
+	Accordingly, there are two peaks in the posterior sample distribution of $\mu_0$, $\mu_1$ and $\sigma$. 
+	In addition, we found that the second peak of $\tau_1$ is very close to the peak of $\tau_2$, which is not what we want because we do not want to get very short segments. 
+	In the next section, we will discuss adding a prior to the model to improve the performance of Bayesian inference.
+	\section{Discussion}
+	\label{disc}
+	In field experiment 1, there are two significant peaks in the posterior sample distribution at the same change point. 
+	In addition, in field experiment 2, the posterior distribution interval of two different change points is close.
+	Here, the interval between adjacent change points is constrained by adding a prior. 
+	A random variable $d\tau$, the distance between continuous change points, is added, which obeys the  discrete uniform distribution.
+	
+	\begin{equation}\label{eq_bayesian_prior_d_tau}
+	P(d\tau_{i})=DiscreteU(\tau_{i} + d,\tau_{i+1})
+	\end{equation}
+	where $d$ is the shortest time interval to be constrained. The new Bayesian probability model with the prior is shown in Fig. \ref{fig_v_simple_p_model_add_new_rule}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.45]{v_simple_p_model_add_new_rule}
+		\caption{Bayesian model for displacement detection with an interval constraint prior.}
+		\label{fig_v_simple_p_model_add_new_rule}
+	\end{figure} 
+	As shown in (\ref{eq_bayesian_prior_d_tau}) and Fig. \ref{fig_v_simple_p_model_add_new_rule}, the prior distribution of newly added random variables depends on the change points and the constraint interval. 
+	In the following data processing, the interval $d$ is set to 300.
+	The data in field experiment 1 is reprocessed with the new Bayesian model, and the posterior distribution of $\tau$ is shown in Fig. \ref{fig_v_bd9_3_up_tau_add_new_rule}.
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.45]{v_bd9_3_up_tau_add_new_rule}
+		\caption{Posterior sample distribution of $\tau$ in field experiment 1 with an interval constraint prior.}
+		\label{fig_v_bd9_3_up_tau_add_new_rule}
+	\end{figure} 
+	
+	%从图16和图14的对比中可以看出，图14中t1次峰值得到了有效抑制，更加有利于主要变化点的识别。
+	%此外，t2以及均值和方差的的后验分布没有明显变化。
+	From the comparison between Fig. \ref{fig_v_bd9_3_up_tau_add_new_rule} and Fig. \ref{fig_v_bd9_3_up_tau}, it can be seen that the secondary peak of $\tau_1$ posterior distribution in Fig. \ref{fig_v_bd9_3_up_tau} is effectively suppressed, which is more conducive to the identification of the primary change point. 
+	There is no significant change in the posterior distribution of $\tau_2$, $\mu$, and  $\sigma$.
+	The data in field experiment 2 is also reprocessed with the new Bayesian model, and the results are shown in Fig. \ref{fig_v_bd9_4_up_tau_add_new_rule}, \ref{fig_v_bd9_4_up_mu_add_new_rule}, and \ref{fig_v_bd9_4_up_sigma_add_new_rule}.
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.45]{v_bd9_4_up_tau_add_new_rule}
+		\caption{Posterior sample distribution of $\tau$ in field experiment 2 with an interval constraint prior.}
+		\label{fig_v_bd9_4_up_tau_add_new_rule}
+	\end{figure} 
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.45]{v_bd9_4_up_mu_add_new_rule}
+		\caption{Histogram of posterior sample of $\mu$ in field experiment 2 with an interval constraint prior.}
+		\label{fig_v_bd9_4_up_mu_add_new_rule}
+	\end{figure} 
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.45]{v_bd9_4_up_sigma_add_new_rule}
+		\caption{Histogram of posterior sample of $\sigma$ in field experiment 2 with an interval constraint prior.}
+		\label{fig_v_bd9_4_up_sigma_add_new_rule}
+	\end{figure}
+	Compared with the posterior sample distribution of $\tau_1$ in Fig. \ref{fig_v_bd9_4_up_tau}, the posterior sample distribution in Fig. \ref{fig_v_bd9_4_up_tau_add_new_rule} is more conducive to the identification of the change point.
+	Although there are still some sampling points around 1200 seconds, most of the sample number is below 1000, which has little effect.
+	The posterior distribution of $\tau_2$ has slightly changed. 
+	There are a few sampling points around 1750 s, which are not enough to affect the identification of change points.
+	From the comparison between Fig. \ref{fig_v_bd9_4_up_mu} and Fig. \ref{fig_v_bd9_4_up_mu_add_new_rule}, it can be seen that the secondary peak of $\mu_1$ almost disappears.
+	However, there are still some sample points which deviate from the main peak.
+	In order to reduce the influence of these sampling points, the median value of the sample is used as the final estimation of \textbf{$\mu$}, and $\mu_0$, $\mu_1$ and $\mu_2$ are obtained as -1461.18 mm, -1482.37 mm and -1509.09 mm respectively.
+	The two displacements obtained by these means are -21.19 mm and -26.72 mm, respectively, and the displacements measured in Table \ref{tab_measured_height_9_4} are -21.3 mm and -19.6 mm respectively.  
+	The displacement difference between the two methods at the two change points is 0.11 mm and 7.12 mm, respectively. 
+	The larger displacement error at $\tau_2$ is mainly due to the incompletely controllable experimental equipment. 
+	But on the whole, using the proposed method, the displacement extraction accuracy in the experiment can reach less than 2 mm. However, as mentioned in the simulation experiment, the accuracy of displacement extraction in practical application also depends on the number of available samples near the change point.
+	It can be seen from Fig. \ref{fig_v_bd9_4_up_sigma_add_new_rule} and Fig. \ref{fig_v_bd9_4_up_sigma} that the secondary peak of $\sigma$ posterior distribution has been significantly weakened.
+	
+	As can be seen from the above discussion that the interval constraint prior can effectively improve the identifiability of change points.
+	On the other hand, it also shows that the Bayesian inference-based displacement detection method proposed in this paper is flexible enough to meet different analysis needs by adding a priori.
+	
+	\section{Conclusions}
+	\label{concl}
+	This study set out to develop a Bayesian model for displacement detection from GNSS kinematic positioning in a short time. 
+	The description of multiple displacements is given, and the Bayesian model for multiple displacement detection is proposed.
+	The principle of Bayesian inference and its implementation based on MCMC sampling are presented.
+	To provide epoch by epoch coordinate time series for displacement detection, the principle of GNSS kinematic positioning mode RTK is introduced.
+	The likelihood function of the observation and the prior distribution of the parameters to be estimated are provided.
+	Simulation and field experiments were carried out to verify the effectiveness of the proposed method. 
+	These experiments confirmed the effectiveness of the method in displacement identification and extraction.
+	
+	Significant displacements can be effectively detected by the displacement Bayesian inference model.
+	The displacement is obtained by the difference of the mean of the coordinates before and after the change point, which can be obtained by the mean of the posterior sample.
+	The accuracy of the final displacement is determined by the number of available samples before and after the change point.
+	The more samples are, the higher the accuracy is.
+	
+	When the amplitude of displacement is small, the posterior distribution of change points appears multiple peaks, which is not conducive to the effective identification of change points.
+	By adding an interval constraint prior, the influence of secondary change points can be effectively weakened.
+	To reduce the influence of the sample points of the secondary change point on the displacement extraction, the coordinate mean before and after the change point can be estimated by the median of the posterior sample.
+	
+	The displacement detection based on Bayesian inference can meet different needs by adding a priori, and has sufficient flexibility.
+	In addition, the Bayesian inference implementation based on MCMC sampling used in this paper provides posterior samples, which is more conducive to problem analysis.
+	This study provides the first comprehensive assessment of the Bayesian inference model for displacement identification and extraction from GNSS kinematic positioning.
+	
+%	\section*{Acknowledgement}
+
+	\section*{Fundings}
+This research was funded by the National Key Research and Development Programs 2018YFB0505400
+	\section*{Conflict of interest}
+	The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+	\section*{References} 
+	\bibliographystyle{elsarticle-num}
+	\bibliography{ref}
+
+\end{document}
+\endinput
+%%
+%% End of file `elsarticle-template-num.tex'.
