@@ -156,11 +156,12 @@
 	%传统测量仪器的弊端，GNSS位移探测的优势。
 	%GNSS在位移探测中扮演的角色，以及位移探测的要求
 	%目前人们对于基于GNSS位移探测的研究更过的关注与如何提高定位的精度，而忽略了如何从GNSS获取的坐标序列中识别并提取位移。
-	In recent decades, the Global navigation satellite system (GNSS) has been widely used in surveying\cite{barry2011surveying}, civil aviation\cite{iatsouk2004development}, and autonomous vehicle\cite{kuutti2018survey} as a positioning method. 
-	Besides, as a displacement detection method in deformation monitoring, GNSS has been applied to landslide monitoring\cite{awange2012environmental}, subsidence survey\cite{bian2014monitoring}, industrial measurement\cite{pavasovic2011application}, and other fields. 
+	In recent decades, the Global navigation satellite system (GNSS) has been widely used in surveying, civil aviation, and autonomous vehicle as a positioning method\cite{barry2011surveying,iatsouk2004development}. 
+	Besides, as a displacement detection method in deformation monitoring, GNSS has been widely applied to engineering fields such as landslide monitoring\cite{awange2012environmental}, subsidence survey\cite{bian2014monitoring}, industrial measurement\cite{pavasovic2011application}. 
+	Displacement is an important parameter in engineering analysis in structural mechanics and geomechanics\cite{TASORA2020112635,BIGONI2020113315}.
 	Compared with traditional displacement detection technology, GNSS-based displacement detection has many advantages, such as real-time, high precision, and weather independence\cite{shen2019a}. 
 	%随着物联网通信技术标准的制订和创新，高精度定位技术，例如RTK，PPP，以及GNSS传输协议NTRIP的发展，GNSS定位结果可以被实时传输到云端。
-	With the development of the Internet of things (IoT), GNSS high-precision positioning technology, and GNSS enhanced information transmission protocol, high-precision GNSS positioning results can be transmitted to the cloud in real-time\cite{mei2019survey}.
+	With the development of the Internet of things (IoT), GNSS high-precision positioning technology, and GNSS enhanced information transmission protocol, high-precision GNSS positioning results can be transmitted to the cloud in real-time.
 	%Displacement detection involves displacement identification and extraction. 
 	GNSS-based displacement detection is generally performed by the time-domain difference of GNSS positioning results\cite{abidin2004use,rs12203375}. 
 	There are many researches on displacement detection based on GNSS, which can be divided into two categories.
@@ -170,7 +171,7 @@
 	%位移探测的短板1,关注与定位算法，忽略探测算法2，关注与longterm忽略shortterm
 	%随着在线监测系统的普及，急需对于单历元动态监测数据进行分析处理，今早发现识别和确定位移。
 	The first category is about the research of measurement technology in GNSS-based displacement detection.
-	In order to evaluate the performance of single base station real time kinematic(RTK) and network real time kinematic(NRTK) in displacement detection, the data of different observation duration were compared\cite{wang2011gps}. The results showed that NRTK has advantages in accuracy and robustness.
+	To evaluate the performance of single base station real time kinematic(RTK) and network real time kinematic(NRTK) in displacement detection, the data of different observation duration were compared\cite{wang2011gps}. The results showed that NRTK has advantages in accuracy and robustness.
 	A displacement monitoring system was designed to evaluate NRTK for displacement detection\cite{GUMUS2019131}. The results showed that NRTK can achieve an accuracy of 4.7mm and 7.9mm in the horizontal and vertical directions respectively.
 	In \cite{csanliouglu2016landslide} and \cite{lytvyn2012real}, the feasibility of displacement detection for landslides  using precise point position(PPP) has been studied. The results showed that PPP can be capable of detecting large landslides.
 	There are also some studies using the time-differenced carrier phases (TDCP) technique\cite{freda2015time,colosimo2011real} to obtain velocity estimates for displacement detection. This kind of method obtains displacement by integrating velocity, which is mainly used in displacement detection and extraction of large earthquakes.
@@ -180,17 +181,18 @@
 	Gili et al.\cite{gili2000using} was one of the first landslide monitoring studies using GNSS technology, in which traditional measurement data were used as a comparison. 
 	The results showed that the accuracy of the Global positioning system (GPS) measurement over a period of 26 months was 12 to 16 mm in the horizontal plane and 18 to 24 mm in the elevation.
 	A prototype of a low-cost GNSS has been developed for deep-seated landslide monitoring\cite{rs12203375}. 
-	The results of a nine-month filed monitoring period provided a detailed insight into the spatial and temporal pattern of deep-seated landslide surface movements, in which the displacement was obtained by the direct difference between the coordinates of the start and end periods.
+	The results of a nine-month of field monitoring period provided a detailed insight into the spatial and temporal pattern of deep-seated landslide surface movements, in which the displacement was obtained by the direct difference between the coordinates of the start and end periods.
 	In addition, GNSS was also combined with synthetic aperture radar technology for displacement detection, in which long-term GNSS measurements were used as references\cite{atanasova2018ground,fuhrmann2015estimation}.
 	In these studies, the GNSS static positioning mode is usually adopted.
 	
 	%目前针对GNSS动态定位时间序列的位移识别和提取的研究还很少。目前研究都是基于长周期时间序列进行分析，对于动态定位结果分析的研究还是有限。
-	At present, there are few studies on displacement identification and extraction of GNSS kinematic positioning time series. In \cite{li2010deformation}, a multiple Kalman filters model was proposed for deformation detection in the GPS real-time series. Different filters in the model represent different displacement models, which need to be defined in advance. In addition, epoch by epoch displacement detection is easily affected by observation noise.
+	At present, there are few studies on displacement identification and extraction of GNSS kinematic positioning time series. In \cite{li2010deformation}, a multiple Kalman filters model was proposed for deformation detection in the GPS real-time series. Different filters in the model represent different displacement models, which need to be defined in advance. 
+	In addition, the index-based is also widely used, but it is easily affected by the observation noise, so further measures need to be taken\cite{shen_shortterm2021}.
 	A modified real-time Chow test approach was proposed for fast deformation monitoring\cite{bellone2016real}. This kind of method based on statistical index is easily affected by observation noise, and is not suitable for small displacement detection\cite{pirotti2015micro}. Besides, Dabove and Manzino\cite{dabove2016fast} introduced a cluster-based method for dynamic deformation analysis, but this method did not perform well on real data.
 	
 	%本文拟采取的措施弥补这些短板
 	%Bayes的优势，并且调研一下前人是否尝试同样的方法干过这类事情
-	Previous studies provide an important information for the application of displacement detection based on GNSS, but most of them focus on the detection of long term displacement. 
+	Previous studies provide important information for the application of displacement detection based on GNSS, but most of them focus on the detection of long-term displacement. 
 	Few studies have explored the use of GNSS kinematic positioning for short-term displacement detection. 
 	Although the displacement can be obtained directly by the difference of GNSS positioning coordinates, the identification and extraction of displacement are still challenging due to the influence of measurement errors.
 	At present, most of the displacement detection methods based on GNSS kinematic positioning are based on single epoch observations, which are easily affected by measurement noise and gross error.
@@ -444,6 +446,7 @@
 	To verify the feasibility of the proposed method, we carried out a series of experiments, including simulation and field experiments. 
 	In the simulation experiment, the data is composed of designed displacement and noise.
 	In the field experiment, the displacement is controlled manually by the  the self-built displacement control platform.
+	Moreover, the results of some commonly used index-based abrupt detection methods including the Buishand U test(BUT), Pettitt’s test (PETT), standard normal homogeneity test (SNHT), Z test(ZT), are given for comparison.
 	
 	\subsection{Simulation Experiment}
 	In the experiment, we only simulate the up coordinate component, in which Gaussian white noise with the mean of 0 mm and the standard deviation of 30 mm is added.
