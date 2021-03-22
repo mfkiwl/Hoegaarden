@@ -114,9 +114,10 @@
 		\author[a]{Ruizhi Chen}
 		\address[a]{State Key Laboratory of Information Engineering in Surveying, Mapping and Remote Sensing, Wuhan University, Wuhan 430000, PR China}
 		\begin{abstract}
+		Displacement is an important parameter in engineering analysis in structural mechanics and geomechanics.
 		For decades, displacement detection based on the Global navigation satellite system (GNSS) has increasingly been important for a wide range of applications, from landslide monitoring, subsidence survey, to industrial measurement. 
-		Most of the GNSS-based displacement detection methods in these applications are based on GNSS long-term static positioning results.
-		With the development of the Internet of Things (IoT), high-precision GNSS positioning, and GNSS-related transmission protocol, kinematic positioning results can be transmitted to the cloud in real-time.
+%		Most of the GNSS-based displacement detection methods in these applications are based on GNSS long-term static positioning results.
+%		With the development of the Internet of Things (IoT), high-precision GNSS positioning, and GNSS-related transmission protocol, kinematic positioning results can be transmitted to the cloud in real-time.
 		However, due to the influence of measurement noise, it is still a challenge to identify and extract displacement from GNSS kinematic positioning results in a short time.
 		To resolve this, we propose a novel displacement detection approach with the purpose of identifying and extracting displacement from GNSS kinematic positioning.
 		Specifically, we use the Bayesian inference model to obtain the displacement change time from the coordinate time series of GNSS kinematic positioning. 
@@ -489,11 +490,29 @@
 	These are mainly due to the fact that the most observation samples are used for $\mu_2$ estimation, while the least observation samples are used for $\mu_4$ estimation. 
 	As shown in Fig. \ref{fig_v_sigma_sim_simple}, $\sigma$ is also accurately estimated.
 	
+	% 仿真实验中不同基于索引检测方法的指标值如图6所示。
+	% 从中可以看出不同探测方法所采用的指标的数值范围不一致，但在所设计的突变处很明显。
+	%  然而，想基于这些指标值自动将这些突变点识别出来，还需要额外的工作。
+	%  另外，这些方法设计之初为了探测突变点，并未涉及位移提取。
+	%  有学者，基于设计了基于这些指标的突变探测和位移提取方法，但实时过程复杂。
+	%  相比而言，本文提出的方法是一种简单直接易于实现的一站式方法。
+	The index values of different index-based detection methods in the simulation experiment are shown in Fig. \ref{fig_v_sim_idx}.
+	It can be seen that the numerical range of indicators used by different detection methods is not consistent, but all are obvious at the designed abrupt point.
+	However, to automatically identify these abrupt points based on these index values, additional work is required, such as setting a certain threshold.
+	In addition, these methods were originally designed to detect abrupt points without involving displacement extraction.
+	There are abrupt detection and displacement extraction methods based on these indicators, but the implementation process is complex\cite{shen_shortterm2021}.
+	In contrast, the method proposed in this work is a simple, straightforward, and easy-to-implement one-stop method.
 	\begin{figure}[htbp]
 		\centering
 		\includegraphics[scale=0.45]{v_sigma_sim_simple}
 		\caption{Histogram of posterior sample of $\sigma$ in the simulation experiment.}
 		\label{fig_v_sigma_sim_simple}
+	\end{figure} 
+	\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.45]{v_sim_idx}
+	\caption{Index values of different index-based detection methods in simulation experiments.}
+	\label{fig_v_sim_idx}
 	\end{figure} 
 	\subsection{Field Experiments}
 	The experiments were carried out on the roof of a building on the campus of Wuhan University, and the equipment deployment is shown in Fig. \ref{fig_v_field_exp_config}. 
@@ -530,7 +549,6 @@
 	As can be seen from Fig. \ref{fig_v_bd9_3_up_ts}, there are still some unmodeled errors, such as the multipath error that have not been eliminated. 
 	The RTK positioning results are processed by the proposed method, and Bayesian inference is implemented by the MCMC sampling. 
 	The histogram of the posterior sample of $\tau$ is shown in Fig. \ref{fig_v_bd9_3_up_tau}.
-	
 	\begin{figure}[htbp]
 		\centering
 		\includegraphics[scale=0.45]{v_bd9_3_up_tau}
@@ -542,8 +560,14 @@
 	However, as can be seen from Fig. \ref{fig_v_bd9_3_up_tau}, there are two peaks in the posterior sample distribution of change point $\tau_1$.
 	The main reason is that the displacement control device is not completely controllable, and the plank floats up and down when moving the object. 
 	In addition, since the antenna is close to the ground, the antenna vibration caused by breeze or touch causes an increase in the multipath phase rate or fading frequency\cite{kelly2003characterization}. 
+	The index values of different index-based detection methods in field experiment 1 are shown in Fig. \ref{fig_v_exp1_idx}. At the abrupt point, each index value is no longer as clear as in the simulation experiment, which puts forward higher requirements for additional analysis of these indexes.
 	The posterior sample histogram of the $\mu$ of each segment divided by the change point and the displacement measured by the tape are shown in Fig. \ref{fig_v_bd9_3_up_mu} and Table \ref{tab_measured_height_9_3}, respectively.
-	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.45]{v_exp1_idx}
+		\caption{Index values of different index-based detection methods in field experiment 1.}
+		\label{fig_v_exp1_idx}
+	\end{figure} 
 	\begin{figure}[htbp]
 		\centering
 		\includegraphics[scale=0.45]{v_bd9_3_up_mu}
@@ -573,6 +597,7 @@
 			\end{tabular}
 		\end{threeparttable}
 	\end{table}
+	
 	The $\mu_0$, $\mu_1$, and $\mu_2$ obtained by the mean of the posterior samples are -1446.03 mm, -1474.11 mm, and -1489.83 mm, respectively, and the two displacements obtained by the difference of these mean values are -28.08 mm, -15.72 mm, respectively. The two displacements measured by tape are -29.66 mm and -27.18 mm respectively. 
 	To our surprise, the displacement difference between the two methods at the two change points is 1.58 mm and 11.46 mm, respectively. 
 	The main reason is that the displacement control device is not fully controllable. 
@@ -594,7 +619,6 @@
 	In reality, multiple change points exist, such as multiple displacements in a short period of time in the process of landslide or settlement.
 	However, more attention is paid to the primary change points.
 	By adding a prior to the model to improve the identification of the primary change points, and weaken the influence of secondary change points will be discussed later.
-	
 	\subsubsection{Field Experiment 2}
 	This experiment is similar to the previous one except that the displacement amplitude is smaller. 
 	The coordinate time series is obtained by RTKLIB with the same processing strategy as the previous experiment, and the up component of the time series is shown in Fig. \ref{fig_v_bd9_4_up_ts}. 
@@ -689,13 +713,19 @@
 	%此外，t2以及均值和方差的的后验分布没有明显变化。
 	From the comparison between Fig. \ref{fig_v_bd9_3_up_tau_add_new_rule} and Fig. \ref{fig_v_bd9_3_up_tau}, it can be seen that the secondary peak of $\tau_1$ posterior distribution in Fig. \ref{fig_v_bd9_3_up_tau} is effectively suppressed, which is more conducive to the identification of the primary change point. 
 	There is no significant change in the posterior distribution of $\tau_2$, $\mu$, and  $\sigma$.
-	The data in field experiment 2 is also reprocessed with the new Bayesian model, and the results are shown in Fig. \ref{fig_v_bd9_4_up_tau_add_new_rule}, \ref{fig_v_bd9_4_up_mu_add_new_rule}, and \ref{fig_v_bd9_4_up_sigma_add_new_rule}.
+	The data in field experiment 2 is also reprocessed with the new Bayesian model, and the results are shown in Fig. \ref{fig_v_bd9_4_up_tau_add_new_rule}, \ref{fig_v_exp2_idx}, \ref{fig_v_bd9_4_up_mu_add_new_rule}, and \ref{fig_v_bd9_4_up_sigma_add_new_rule}.
 	
 	\begin{figure}[htbp]
 		\centering
 		\includegraphics[scale=0.45]{v_bd9_4_up_tau_add_new_rule}
 		\caption{Posterior sample distribution of $\tau$ in field experiment 2 with an interval constraint prior.}
 		\label{fig_v_bd9_4_up_tau_add_new_rule}
+	\end{figure} 
+	\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.45]{v_exp2_idx}
+	\caption{Index values of different index-based detection methods in field experiment 2.}
+	\label{fig_v_exp2_idx}
 	\end{figure} 
 	\begin{figure}[htbp]
 		\centering
