@@ -363,7 +363,6 @@
 	In the experiment, we only simulate the up coordinate component, in which Gaussian white noise with the mean of 0 mm and the standard deviation of 30 mm is added.
 	At 1000 s, 2500 s, and 3200 s, the displacements of -50 mm, -50 mm, and 100 mm are added, respectively. 
 	The simulation results are shown in Fig. \ref{fig_v_sim_simple_gauss_ts}.
-	
 	\begin{figure}[htbp]
 		\centering
 		\includegraphics[scale=0.45]{v_sim_simple_gauss_ts}
@@ -371,19 +370,18 @@
 		\label{fig_v_sim_simple_gauss_ts}
 	\end{figure} 
 	As shown in Fig. \ref{fig_v_sim_simple_gauss_ts}, the whole time series is divided into four segments by three displacement change points. 
-	Using the model designed above, Bayesian inference is implemented by the MCMC sampling. 
+	\textcolor{r_s}{The time series is processed by the proposed method, and Bayesian inference is realized through MCMC sampling using the probability model designed above.} 
 	The posterior sample distribution of $\bf{\tau}$ is shown in Fig. \ref{fig_v_tau_sim_simple}.
-	
-	
 	\begin{figure}[htbp]
 		\centering
 		\includegraphics[scale=0.45]{v_tau_sim_simple}
 		\caption{Posterior sample distribution of $\tau$ in the simulation experiment.}
 		\label{fig_v_tau_sim_simple}
 	\end{figure} 
-	As can be seen from Fig. \ref{fig_v_tau_sim_simple}, all the designed displacement change points are identified. 
-	$\tau_3$ is the easiest to be identified, mainly due to the largest displacement amplitude. 
-	Since the displacement amplitude at $\tau_2$ is small and there are fewer sample points on the right side, the estimated accuracy is worse than the other two change points.
+	
+	As can be seen from Fig. \ref{fig_v_tau_sim_simple}, \textcolor{r_s}{there are more samples at the displacement, and} all the designed displacement change points are identified. 
+	$\tau_3$ is the easiest to \textcolor{r_s}{identify}, mainly due to \textcolor{r_s}{its maximum} displacement amplitude. 
+	  \textcolor{r_s}{Due to the smaller displacement amplitude and fewer samples on the right at $\tau_2$}, the estimated accuracy is worse than the other two change points.
 	The histogram of the posterior sample of $\bf{\mu}$ is shown in Fig. \ref{fig_v_mu_sim_simple}.
 	
 	\begin{figure}[htbp]
@@ -397,7 +395,7 @@
 	The vertical green dashed line in Fig. \ref{fig_v_mu_sim_simple} represents the mean value of posterior samples, and the mean values of the four segments are 1.17 mm, -49.58 mm, -98.9 mm, and -3.65 mm.
 	Among these means, $\mu_2$ has the highest accuracy, and its corresponding posterior sample coverage is the narrowest. 
 	The estimation accuracy of $\mu_4$ is the lowest, and the corresponding posterior sample coverage is the widest. 
-	These are mainly due to the fact that the most observation samples are used for $\mu_2$ estimation, while the least observation samples are used for $\mu_4$ estimation. 
+	These are mainly due to the fact that most samples are used for $\mu_2$ estimation, while least samples are used for $\mu_4$ estimation. 
 	As shown in Fig. \ref{fig_v_sigma_sim_simple}, $\sigma$ is also accurately estimated.
 	
 	% 仿真实验中不同基于索引检测方法的指标值如图6所示。
@@ -407,8 +405,8 @@
 	%  有学者，基于设计了基于这些指标的突变探测和位移提取方法，但实时过程复杂。
 	%  相比而言，本文提出的方法是一种简单直接易于实现的一站式方法。
 	The index values of different index-based detection methods in the simulation experiment are shown in Fig. \ref{fig_v_sim_idx}.
-	It can be seen that the numerical range of indicators used by different detection methods is not consistent, but all are obvious at the designed abrupt point.
-	However, to automatically identify these abrupt points based on these index values, additional work is required, such as setting a certain threshold.
+	It can be seen that the numerical range of indicators used by different \textcolor{r_s}{index-based} detection methods is not consistent, but all are obvious at the designed abrupt point.
+	However, to automatically identify these abrupt points based on these index values, additional work is required, such as setting a certain threshold  \textcolor{r_s}{or detection window\cite{shen_shortterm2021}}.
 	In addition, these methods were originally designed to detect abrupt points without involving displacement extraction.
 	There are abrupt detection and displacement extraction methods based on these indicators, but the implementation process is complex\cite{shen_shortterm2021}.
 	In contrast, the method proposed in this work is a simple, straightforward, and easy-to-implement one-stop method.
@@ -448,8 +446,7 @@
 	\end{figure} 
 	
 	\subsubsection{Field Experiment 1}%rover_bd9_3
-	GNSS observations were processed epoch by epoch by using RTK mode, and the corresponding coordinate output was the only input of the proposed displacement detection method.
-	The results of RTK positioning are shown in Fig. \ref{fig_v_bd9_3_up_tau}.
+	GNSS observations were processed epoch by epoch by using RTK mode, and the results are shown in Fig. \ref{fig_v_bd9_3_up_tau}.
 	Only the vertical displacement was triggered in the experiment, so only the up coordinate component is displayed. 
 	\begin{figure}[htbp]
 		\centering
@@ -460,7 +457,7 @@
 	
 	For such a short baseline, most of the errors can be eliminated by the double-difference observation. 
 	As can be seen from Fig. \ref{fig_v_bd9_3_up_ts}, there are still some unmodeled errors, such as the multipath error that have not been eliminated. 
-	The RTK positioning results are processed by the proposed method, and Bayesian inference is implemented by the MCMC sampling. 
+	\textcolor{r_s}{The RTK positioning results are served as the input of displacement detection}, and Bayesian inference is implemented by the MCMC sampling. 
 	The histogram of the posterior sample of $\tau$ is shown in Fig. \ref{fig_v_bd9_3_up_tau}.
 	\begin{figure}[htbp]
 		\centering
@@ -577,7 +574,7 @@
 	\end{table}
 
 	As can be seen from Fig. \ref{fig_v_bd9_4_up_ts} and Table \ref{tab_measured_height_9_4}, the amplitude of the two displacements is smaller than that of the previous experiment. 
-	The time series are processed by the proposed method, and Bayesian inference is implemented by the MCMC sampling. The results are shown in Fig. \ref{fig_v_bd9_4_up_tau}, \ref{fig_v_bd9_4_up_mu}, and \ref{fig_v_bd9_4_up_sigma}.
+	\textcolor{r_s}{The RTK positioning results are served as the input of displacement detection}, and Bayesian inference is implemented by the MCMC sampling. The results are shown in Fig. \ref{fig_v_bd9_4_up_tau}, \ref{fig_v_bd9_4_up_mu}, and \ref{fig_v_bd9_4_up_sigma}.
 	
 	\begin{figure}[htbp]
 		\centering
@@ -602,6 +599,7 @@
 	Accordingly, there are two peaks in the posterior sample distribution of $\mu_0$, $\mu_1$ and $\sigma$. 
 	In addition, we found that the second peak of $\tau_1$ is very close to the peak of $\tau_2$, which is not what we want because we do not want to get very short segments. 
 	In the next section, we will discuss adding a prior to the model to improve the performance of Bayesian inference.
+	In the next section, we will discuss adding a prior to the \textcolor{r_s}{probability} model to improve the performance of the \textcolor{r_s}{displacement detection method}.
 	\section{Discussion}
 	\label{disc}
 	In field experiment 1, there are two significant peaks in the posterior sample distribution at the same change point. 
@@ -612,7 +610,7 @@
 	\begin{equation}\label{eq_bayesian_prior_d_tau}
 	P(d\tau_{i})=DiscreteU(\tau_{i} + d,\tau_{i+1})
 	\end{equation}
-	where $d$ is the shortest time interval to be constrained. The new Bayesian probability model with the prior is shown in Fig. \ref{fig_v_simple_p_model_add_new_rule}.
+	where $d$ is the shortest time interval to be constrained. The new \textcolor{r_s}{probability} model with the prior is shown in Fig. \ref{fig_v_simple_p_model_add_new_rule}.
 	
 	\begin{figure}[H]
 		\centering
@@ -622,7 +620,7 @@
 	\end{figure} 
 	As shown in (\ref{eq_bayesian_prior_d_tau}) and Fig. \ref{fig_v_simple_p_model_add_new_rule}, the prior distribution of newly added random variables depends on the change points and the constraint interval. 
 	In the following data processing, the interval $d$ is set to 300.
-	The data in \textcolor{r_s}{the} field experiment 1 is reprocessed with the new Bayesian model, and the posterior distribution of $\tau$ is shown in Fig. \ref{fig_v_bd9_3_up_tau_add_new_rule}.
+	The data in \textcolor{r_s}{the} field experiment 1 is reprocessed with the new \textcolor{r_s}{probability} model, and the posterior distribution of $\tau$ is shown in Fig. \ref{fig_v_bd9_3_up_tau_add_new_rule}.
 	
 	\begin{figure}[htbp]
 		\centering
@@ -687,33 +685,33 @@
 		This is the first time that Bayesian inference has been used for displacement detection based on GNSS kinematic positioning.
 		Compared with indicator-based detection methods, this method has high robustness and flexibility.
 		The method based on Bayesian inference uses multi-epoch observation data, which is more reliable.
-		On the other hand, the Bayesian inference-based displacement detection method proposed in this paper is flexible enough to meet different analysis needs by adding a priori.
+		On the other hand, the Bayesian inference-based displacement detection method proposed in this paper is flexible enough to meet different analysis needs by adding a priori. Although only the vertical direction has been verified due to the experimental equipment, the horizontal direction should also be adapted because the vertical direction is noisier.
 	}
 	
 	\section{Conclusions}
 	\label{concl}
-	This study set out to develop a Bayesian model for displacement detection from GNSS kinematic positioning. 
-	The description of multiple displacements is given, and the Bayesian model for multiple displacement detection is proposed.
+	This study set out to develop a \textcolor{r_s}{displacement detection approach} from GNSS kinematic positioning. 
+	\textcolor{r_s}{GNSS kinematic positioning is used to provide epoch by epoch coordinate time series for displacement detection.}
 	The principle of Bayesian inference and its implementation based on MCMC sampling are presented.
-	To provide epoch by epoch coordinate time series for displacement detection, the principle of GNSS kinematic positioning mode RTK is introduced.
+	The description of multiple displacements is given, and the \textcolor{r_s}{probability} model for multiple displacement detection is proposed.
 	The likelihood function of the observation and the prior distribution of the parameters to be estimated are provided.
 	Simulation and field experiments were carried out to verify the effectiveness of the proposed method. 
 	These experiments confirmed the effectiveness of the method in displacement identification and extraction.
 	
-	Significant displacements can be effectively detected by the displacement Bayesian inference model.
-	The displacement is obtained by the difference of the mean of the coordinates before and after the change point, which can be obtained by the mean of the posterior sample.
+	Significant displacements can be effectively detected by the displacement \textcolor{r_s}{detection method}.
+	The displacement is obtained by the difference of the mean of the coordinates before and after the change point, which can be obtained by the mean of \textcolor{r_s}{posterior samples}.
 	The accuracy of the final displacement is determined by the number of available samples before and after the change point.
 	The more samples are, the higher the accuracy is.
 	
 	When the amplitude of displacement is small, the posterior distribution of change points appears multiple peaks, which is not conducive to the effective identification of change points.
 	By adding an interval constraint prior, the influence of secondary change points can be effectively weakened.
-	To reduce the influence of the sample points of the secondary change point on the displacement extraction, the coordinate mean before and after the change point can be estimated by the median of the posterior sample.
+	To reduce the influence of \textcolor{r_s}{samples} of the secondary change point on the displacement extraction, the coordinate mean before and after the change point can be estimated by the median of \textcolor{r_s}{posterior samples}.
 	
-	The displacement detection based on Bayesian inference can meet different needs by adding a priori, and has sufficient flexibility.
+	The displacement detection \textcolor{r_s}{method} based on Bayesian inference can meet different needs by adding a priori, and has sufficient flexibility.
 	In addition, the Bayesian inference implementation based on MCMC sampling used in this paper provides posterior samples, which is more conducive to problem analysis.
-	This study provides the first comprehensive assessment of the Bayesian inference model for displacement identification and extraction from GNSS kinematic positioning.
+	This study provides the first comprehensive assessment of the Bayesian inference \textcolor{r_s}{based method} for displacement identification and extraction from GNSS kinematic positioning.
 	\textcolor{r_s}{
-	Although the method is verified with GNSS kinematic data, the method is also suitable for long-term displacement detection. The main difference is the error model and influencing factors considered, which will be carried out in the follow-up work.	
+	Although the method is verified with GNSS kinematic data, the method is also suitable for long-term displacement detection. The main difference is the probability model and influencing factors considered, which will be carried out in the follow-up work.	
 	}
 	
 %	\section*{Acknowledgement}
