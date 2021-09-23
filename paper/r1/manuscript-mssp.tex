@@ -228,22 +228,42 @@
 	
 	\section{Methodology}
 	\label{method}
-	In this section, the Bayesian model of displacement detection and its implementation based on MCMC are presented first. Then the GNSS  real-time kinematic positioning model is introduced.
-	\subsection{Bayesian Model for Displacement Detection}
+	\textcolor{r_s}{A displacement detection method for deformation monitoring is proposed, which detects displacement, thus probably landslide, subsidence behavior. The method mainly includes three steps: GNSS kinematic positioning, Bayesian inference, and posterior sample analysis. The workflow of the GNSS-based displacement detection using Bayesian inference is shown in Fig. \ref{fig_v_workflow}.}
+	\begin{figure*}[htpb]
+		\centering
+		\includegraphics[scale=0.45]{v_workflow}
+		\caption{\textcolor{r_s}{Displacement detection method based on Bayesian inference.}}
+		\label{fig_v_workflow}
+	\end{figure*} 
 	
+	As shown in Fig. \ref{fig_v_workflow}, to begin this process, the kinematic positioning is carried out to obtain the coordinates time series to form the data source of Bayesian inference. 
+	Before the displacement detection,  the posterior samples of model parameters are obtained by Bayesian inference based on the MCMC sampling.
+	After obtaining the posterior sample distribution of the parameters, the displacement identification is achieved by the posterior sample distribution of the change points.
+	On getting the change points, the displacement is extracted by the posterior sample distribution of  the 'mean' parameters.
+	Finally, according to the analysis of the posterior samples, the \textcolor{r_s}{displacement detection probability model } is optimized as needed. \textcolor{r_s}{The center of Fig. \ref{fig_v_workflow} is a graphical description of the displacement detection probability model.}
+	\subsection{Relative Real-time Kinematic (RTK)}
+	There are many real-time kinematic positioning models, among which RTK is the most widely used model in deformation monitoring.
+	\textcolor{r_s}{Therefore, in this work, RTK is adopted as the kinematic positioning model.
+		RTK is implemented by extended Kalman filtering, where the design matrix is derived from the double-difference observation model, and the state transition matrix is the identity matrix.
+		For the covariance matrix of process noise, the coordinate covariance component is set to be large to capture dynamic features, while the ambiguity covariance component is set to $\mathbf{0}$ to ensure the stability of positioning\cite{takasu2011rtklib}.
+	}
+	\subsection{Bayesian Inference}
+	\textcolor{r_s}{The data basis of Bayesian inference is introduced above, and a brief introduction to Bayesian inference is given here.}
+	Bayesian inference is one of the most important skills in statistics, and deduces the posterior probability as the result of a priori probability and likelihood function\cite{robert2014machine}. Bayesian inference calculates the posterior probability according to the Bayesian theorem\cite{chen2009modulation,chen2013bayesian}
+	
+	\begin{equation}\label{eq_bayesian_inference}
+		P({\bf{\theta }}\left| {\bf{x}} \right.) = \frac{{P({\bf{\theta }})P({\bf{x}}\left| {\bf{\theta }} \right.)}}{{P({\bf{x}})}}
+	\end{equation}
+	where $\bf{\theta }$ is the parameter to be estimated and $\bf{x}$ is the observation; $P({\bf{\theta }}\left| {\bf{x}} \right.)$ denotes the posterior probability; $P({\bf{\theta }})$ represents a priori probability, which refers to the probability obtained from previous experience and analysis;
+	$P({\bf{x}}\left| {\bf{\theta }} \right.)$ is the likelihood function, which represents the probability of $x$ when a priori is established. ${P({\bf{x}})}$ is the total likelihood, which is a constant value.
+	\textcolor{r_s}{Before proceeding to Bayesian inference, it is must to define the probability model for displacement detection.}
+	\subsection{\textcolor{r_s}{Probability} Model for Displacement Detection}
 	
 	The displacement time series is described as $\left[ {{x_1},{x_2}, \cdots {x_m}} \right]$, and the corresponding time is denoted as $\left[ {{t_1},{t_2}, \cdots {t_m}} \right]$, where $m$ is the number of \textcolor{r_s}{coordinates}. The displacement occurrence time is expressed as $\left[ {{\tau _1},{\tau _2}, \cdots {\tau _n}} \right]$, which is a subset of $\left[ {{t_1},{t_2}, \cdots {t_m}} \right]$.  
 	The time corresponding to the $n$ change points satisfies the following relationship: $ {{\tau _1}<{\tau _2}<\cdots {\tau _{n-1}}<{\tau _n}} $.
 	The problem of displacement detection is to find out the time of displacement and estimate the displacement.
 	
-	\subsubsection{Bayesian Inference}
-	Bayesian inference is one of the most important skills in statistics, and deduces the posterior probability as the result of a priori probability and likelihood function\cite{robert2014machine}. Bayesian inference calculates the posterior probability according to the Bayesian theorem\cite{chen2009modulation,chen2013bayesian}
-	
-	\begin{equation}\label{eq_bayesian_inference}
-	P({\bf{\theta }}\left| {\bf{x}} \right.) = \frac{{P({\bf{\theta }})P({\bf{x}}\left| {\bf{\theta }} \right.)}}{{P({\bf{x}})}}
-	\end{equation}
-	where $\bf{\theta }$ is the parameter to be estimated and $\bf{x}$ is the observation; $P({\bf{\theta }}\left| {\bf{x}} \right.)$ denotes the posterior probability; $P({\bf{\theta }})$ represents a priori probability, which refers to the probability obtained from previous experience and analysis;
-	$P({\bf{x}}\left| {\bf{\theta }} \right.)$ is the likelihood function, which represents the probability of $x$ when a priori is established. ${P({\bf{x}})}$ is the total likelihood, which is a constant value.
+
 	
 	\subsubsection{Likelihood Function}
 	It is assumed that the displacement obtained by GNSS kinematic positioning obeys Gaussian normal distribution.  The displacement of each segment segmented by the change points obeys the Gaussian distribution of different mean and same variance, which is expressed as follows
@@ -328,34 +348,10 @@
 	\begin{equation}\label{eq_bayesian_prior_tau_5}
 	P({\bf{\tau }}) = P({\tau _n}\left| {{\tau _{n - 1}}} \right.) \cdots P({\tau _3}\left| {{\tau _2}} \right.)P(\left. {{\tau _2}} \right|{\tau _1})P({\tau _1})
 	\end{equation}
-	Through (\ref{eq_bayesian_prior_tau_basic}) and (\ref{eq_bayesian_prior_tau_5}), the joint probability of all change points can be determined. Finally, the prior distribution of parameter ${\bf{\theta }}$ can be determined by \textcolor{r_s}{formulas} (\ref{eq_bayesian_prior}), (\ref{eq_bayesian_prior_sigma}), (\ref{eq_bayesian_prior_mu_sum}), (\ref{eq_bayesian_prior_tau_5}).  After the Bayesian model of displacement detection is given, MCMC, one of the implementation methods of Bayesian inference, is introduced.
+	Through (\ref{eq_bayesian_prior_tau_basic}) and (\ref{eq_bayesian_prior_tau_5}), the joint probability of all change points can be determined. Finally, the prior distribution of parameter ${\bf{\theta }}$ can be determined by \textcolor{r_s}{formulas} (\ref{eq_bayesian_prior}), (\ref{eq_bayesian_prior_sigma}), (\ref{eq_bayesian_prior_mu_sum}), (\ref{eq_bayesian_prior_tau_5}).  After the \textcolor{r_s}{probability model for} displacement detection is given, MCMC, one of the implementation methods of Bayesian inference, is introduced.
 	
-	\subsubsection{Markov Chain Monte Carlo (MCMC)}
-	The posterior distribution of the parameters depends on the prior distribution and the likelihood function. Obtaining the posterior probability of parameters by direct integration or sum requires a lot of operations, which is difficult to achieve\cite{robert2013monte}. In this work, the Markov chain Monte Carlo technique is used to approximate the integral or sum value.  Two implementations of MCMC,  the Metropolis-Hasting sampler\cite{chib1995understanding} and the No-U-Turn sampler\cite{hoffman2014no}, are used to sample discrete random variables and continuous random variables, respectively. Next, the data source of the proposed method: GNSS real-time kinematic positioning is introduced.
-	
-	\subsection{Relative Real-time Kinematic (RTK)}
-	There are many real-time kinematic positioning models, among which RTK is the most widely used model in deformation monitoring.
-	\textcolor{r_s}{Therefore, in this work, RTK is adopted as the kinematic positioning model.
-	RTK is implemented by extended Kalman filtering, where the design matrix is derived from the double-difference observation model, and the state transition matrix is the identity matrix.
-For the covariance matrix of process noise, the coordinate covariance component is set to be large to capture dynamic features, while the ambiguity covariance component is set to $\mathbf{0}$ to ensure the stability of positioning\cite{takasu2011rtklib}.
-}
-	\subsection{Workflow of displacement detection }  
-	In the previous paragraphs, the displacement detection model using Bayesian inference is proposed, and the \textcolor{r_s}{ kinematic positioning model is described.}
-	The workflow of the GNSS-based displacement detection using Bayesian inference is shown in Fig. \ref{fig_v_workflow}.
-	\begin{figure*}[htpb]
-		\centering
-		\includegraphics[scale=0.45]{v_workflow}
-		\caption{\textcolor{r_s}{Displacement detection process based on Bayesian inference.}}
-		\label{fig_v_workflow}
-	\end{figure*} 
-	
-	As shown in Fig. \ref{fig_v_workflow}, to begin this process, the kinematic positioning is carried out to obtain the coordinates time series to form the data source of Bayesian inference. 
-	Before the displacement detection,  the posterior samples of model parameters are obtained by Bayesian inference based on the MCMC sampling.
-	After obtaining the posterior sample distribution of the parameters, the displacement identification is achieved by the posterior sample distribution of the change points.
-	On getting the change points, the displacement is extracted by the posterior sample distribution of  the 'mean' parameters.
-	Finally, according to the analysis of the posterior samples, the original Bayesian model is optimized as needed.
-	The middle of Fig. \ref{fig_v_workflow} is a graphical description of the Bayesian model of displacement detection and its implementation described above.
-	
+	\subsection{Markov Chain Monte Carlo (MCMC)}
+	The posterior distribution of the parameters depends on the prior distribution and the likelihood function. Obtaining the posterior probability of parameters by direct integration or sum requires a lot of operations, which is difficult to achieve\cite{robert2013monte}. In this work, the Markov chain Monte Carlo technique is used to approximate the integral or sum value.  Two implementations of MCMC,  the Metropolis-Hasting sampler\cite{chib1995understanding} and the No-U-Turn sampler\cite{hoffman2014no}, are used to sample discrete random variables and continuous random variables, respectively. 
 	\section{Experiments and Results}
 	\label{exp}
 	To verify the feasibility of the proposed method, we carried out a series of experiments, including simulation and field experiments. 
