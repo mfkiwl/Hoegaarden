@@ -101,7 +101,7 @@
 		%% \address{Address\fnref{label3}}
 		%% \fntext[label3]{}
 		
-		\title{\textcolor{r_s}{Displacement Detection from GNSS Kinematic Positioning Using Bayesian Inference}}
+		\title{\textcolor{r_s}{Displacement Detection Based on Bayesian Inference from GNSS Kinematic Positioning for Deformation Monitoring}}
 		
 		
 		%% use optional labels to link authors explicitly to addresses:
@@ -127,7 +127,7 @@
 		By investigating the posterior distribution of the designed change point parameter, we can identify the change points.
 		Furthermore, we derive the mean value from the posterior distribution of the mean parameter, and further obtain the displacement.
 		Results from simulation and field experiments have demonstrated the effectiveness and flexibility of the proposed method.
-		For significant displacement, it can be clearly identified; for small displacement, it can be identified by adding an interval constraint prior. The accuracy of up-displacement extraction from GNSS real-time kinematic positioning can reach within 2 mm in 15 minutes.		
+		For significant displacement, it can be clearly identified; for small displacement, it can be identified by adding an interval constraint prior. The accuracy of \textcolor{r_s}{vertical} displacement extraction from GNSS real-time kinematic positioning can reach within 2 mm in 15 minutes.		
 		\end{abstract}
 		
 		%%Graphical abstract
@@ -404,12 +404,12 @@
 	%  另外，这些方法设计之初为了探测突变点，并未涉及位移提取。
 	%  有学者，基于设计了基于这些指标的突变探测和位移提取方法，但实时过程复杂。
 	%  相比而言，本文提出的方法是一种简单直接易于实现的一站式方法。
-	The index values of different index-based detection methods in the simulation experiment are shown in Fig. \ref{fig_v_sim_idx}.
-	It can be seen that the numerical range of indicators used by different \textcolor{r_s}{index-based} detection methods is not consistent, but all are obvious at the designed abrupt point.
-	However, to automatically identify these abrupt points based on these index values, additional work is required, such as setting a certain threshold  \textcolor{r_s}{or detection window\cite{shen_shortterm2021}}.
-	In addition, these methods were originally designed to detect abrupt points without involving displacement extraction.
-	There are abrupt detection and displacement extraction methods based on these indicators, but the implementation process is complex\cite{shen_shortterm2021}.
-	In contrast, the method proposed in this work is a simple, straightforward, and easy-to-implement one-stop method.
+	\textcolor{r_s}{
+		Detection values of different index-based detection methods in the simulation experiment are shown in Fig. \ref{fig_v_sim_idx}.
+	}
+	It can be seen that the numerical range of indicators used by different \textcolor{r_s}{index-based} detection methods is not consistent, but all are obvious at the designed abrupt point. \textcolor{r_s}{These detection values can be obtained in real-time from the GNSS kinematic positioning results.} However, to automatically identify these abrupt points based on these \textcolor{r_s}{detection} values, additional work is required, such as setting a certain threshold  \textcolor{r_s}{or detection window\cite{shen_shortterm2021}}. In addition, these methods were originally designed to detect abrupt points without involving displacement extraction. \textcolor{r_s}{
+	Although there are improved methods of abrupt detection and displacement extraction based on these indicators, the implementation process is complex\cite{shen_shortterm2021}.
+	} In contrast, the method proposed in this work is a simple, straightforward, and easy-to-implement one-stop method.
 	\begin{figure}[htbp]
 		\centering
 		\includegraphics[scale=0.45]{v_sigma_sim_simple}
@@ -419,7 +419,7 @@
 	\begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.45]{v_sim_idx}
-	\caption{Index values of different index-based detection methods in simulation experiments.}
+	\caption{\textcolor{r_s}{Detection values of different index-based detection methods in the simulation experiment.}}
 	\label{fig_v_sim_idx}
 	\end{figure} 
 	\subsection{Field Experiments}
@@ -475,7 +475,7 @@
 	\begin{figure}[htbp]
 		\centering
 		\includegraphics[scale=0.45]{v_exp1_idx}
-		\caption{Index values of different index-based detection methods in field experiment 1.}
+		\caption{\textcolor{r_s}{Detection values of different index-based detection methods in field experiment 1.}}
 		\label{fig_v_exp1_idx}
 	\end{figure} 
 	\begin{figure}[htbp]
@@ -512,7 +512,8 @@
 	To our surprise, the displacement difference between the two methods at the two change points is 1.58 mm and 11.46 mm, respectively. 
 	The main reason is that the displacement control device is not fully controllable.
 \textcolor{r_s}{
-	As can be seen from Fig. \ref{fig_v_bd9_3_up_ts}, the time series fluctuates obviously near the abrupt displacement. To explore the possible causes, the number of satellites, geometric dilution of precision(GDOP), signal-to-noise ratio(SNR), and multipath are shown in Fig. \ref{fig_v_ndop_snrmp_9_3}. The number of satellites and GDOP changed when the displacement took place, which may be caused by the shielding of the antenna during operation. The SNR and multipath have also changed when the displacement takes place, possibly due to antenna vibration caused by touch or wind.}
+	As can be seen from Fig. \ref{fig_v_bd9_3_up_ts}, the time series fluctuates obviously near the abrupt displacement. To explore the possible causes, the number of satellites, geometric dilution of precision (GDOP), signal-to-noise ratio (SNR), and multipath are shown in Fig. \ref{fig_v_ndop_snrmp_9_3}. When the displacement occurs, the number of satellites and GDOP change, especially at $\tau_2$, which may be the reason for the inconsistency between the reference displacement and the estimated displacement.
+	The SNR and multipath have also changed when the displacement takes place, possibly due to antenna vibration caused by touch or wind.}
 	
 	
 	As shown in Fig. \ref{fig_v_bd9_3_up_sigma}, the estimated value of $\sigma$ is 12.58 mm through the posterior sample mean of $\sigma$.
@@ -523,7 +524,7 @@
 	\begin{figure}[htbp]
 		\centering
 		\includegraphics[scale=0.45]{ndop_snrmp_9_3}
-		\caption{Number of satellites, GDOP, SNR, multipath of experiment 1.}
+		\caption{\textcolor{r_s}{Number of satellites, GDOP, SNR, multipath of experiment 1.}}
 		\label{fig_v_ndop_snrmp_9_3}
 	\end{figure} 
 	\begin{figure}[htbp]
@@ -644,7 +645,7 @@
 	\begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.45]{v_exp2_idx}
-	\caption{Index values of different index-based detection methods in field experiment 2.}
+	\caption{\textcolor{r_s}{Detection values of different index-based detection methods in field experiment 2.}}
 	\label{fig_v_exp2_idx}
 	\end{figure} 
 	\begin{figure}[htbp]
@@ -670,11 +671,12 @@
 	The displacement difference between the two methods at the two change points is 0.11 mm and 7.12 mm, respectively. 
 	The larger displacement error at $\tau_2$ is mainly due to the incompletely controllable experimental equipment. 
 	\textcolor{r_s}{
-		 The number of satellites, GDOP, SNR, and multipath are shown in Fig. \ref{fig_v_ndop_snrmp_9_4}. The number of satellites and GDOP changed at $\tau_2$, which may be caused by the shielding of the antenna during operation.}	
+		 The number of satellites, GDOP, SNR, and multipath are shown in Fig. \ref{fig_v_ndop_snrmp_9_4}. 
+		 From the SNR and multipath, it can be seen that the quality of the observation data on the right side of $\tau_2$ is better than that on the left side.}
 	\begin{figure}[htbp]
 		\centering
 		\includegraphics[scale=0.45]{ndop_snrmp_9_4}
-		\caption{Number of satellites, GDOP, SNR, multipath of experiment 2.}
+		\caption{\textcolor{r_s}{Number of satellites, GDOP, SNR, multipath of experiment 2.}}
 		\label{fig_v_ndop_snrmp_9_4}
 	\end{figure} 
 	But on the whole, using the proposed method, the displacement extraction accuracy in the experiment can reach less than 2 mm. However, as mentioned in the simulation experiment, the accuracy of displacement extraction in practical application also depends on the number of available samples near the change point.
