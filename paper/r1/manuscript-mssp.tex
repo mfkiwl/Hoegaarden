@@ -101,7 +101,7 @@
 		%% \address{Address\fnref{label3}}
 		%% \fntext[label3]{}
 		
-		\title{\textcolor{r_s}{Displacement Detection from GNSS Kinematic Positioning Using Bayesian Inference for Deformation Monitoring}}
+		\title{\textcolor{r_s}{Displacement Detection from GNSS Kinematic Positioning Using Bayesian Inference}}
 		
 		
 		%% use optional labels to link authors explicitly to addresses:
@@ -121,7 +121,7 @@
 %		With the development of the Internet of Things (IoT), high-precision GNSS positioning, and GNSS-related transmission protocol, kinematic positioning results can be transmitted to the cloud in real-time.
 		However, due to the influence of measurement noise, it is still a challenge to identify and extract displacement from GNSS kinematic positioning results.
 		To resolve this, we propose a novel displacement detection approach with the purpose of identifying and extracting displacement from GNSS kinematic positioning.
-		Specifically, we use the Bayesian inference model to obtain the displacement change time from the coordinate time series of GNSS kinematic positioning. 
+		Specifically, we use the Bayesian inference to obtain the displacement change time from the coordinate time series of GNSS kinematic positioning. 
 		%The likelihood function of the observation and the prior distribution of the parameters to be estimated are provided.
 		%Finally, Bayesian inference was implemented by Markov Chain Monte Carlo (MCMC) sampling.
 		By investigating the posterior distribution of the designed change point parameter, we can identify the change points.
@@ -172,9 +172,9 @@
 	%位移探测的短板1,关注与定位算法，忽略探测算法2，关注与longterm忽略shortterm
 	%随着在线监测系统的普及，急需对于单历元动态监测数据进行分析处理，今早发现识别和确定位移。
 	The first category is about the research of measurement technology in GNSS-based displacement detection.
-	To evaluate the performance of single base station \textcolor{r_s}{real-time} kinematic(RTK) and network \textcolor{r_s}{real-time} kinematic(NRTK) in displacement detection, the data of different observation duration were compared\cite{wang2011gps}. The results showed that NRTK has advantages in accuracy and robustness.
+	To evaluate the performance of single base station \textcolor{r_s}{real-time} kinematic (RTK) and network \textcolor{r_s}{real-time} kinematic (NRTK) in displacement detection, the data of different observation duration were compared\cite{wang2011gps}. The results showed that NRTK has advantages in accuracy and robustness.
 	A displacement monitoring system was designed to evaluate NRTK for displacement detection\cite{GUMUS2019131}. The results showed that NRTK can achieve an accuracy of 4.7 mm and 7.9 mm in the horizontal and vertical directions respectively.
-	In \cite{csanliouglu2016landslide} and \cite{lytvyn2012real}, the feasibility of displacement detection for landslides  using precise point position(PPP) has been studied. The results showed that PPP can be capable of detecting large landslides.
+	In \cite{csanliouglu2016landslide} and \cite{lytvyn2012real}, the feasibility of displacement detection for landslides  using precise point position (PPP) has been studied. The results showed that PPP can be capable of detecting large landslides.
 	\textcolor{r_s}{
 		Moschas et al.\cite{Moschas_2014} studied the extraction of strong motion displacement waveform by PPP and evaluated it through free vibration experiments. These results show that 10 Hz PPP-GPS is very useful for seismic engineering and can be safely used to reconstruct the deflection waveforms of various points on the ground and structure during strong motion.}
 	\textcolor{r_s}{Zhang et al.\cite{Meng_2019} introduced Galileo augmenting GPS single-frequency single-epoch precise positioning method with baseline constrain for bridge dynamic monitoring, to improve the positioning availability and reliability, as well as narrow the search space, and increase the success rate of ambiguity resolution and positioning.
@@ -188,7 +188,7 @@
 	Psimoulis et al.\cite{psimoulis2008_1,psimoulis2008_2} studied the feasibility of using GNSS for structural vibration detection. Experiments were carried out to evaluate the use of Global positioning system (GPS) to determine the parameters of oscillation of major structures.
 	Meng et al.\cite{Meng_2018} presented the challenges faced by the design and implementation of a new monitoring system for large bridges. Damage detection in SHM of long-span bridges is very challenging because there is no general damage definition, and damage is usually unique and bridge-specific. Psimoulis et al.\cite{psimoulis2018detection} presented an algorithm named RT-SHAKE to detect ground motions, which aims to detect seismic motion more sensitively and robustly.	There are also studies on the relationship between receiver parameters and high-rate GNSS measurement\cite{Hberling2015,Moschas2015}.
 	H{\"a}berling et al.\cite{Hberling2015} argued that due to the large error of dynamic GNSS measurement if high-rate GNSS is to be a valuable tool for seismic displacement measurement above 1 Hz, the baseband parameters of the GNSS receiver must be considered.
-	Moschas et al.\cite{Moschas2015} studied the relationship between the phase-locked loop(PLL) bandwidth and noise in 100 Hz GPS measurement.
+	Moschas et al.\cite{Moschas2015} studied the relationship between the phase-locked loop (PLL) bandwidth and noise in 100 Hz GPS measurement.
 	The results show that the measurement correlation decreases with the increase of PLL bandwidth from low to high to 100 Hz. Shen et al.\cite{shennan_2019} gave a more detailed review of dynamic structural health monitoring technology based on GNSS. There are also studies on displacement detection such as landslide, and GNSS is usually used as a static positioning method.}
 	Gili et al.\cite{gili2000using} was one of the first landslide monitoring studies using GNSS technology, in which traditional measurement data were used as a comparison. 
 	The results showed that the accuracy of the GPS measurement \textcolor{r_s}{for} 26 months was 12 to 16 mm in the horizontal plane and 18 to 24 mm in the elevation.
@@ -232,7 +232,7 @@
 	\begin{figure*}[htpb]
 		\centering
 		\includegraphics[scale=0.45]{v_workflow}
-		\caption{\textcolor{r_s}{Displacement detection method based on Bayesian inference.}}
+		\caption{\textcolor{r_s}{Displacement detection based on Bayesian inference from GNSS Kinematic Positioning.}}
 		\label{fig_v_workflow}
 	\end{figure*} 
 	
@@ -682,7 +682,7 @@
 	
 	As can be seen from the above discussion that the interval constraint prior can effectively improve the identifiability of change points.
 	\textcolor{r_s}{
-		This is the first time that Bayesian inference has been used for displacement detection based on GNSS kinematic positioning.
+		This is the first time that Bayesian inference has been used for displacement detection from GNSS kinematic positioning.
 		Compared with indicator-based detection methods, this method has high robustness and flexibility.
 		The method based on Bayesian inference uses multi-epoch observation data, which is more reliable.
 		On the other hand, the Bayesian inference-based displacement detection method proposed in this paper is flexible enough to meet different analysis needs by adding a priori. Although only the vertical direction has been verified due to the experimental equipment, the horizontal direction should also be adapted because the vertical direction is noisier.
